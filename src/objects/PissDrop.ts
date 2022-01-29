@@ -1,4 +1,4 @@
-const PISS_VELOCITY = 150;
+const PISS_VELOCITY = 180;
 
 export class PissDrop {
   private sprite: Phaser.GameObjects.Rectangle;
@@ -14,8 +14,8 @@ export class PissDrop {
     this.sprite = this.scene.add.rectangle(
       originPos.x,
       originPos.y,
-      5,
-      5,
+      8,
+      3,
       0xffff00,
       0.8
     );
@@ -32,18 +32,20 @@ export class PissDrop {
     this.body.setVelocity(x, y);
 
     this.scene.time.addEvent({
-      delay: 1500,
+      delay: 1100,
       callback: () => {
         this.body.destroy();
         this.sprite.destroy();
 
         const path = new Phaser.Geom.Circle(0, 0, 10);
 
+        const lifespan = 400
+
         const emitter = this.emitterManager
           .createEmitter({
             x: this.body.position.x,
             y: this.body.position.y,
-            lifespan: 400,
+            lifespan: lifespan,
             quantity: 1,
             scale: 0.4,
             alpha: { start: 1, end: 0 },
@@ -53,7 +55,7 @@ export class PissDrop {
           .start();
 
         this.scene.time.addEvent({
-          delay: 400,
+          delay: lifespan,
           callback: () => {
             emitter.killAll();
             emitter.stop();
