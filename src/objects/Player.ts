@@ -1,7 +1,6 @@
 import { PissDrop } from './PissDrop';
 
-const ROTATION_SPEED = Math.PI * 0.5;
-const PLAYER_VELOCITY = 150;
+const PLAYER_VELOCITY = 250;
 
 export class Player {
   public sprite: Phaser.GameObjects.Sprite;
