@@ -26,11 +26,15 @@ export class GameScene extends Phaser.Scene {
   }
 
   public create(): void {
-    const bg = this.add.image(0, 0, 'master', 'bg.png').setOrigin(0).setScale(4).setPipeline('Light2D');
+    const bg = this.add
+      .image(0, 0, 'master', 'bg.png')
+      .setOrigin(0)
+      .setScale(4)
+      .setPipeline('Light2D');
     this.cameras.main.setBounds(0, 0, bg.displayWidth, bg.displayHeight);
 
-    this.physics.world.setBounds(0, 100, bg.displayWidth, bg.displayHeight)
-    this.physics.world.setBoundsCollision()
+    this.physics.world.setBounds(0, 100, bg.displayWidth, bg.displayHeight);
+    this.physics.world.setBoundsCollision();
 
     const keys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -39,42 +43,49 @@ export class GameScene extends Phaser.Scene {
       right: Phaser.Input.Keyboard.KeyCodes.D,
     });
 
-    this.zIndexGroup = this.add.group()
+    this.zIndexGroup = this.add.group();
 
     this.pissDrops = this.add.group();
 
     this.enemies = this.add.group();
     this.enemies.add(new Enemy(this).sprite);
 
-    this.enemies.children.entries.forEach(enemy => {
-      this.zIndexGroup.add(enemy)
-    })
+    this.enemies.children.entries.forEach((enemy) => {
+      this.zIndexGroup.add(enemy);
+    });
 
     this.pissDropsController = new PissDropsController(
       this,
       this.pissDrops,
       this.enemies
     );
-    this.player = new Player(this, 600, 600, keys, this.pissDrops);
-    this.zIndexGroup.add(this.player.sprite)
+    this.player = new Player(this, 1200, 900, keys, this.pissDrops);
+    this.zIndexGroup.add(this.player.sprite);
 
-    this.cameras.main.startFollow(this.player.sprite, false, 0.1, 0.1)
+    this.cameras.main.startFollow(this.player.sprite, false, 0.1, 0.1);
 
     this.lights.enable();
-    this.lights.setAmbientColor(0x111111)
+    this.lights.setAmbientColor(0);
 
     const lanterns = [
-    new Lantern(this, 600, 600),
-    new Lantern(this, 900, 900),
-    new Lantern(this, 200, 700),
-    ]
-    lanterns.forEach(lantern => this.zIndexGroup.add(lantern.sprite))
+      new Lantern(this, 260 - 33, 800, true),
+      new Lantern(this, 890 - 33, 700, true),
+      new Lantern(this, 260 - 33, 1200, true),
+      new Lantern(this, 890 - 33, 1100, true),
+      new Lantern(this, 1500, 700, false),
+      new Lantern(this, 1500, 1200, false),
+    ];
+    lanterns.forEach((lantern) => this.zIndexGroup.add(lantern.sprite));
   }
 
   update(_time: number, delta: number) {
     this.player?.update(delta);
-    this.enemies.children.entries.forEach(enemy => enemy.getData('ref').update(delta, this.player))
- 
-    this.zIndexGroup.children.entries.forEach(el => el.setDepth(el.y + el.displayHeight))
+    this.enemies.children.entries.forEach((enemy) =>
+      enemy.getData('ref').update(delta, this.player)
+    );
+
+    this.zIndexGroup.children.entries.forEach((el) =>
+      el.setDepth(el.y + el.displayHeight)
+    );
   }
 }
