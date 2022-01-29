@@ -64,6 +64,7 @@ export class Player {
                   this.sprite.displayHeight * 0.7
                 )
               ),
+              this.body.velocity,
               pissDropDeathEmitterManager
             ).sprite.setDepth(
               this.sprite.frame.name === 'Andrzej-Drunk-Up.png'

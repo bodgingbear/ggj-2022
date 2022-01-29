@@ -9,6 +9,7 @@ export class PissDrop {
     private scene: Phaser.Scene,
     rotation: number,
     originPos: Phaser.Math.Vector2,
+    initialVelocity: Phaser.Math.Vector2,
     private emitterManager: Phaser.GameObjects.Particles.ParticleEmitterManager
   ) {
     this.sprite = this.scene.add
@@ -24,7 +25,7 @@ export class PissDrop {
     this.body = this.sprite.body as Phaser.Physics.Arcade.Body;
 
     const { x, y } = new Phaser.Math.Vector2(PISS_VELOCITY, 0).rotate(rotation);
-    this.body.setVelocity(x, y);
+    this.body.setVelocity(x + initialVelocity.x, y + initialVelocity.y);
 
     this.scene.time.addEvent({
       delay: 1100,

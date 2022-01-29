@@ -3,7 +3,7 @@ import { PEE_MAX_VALUE } from 'constants';
 const BLADDER_BAR_X = 1280;
 const BLADDER_BAR_Y = 0;
 
-const BlADDER_BAR_WIDTH = 160;
+export const BlADDER_BAR_WIDTH = 160;
 const BLADDER_BAR_HEIGHT = 26;
 
 export class BladderBar {

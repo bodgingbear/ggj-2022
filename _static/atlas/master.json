@@ -200,6 +200,27 @@
 					}
 				},
 				{
+					"filename": "alcohol.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 6,
+						"h": 12
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 6,
+						"h": 12
+					},
+					"frame": {
+						"x": 730,
+						"y": 141,
+						"w": 6,
+						"h": 12
+					}
+				},
+				{
 					"filename": "Andrzej-Drunk-Left.png",
 					"rotated": false,
 					"trimmed": false,
@@ -520,6 +541,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:8ceb38d0a59efd584739d89151e4d30d:ab3560cc48b4cd9c4dbe84fa33e704e1:ce5acf6cd72dab34adb55a56ed928e19$"
+		"smartupdate": "$TexturePacker:SmartUpdate:4a6955feab7ef2e5244bd9848ec068a6:6718acee3db8e8e8a2c0c10abe23c21a:ce5acf6cd72dab34adb55a56ed928e19$"
 	}
 }
