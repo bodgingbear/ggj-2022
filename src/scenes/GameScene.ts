@@ -69,7 +69,9 @@ export class GameScene extends Phaser.Scene {
       this.pissDrops,
       this.enemies
     );
-    this.player = new Player(this, 1200, 900, keys, this.pissDrops);
+    this.player = new Player(this, 1200, 900, keys, this.pissDrops, () => {
+      console.log('TODO: Play dzwięki bólu zula, ze juz go pecherz boli XD');
+    });
     this.zIndexGroup.add(this.player.sprite);
 
     this.cameras.main.startFollow(this.player.sprite, false, 0.1, 0.1);

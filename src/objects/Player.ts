@@ -7,6 +7,8 @@ const PLAYER_VELOCITY = 150;
 export class Player {
   public sprite: Phaser.GameObjects.Sprite;
 
+  public pee: number = PEE_DEFAULT_VALUE;
+
   public body: Phaser.Physics.Arcade.Body;
 
   private targetToMouseRotation: number = 0;
@@ -15,14 +17,13 @@ export class Player {
 
   private rotation = 0;
 
-  public pee: number = PEE_DEFAULT_VALUE;
-
   constructor(
     private scene: Phaser.Scene,
     x: number,
     y: number,
     private keys: Phaser.Types.Input.Keyboard.CursorKeys,
-    private pissDrops: Phaser.GameObjects.Group
+    private pissDrops: Phaser.GameObjects.Group,
+    private noPee: (() => void) | null = null
   ) {
     this.sprite = this.scene.add
       .sprite(x, y, 'master', 'Andrzej-Drunk-Down.png')
@@ -49,10 +50,11 @@ export class Player {
       delay: 40,
       loop: true,
       callback: () => {
-        if (
-          this.pee > 0 &&
-          (cursorKeys.space?.isDown || this.pointer?.isDown)
-        ) {
+        if (this.pee < 0) {
+          this.noPee?.();
+          return;
+        }
+        if (cursorKeys.space?.isDown || this.pointer?.isDown) {
           this.pee--;
           this.pissDrops.add(
             new PissDrop(
