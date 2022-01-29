@@ -1,4 +1,8 @@
+import { Player } from "objects/Player";
+
 export class GameScene extends Phaser.Scene {
+  private player?: Player;
+
   public constructor() {
     super({
       key: 'GameScene',
@@ -6,13 +10,17 @@ export class GameScene extends Phaser.Scene {
   }
 
   public create(): void {
-    const text = this.add.text(1280 / 2, 720 / 2, 'Here is the game', {
-      fontSize: '48px',
+    this.add.text(50, 50, 'Here is the game', {
+      fontSize: '12px',
       fill: '#fff',
       align: 'center',
       lineSpacing: 10,
     });
+    
+    this.player = new Player(this)
+  }
 
-    text.setOrigin(0.5, 0.5);
+  update(_time: number, delta: number) {
+    this.player?.update(delta)
   }
 }
