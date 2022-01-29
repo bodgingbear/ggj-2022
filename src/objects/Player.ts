@@ -48,7 +48,7 @@ export class Player {
             this.body.position.add(
               new Phaser.Math.Vector2(
                 this.sprite.displayWidth / 2,
-                this.sprite.displayHeight * 0.6
+                this.sprite.displayHeight * 0.7
               )
             ),
             pissDropDeathEmitterManager
@@ -99,16 +99,16 @@ export class Player {
         const normalRotation = Phaser.Math.Angle.Normalize(this.rotation)
 
         if(normalRotation > Math.PI * 1.75 ||  normalRotation < Math.PI / 4) {
-            this.sprite.setFrame('Andrzej-3.png')
+            this.sprite.setFrame('Andrzej-Drunk-Right.png')
             this.sprite.setDepth(0)
         } else if(normalRotation >= Math.PI / 4 && normalRotation < Math.PI * 3/4) {
-            this.sprite.setFrame('Andrzej-1.png')
+            this.sprite.setFrame('Andrzej-Drunk-Down.png')
             this.sprite.setDepth(0)
         } else if(normalRotation >= Math.PI * 3/4 && normalRotation < Math.PI * 1.25) {
-            this.sprite.setFrame('Andrzej-0.png')
+            this.sprite.setFrame('Andrzej-Drunk-Left.png')
             this.sprite.setDepth(0)
         } else if(normalRotation >= Math.PI * 1.25 && normalRotation <= 2 * Math.PI) {
-            this.sprite.setFrame('Andrzej-2.png')
+            this.sprite.setFrame('Andrzej-Drunk-Up.png')
             this.sprite.setDepth(1)
         }
     }

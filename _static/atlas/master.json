@@ -1,7 +1,8 @@
 {
 	"textures": [
 		{
-			"image": "master.png",
+			"image": "master-0.png",
+			"normalMap": "master-0_n.png",
 			"format": "RGBA8888",
 			"size": {
 				"w": 198,
@@ -10,7 +11,7 @@
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "Andrzej-0.png",
+					"filename": "Andrzej-Down.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -31,7 +32,7 @@
 					}
 				},
 				{
-					"filename": "Andrzej-1.png",
+					"filename": "Andrzej-Drunk-Down.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -52,7 +53,7 @@
 					}
 				},
 				{
-					"filename": "Andrzej-2.png",
+					"filename": "Andrzej-Drunk-Left.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -73,7 +74,7 @@
 					}
 				},
 				{
-					"filename": "Andrzej-3.png",
+					"filename": "Andrzej-Drunk-Right.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -94,7 +95,7 @@
 					}
 				},
 				{
-					"filename": "Andrzej-Drunk-1.png",
+					"filename": "Andrzej-Drunk-Up.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -115,7 +116,7 @@
 					}
 				},
 				{
-					"filename": "Andrzej-Drunk-2.png",
+					"filename": "Andrzej-Left.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -136,7 +137,7 @@
 					}
 				},
 				{
-					"filename": "Andrzej-Drunk-3.png",
+					"filename": "Andrzej-Right.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -157,7 +158,7 @@
 					}
 				},
 				{
-					"filename": "Andrzej-Drunk-4.png",
+					"filename": "Andrzej-Up.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -267,6 +268,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:2cbab391464c40a753757ed2198af307:1603064255790de4e1a76770339835fa:5bc7ad8fb5c1c7a3dd93d07a0db38fe6$"
+		"smartupdate": "$TexturePacker:SmartUpdate:70dc95fb8ad8780cc1c949d76e0a9054:ed0632474db22e27cd042c892d5e699d:ce5acf6cd72dab34adb55a56ed928e19$"
 	}
 }
