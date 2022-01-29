@@ -9,7 +9,7 @@ export class Lantern {
   ) {
     this.sprite = this.scene.add
       .sprite(x, y, 'master', double ? 'latarnia2.png' : 'latarnia1.png')
-      .setScale(3)
+      .setScale(4)
       .setOrigin(0.5)
       .setFlipX(true);
 
