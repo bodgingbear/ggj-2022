@@ -52,11 +52,11 @@ export class Enemy {
   };
 
   private getNearestEdgeY = () => {
-    if (this.body.y < 1080 / 2) {
+    if (this.body.y < 720 / 2) {
       return 0 - 100;
     }
 
-    return 1080 + 100;
+    return 720 + 100;
   };
 
   private goToPoint = (

@@ -131,4 +131,8 @@ export class Player {
       }
     }
   }
+
+  public addPiss = (pissCount: number) => {
+    console.log('new piss', pissCount);
+  };
 }

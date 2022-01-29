@@ -1,4 +1,5 @@
 import { BladderBar } from 'objects/BladderBar';
+import { AlcoholSpawner } from 'objects/AlcoholSpawner';
 import { Enemy } from 'objects/Enemy';
 import { Lantern } from 'objects/Lantern';
 import { Lidl } from 'objects/Lidl';
@@ -70,7 +71,7 @@ export class GameScene extends Phaser.Scene {
     this.cameras.main.startFollow(this.player.sprite, false, 0.1, 0.1);
     this.lights.enable();
     // this.lights.cull(this.cameras.main);
-    this.lights.setAmbientColor(0);
+    this.lights.setAmbientColor(0xffffff);
     new Moon(this, 200, 200);
     this.lidl = new Lidl(this, this.player);
 
@@ -86,6 +87,8 @@ export class GameScene extends Phaser.Scene {
 
     this.addCameraSwing();
     this.trees = new Trees(this, this.player);
+
+    new AlcoholSpawner(this, this.player);
 
     this.scene.run('HUDScene');
   }
