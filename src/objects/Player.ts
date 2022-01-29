@@ -32,6 +32,7 @@ export class Player {
     });
     this.scene.physics.world.enable(this.sprite);
     this.body = this.sprite.body as Phaser.Physics.Arcade.Body;
+    this.body.setCollideWorldBounds(true)
 
     const cursorKeys = scene.input.keyboard.createCursorKeys();
 

@@ -17,6 +17,8 @@ export class GameScene extends Phaser.Scene {
 
   private zIndexGroup!: Phaser.GameObjects.Group;
 
+  physics!: Phaser.Physics.Arcade.ArcadePhysics;
+
   public constructor() {
     super({
       key: 'GameScene',
@@ -26,6 +28,9 @@ export class GameScene extends Phaser.Scene {
   public create(): void {
     const bg = this.add.image(0, 0, 'master', 'bg.png').setOrigin(0).setScale(4).setPipeline('Light2D');
     this.cameras.main.setBounds(0, 0, bg.displayWidth, bg.displayHeight);
+
+    this.physics.world.setBounds(0, 100, bg.displayWidth, bg.displayHeight)
+    this.physics.world.setBoundsCollision()
 
     const keys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -56,7 +61,7 @@ export class GameScene extends Phaser.Scene {
     this.cameras.main.startFollow(this.player.sprite, false, 0.1, 0.1)
 
     this.lights.enable();
-    this.lights.setAmbientColor(0x111111);
+    this.lights.setAmbientColor(0x111111)
 
     const lanterns = [
     new Lantern(this, 600, 600),

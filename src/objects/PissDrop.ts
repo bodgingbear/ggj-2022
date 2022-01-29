@@ -18,7 +18,7 @@ export class PissDrop {
       3,
       0xffff00,
       0.8
-    );
+    )
 
     this.sprite.setOrigin(0.5);
 
