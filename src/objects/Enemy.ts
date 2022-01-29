@@ -3,6 +3,8 @@ import { Player } from './Player';
 const ENEMY_VELOCITY = 50;
 const ROTATION_SPEED = Math.PI * 0.3;
 
+// TODO: jeśli mocz dotknie wroga to on zaczyna uciekać
+
 export class Enemy {
   private sprite: Phaser.GameObjects.Rectangle;
 
@@ -40,5 +42,9 @@ export class Enemy {
       this.sprite.rotation
     );
     this.body.setVelocity(x, y);
+
+    if (this.scene.physics.overlap(this.sprite, player.sprite)) {
+      console.log('ee');
+    }
   }
 }

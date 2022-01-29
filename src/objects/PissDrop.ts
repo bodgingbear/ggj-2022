@@ -39,13 +39,13 @@ export class PissDrop {
 
         const path = new Phaser.Geom.Circle(0, 0, 10);
 
-        const lifespan = 400
+        const lifespan = 400;
 
         const emitter = this.emitterManager
           .createEmitter({
             x: this.body.position.x,
             y: this.body.position.y,
-            lifespan: lifespan,
+            lifespan,
             quantity: 1,
             scale: 0.4,
             alpha: { start: 1, end: 0 },

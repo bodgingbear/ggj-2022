@@ -4,7 +4,7 @@ const ROTATION_SPEED = Math.PI * 0.5;
 const PLAYER_VELOCITY = 150;
 
 export class Player {
-  private sprite: Phaser.GameObjects.Sprite;
+  public sprite: Phaser.GameObjects.Sprite;
 
   public body: Phaser.Physics.Arcade.Body;
 
@@ -91,7 +91,7 @@ export class Player {
         ROTATION_SPEED * 0.001 * delta
       );
 
-      console.log(this.rotation);
+      // console.log(this.rotation);
 
       const normalRotation = Phaser.Math.Angle.Normalize(this.rotation);
 
