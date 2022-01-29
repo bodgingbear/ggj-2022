@@ -1,6 +1,8 @@
 import { Player } from "objects/Player";
 
 export class GameScene extends Phaser.Scene {
+  private player?: Player;
+
   public constructor() {
     super({
       key: 'GameScene',
@@ -15,6 +17,10 @@ export class GameScene extends Phaser.Scene {
       lineSpacing: 10,
     });
     
-    new Player(this)
+    this.player = new Player(this)
+  }
+
+  update(_time: number, delta: number) {
+    this.player?.update(delta)
   }
 }
