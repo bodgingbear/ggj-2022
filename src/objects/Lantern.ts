@@ -1,6 +1,8 @@
 export class Lantern {
+    sprite: Phaser.GameObjects.Sprite
+
     constructor(private scene: Phaser.Scene, x: number, y: number) {
-        const sprite = this.scene.add.sprite(
+        this.sprite = this.scene.add.sprite(
             x, y, 'master', 'latarnia1.png'
         ).setScale(3).setScale(4)
 

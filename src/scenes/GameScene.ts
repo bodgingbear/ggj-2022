@@ -15,6 +15,8 @@ export class GameScene extends Phaser.Scene {
 
   private pissDropsController!: PissDropsController;
 
+  private zIndexGroup!: Phaser.GameObjects.Group;
+
   public constructor() {
     super({
       key: 'GameScene',
@@ -32,13 +34,16 @@ export class GameScene extends Phaser.Scene {
       right: Phaser.Input.Keyboard.KeyCodes.D,
     });
 
+    this.zIndexGroup = this.add.group()
+
     this.pissDrops = this.add.group();
 
-    // this.enemy = new Enemy(this);
-
     this.enemies = this.add.group();
-
     this.enemies.add(new Enemy(this).sprite);
+
+    this.enemies.children.entries.forEach(enemy => {
+      this.zIndexGroup.add(enemy)
+    })
 
     this.pissDropsController = new PissDropsController(
       this,
@@ -46,19 +51,25 @@ export class GameScene extends Phaser.Scene {
       this.enemies
     );
     this.player = new Player(this, 600, 600, keys, this.pissDrops);
+    this.zIndexGroup.add(this.player.sprite)
 
     this.cameras.main.startFollow(this.player.sprite, false, 0.1, 0.1)
 
     this.lights.enable();
     this.lights.setAmbientColor(0x111111);
 
-    new Lantern(this, 600, 600)
-    new Lantern(this, 900, 900)
-    new Lantern(this, 200, 700)
+    const lanterns = [
+    new Lantern(this, 600, 600),
+    new Lantern(this, 900, 900),
+    new Lantern(this, 200, 700),
+    ]
+    lanterns.forEach(lantern => this.zIndexGroup.add(lantern.sprite))
   }
 
   update(_time: number, delta: number) {
     this.player?.update(delta);
     this.enemies.children.entries.forEach(enemy => enemy.getData('ref').update(delta, this.player))
+ 
+    this.zIndexGroup.children.entries.forEach(el => el.setDepth(el.y + el.displayHeight))
   }
 }

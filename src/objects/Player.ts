@@ -86,17 +86,20 @@ export class Player {
 
     if (this.pointer) {
       this.targetToMouseRotation = Phaser.Math.Angle.BetweenPoints(
-        this.sprite,
-        this.pointer
+        this.body,
+        new Phaser.Math.Vector2(
+          this.scene.input.mousePointer.x + this.scene.cameras.main.scrollX,
+          this.scene.input.mousePointer.y + this.scene.cameras.main.scrollY
+        )
       );
 
-      this.rotation = Phaser.Math.Angle.RotateTo(
-        this.rotation,
-        this.targetToMouseRotation,
-        ROTATION_SPEED * 0.001 * delta
-      );
-
-      // console.log(this.rotation);
+      this.rotation = this.targetToMouseRotation
+      
+      // Phaser.Math.Angle.RotateTo(
+      //   this.rotation,
+      //   this.targetToMouseRotation,
+      //   ROTATION_SPEED * 0.001 * delta
+      // );
 
       const normalRotation = Phaser.Math.Angle.Normalize(this.rotation);
 
