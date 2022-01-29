@@ -63,7 +63,6 @@ export class GameScene extends Phaser.Scene {
     this.zIndexGroup.add(this.player.sprite);
 
     this.cameras.main.startFollow(this.player.sprite, false, 0.1, 0.1);
-
     this.lights.enable();
     this.lights.setAmbientColor(0);
 
@@ -76,6 +75,8 @@ export class GameScene extends Phaser.Scene {
       new Lantern(this, 1500, 1200, false),
     ];
     lanterns.forEach((lantern) => this.zIndexGroup.add(lantern.sprite));
+
+    this.addCameraSwing();
   }
 
   update(_time: number, delta: number) {
@@ -87,5 +88,20 @@ export class GameScene extends Phaser.Scene {
     this.zIndexGroup.children.entries.forEach((el) =>
       el.setDepth(el.y + el.displayHeight)
     );
+  }
+
+  addCameraSwing() {
+    this.tweens.addCounter({
+      duration: 2000,
+      yoyo: true,
+      ease: 'sine.inout',
+      loop: -1,
+      from: 0,
+      to: 1,
+
+      onUpdate: (value) => {
+        this.cameras.main.setFollowOffset(value.getValue() * 100);
+      },
+    });
   }
 }
