@@ -45,7 +45,7 @@ export class Player {
       delay: 40,
       loop: true,
       callback: () => {
-        if (cursorKeys.space?.isDown)
+        if (cursorKeys.space?.isDown || this.pointer?.isDown)
           this.pissDrops.add(
             new PissDrop(
               this.scene,
