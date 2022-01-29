@@ -17,6 +17,8 @@ export class Player {
 
   private rotation = 0;
 
+  private light: Phaser.GameObjects.Light;
+
   constructor(
     private scene: Phaser.Scene,
     x: number,
@@ -39,6 +41,8 @@ export class Player {
     this.scene.physics.world.enable(this.sprite);
     this.body = this.sprite.body as Phaser.Physics.Arcade.Body;
     this.body.setCollideWorldBounds(true);
+
+    this.light = this.scene.lights.addLight(x, y, 160, 0xffffff, 0.2);
 
     const cursorKeys = scene.input.keyboard.createCursorKeys();
 
@@ -103,6 +107,8 @@ export class Player {
     }
 
     this.body.setVelocity(velocity.x, velocity.y);
+
+    this.light.setPosition(this.sprite.x, this.sprite.y);
 
     if (this.pointer) {
       this.targetToMouseRotation = Phaser.Math.Angle.BetweenPoints(
