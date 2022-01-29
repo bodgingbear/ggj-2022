@@ -1,13 +1,12 @@
 import { Enemy } from 'objects/Enemy';
 import { Lantern } from 'objects/Lantern';
+import { Lidl } from 'objects/Lidl';
 import { PissDropsController } from 'objects/PissDropsController';
 import { Player } from 'objects/Player';
+import { Trees } from 'objects/Trees';
 
 export class GameScene extends Phaser.Scene {
   private player?: Player;
-
-  // TODO: DO Wyjebania
-  private enemy?: Enemy;
 
   enemies!: Phaser.GameObjects.Group;
 
@@ -18,6 +17,10 @@ export class GameScene extends Phaser.Scene {
   private zIndexGroup!: Phaser.GameObjects.Group;
 
   physics!: Phaser.Physics.Arcade.ArcadePhysics;
+
+  lidl!: Lidl;
+
+  trees!: Trees;
 
   public constructor() {
     super({
@@ -77,6 +80,8 @@ export class GameScene extends Phaser.Scene {
     lanterns.forEach((lantern) => this.zIndexGroup.add(lantern.sprite));
 
     this.addCameraSwing();
+    this.lidl = new Lidl(this, this.player);
+    this.trees = new Trees(this, this.player);
   }
 
   update(_time: number, delta: number) {

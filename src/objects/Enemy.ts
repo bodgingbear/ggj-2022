@@ -27,7 +27,6 @@ export class Enemy {
     this.body.setImmovable(true);
   }
 
-  // public onHit(pissDrop: PissDrop, deathCb: () => void) {
   public onHit() {
     const shouldKeepX = Math.random() > 0.5;
 
