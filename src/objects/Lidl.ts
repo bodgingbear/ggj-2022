@@ -18,5 +18,45 @@ export class Lidl {
     this.body = this.sprite.body as Phaser.Physics.Arcade.Body;
     this.scene.physics.add.collider(this.sprite, player.sprite);
     this.body.setImmovable(true);
+
+    this.scene.lights.addLight(
+      this.sprite.x,
+      this.sprite.y,
+      300,
+      0xfff6f2,
+      0.5
+    );
+
+    this.scene.lights.addLight(
+      this.sprite.x + 80,
+      this.sprite.y,
+      300,
+      0x0000ff,
+      0.5
+    );
+
+    this.scene.lights.addLight(
+      this.sprite.x + 80,
+      this.sprite.y + 200,
+      300,
+      0x0000ff,
+      0.5
+    );
+
+    this.scene.lights.addLight(
+      this.sprite.x + 300,
+      this.sprite.y,
+      300,
+      0xfff6f2,
+      0.5
+    );
+
+    this.scene.lights.addLight(
+      this.sprite.x + 600,
+      this.sprite.y,
+      300,
+      0xfff6f2,
+      0.5
+    );
   }
 }

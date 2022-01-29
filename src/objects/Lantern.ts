@@ -13,6 +13,6 @@ export class Lantern {
       .setOrigin(0.5)
       .setFlipX(true);
 
-    this.scene.lights.addLight(x, y, 200, 0xffffff, 0.5);
+    this.scene.lights.addLight(x, y, 200, 0xffe692, 0.5);
   }
 }
