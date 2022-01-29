@@ -1,4 +1,3 @@
-import { BladderBar } from 'objects/BladderBar';
 import { AlcoholSpawner } from 'objects/AlcoholSpawner';
 import { Enemy } from 'objects/Enemy';
 import { Lantern } from 'objects/Lantern';
@@ -90,7 +89,11 @@ export class GameScene extends Phaser.Scene {
 
     new AlcoholSpawner(this, this.player);
 
-    this.scene.run('HUDScene');
+    this.scene.run('HUDScene', {
+      peeProvider: () => {
+        return this.player?.pee || 0;
+      },
+    });
   }
 
   update(_time: number, delta: number) {

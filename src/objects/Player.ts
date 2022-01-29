@@ -1,3 +1,5 @@
+import { PEE_DEFAULT_VALUE, PEE_MAX_VALUE } from 'constants';
+
 import { PissDrop } from './PissDrop';
 
 const PLAYER_VELOCITY = 150;
@@ -12,6 +14,8 @@ export class Player {
   private pointer: Phaser.Input.Pointer | null = null;
 
   private rotation = 0;
+
+  public pee: number = PEE_DEFAULT_VALUE;
 
   constructor(
     private scene: Phaser.Scene,
@@ -45,7 +49,11 @@ export class Player {
       delay: 40,
       loop: true,
       callback: () => {
-        if (cursorKeys.space?.isDown || this.pointer?.isDown)
+        if (
+          this.pee > 0 &&
+          (cursorKeys.space?.isDown || this.pointer?.isDown)
+        ) {
+          this.pee--;
           this.pissDrops.add(
             new PissDrop(
               this.scene,
@@ -63,6 +71,7 @@ export class Player {
                 : this.sprite.depth + 0.1
             )
           );
+        }
       },
     });
   }
@@ -133,6 +142,6 @@ export class Player {
   }
 
   public addPiss = (pissCount: number) => {
-    console.log('new piss', pissCount);
+    this.pee = Math.max(this.pee + pissCount, PEE_MAX_VALUE);
   };
 }

@@ -1,3 +1,5 @@
+import { PEE_MAX_VALUE } from 'constants';
+
 const BLADDER_BAR_X = 1280;
 const BLADDER_BAR_Y = 0;
 
@@ -31,7 +33,7 @@ export class BladderBar {
   }
 
   onPissAmountChange = (piss: number) => {
-    this.bladderShrinking.scaleX = piss / 100;
+    this.bladderShrinking.scaleX = piss / PEE_MAX_VALUE;
     this.bladderShrinking.setX(
       this.bar.x + this.bladderShrinking.displayWidth / 2 + 4
     );
