@@ -1,3 +1,5 @@
+import { Player } from "objects/Player";
+
 export class GameScene extends Phaser.Scene {
   public constructor() {
     super({
@@ -12,6 +14,7 @@ export class GameScene extends Phaser.Scene {
       align: 'center',
       lineSpacing: 10,
     });
-
+    
+    new Player(this)
   }
 }
