@@ -1,6 +1,6 @@
 import { PissDrop } from './PissDrop';
 
-const ROTATION_SPEED = Math.PI * 0.2;
+const ROTATION_SPEED = Math.PI * 0.5;
 const PLAYER_VELOCITY = 150;
 
 export class Player {
@@ -25,7 +25,7 @@ export class Player {
         'Andrzej-0.png'
     ).setScale(3)
 
-    this.sprite.setOrigin(0.5);
+    this.sprite.setOrigin(0.5).setDepth(1)
 
     scene.input.on('pointermove', (pointer: any) => {
       this.pointer = pointer;
@@ -47,8 +47,8 @@ export class Player {
             this.rotation,
             this.body.position.add(
               new Phaser.Math.Vector2(
-                this.sprite.width / 2,
-                this.sprite.height / 2
+                this.sprite.displayWidth / 2,
+                this.sprite.displayHeight * 0.6
               )
             ),
             pissDropDeathEmitterManager
@@ -96,16 +96,20 @@ export class Player {
 
         console.log(this.rotation)
 
-        const normalRotation = Phaser.Math.Angle.Normalize(this.targetToMouseRotation)
+        const normalRotation = Phaser.Math.Angle.Normalize(this.rotation)
 
-        if(  normalRotation > 0 && normalRotation < Math.PI / 4) {
+        if(normalRotation > Math.PI * 1.75 ||  normalRotation < Math.PI / 4) {
             this.sprite.setFrame('Andrzej-3.png')
+            this.sprite.setDepth(0)
         } else if(normalRotation >= Math.PI / 4 && normalRotation < Math.PI * 3/4) {
             this.sprite.setFrame('Andrzej-1.png')
-        } else if(normalRotation >= Math.PI * 3/4 && normalRotation < Math.PI) {
+            this.sprite.setDepth(0)
+        } else if(normalRotation >= Math.PI * 3/4 && normalRotation < Math.PI * 1.25) {
             this.sprite.setFrame('Andrzej-0.png')
-        } else if(normalRotation >= Math.PI * 3/4 && normalRotation <= 2 * Math.PI) {
+            this.sprite.setDepth(0)
+        } else if(normalRotation >= Math.PI * 1.25 && normalRotation <= 2 * Math.PI) {
             this.sprite.setFrame('Andrzej-2.png')
+            this.sprite.setDepth(1)
         }
     }
   }
