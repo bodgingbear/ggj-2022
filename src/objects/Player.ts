@@ -98,7 +98,7 @@ export class Player {
 
         const normalRotation = Phaser.Math.Angle.Normalize(this.targetToMouseRotation)
 
-        if(normalRotation > Math.PI * 1.75  normalRotation > 0 && normalRotation < Math.PI / 4) {
+        if(  normalRotation > 0 && normalRotation < Math.PI / 4) {
             this.sprite.setFrame('Andrzej-3.png')
         } else if(normalRotation >= Math.PI / 4 && normalRotation < Math.PI * 3/4) {
             this.sprite.setFrame('Andrzej-1.png')
