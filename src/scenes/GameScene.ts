@@ -6,6 +6,7 @@ import { Moon } from 'objects/Moon';
 import { PissDropsController } from 'objects/PissDropsController';
 import { Player } from 'objects/Player';
 import { Trees } from 'objects/Trees';
+import { EnemiesSpawnController } from 'objects/EnemiesSpawnController';
 
 export class GameScene extends Phaser.Scene {
   private player?: Player;
@@ -15,6 +16,8 @@ export class GameScene extends Phaser.Scene {
   pissDrops!: Phaser.GameObjects.Group;
 
   private pissDropsController!: PissDropsController;
+
+  private enemiesSpawnController!: EnemiesSpawnController;
 
   private zIndexGroup!: Phaser.GameObjects.Group;
 
@@ -53,11 +56,15 @@ export class GameScene extends Phaser.Scene {
     this.pissDrops = this.add.group();
 
     this.enemies = this.add.group();
-    this.enemies.add(new Enemy(this).sprite);
 
     this.enemies.children.entries.forEach((enemy) => {
       this.zIndexGroup.add(enemy);
     });
+
+    this.enemiesSpawnController = new EnemiesSpawnController(
+      this,
+      this.enemies
+    );
 
     this.pissDropsController = new PissDropsController(
       this,

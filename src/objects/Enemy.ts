@@ -13,9 +13,9 @@ export class Enemy {
 
   private spierdalingTarget: Phaser.Math.Vector2 | null = null;
 
-  constructor(private scene: Phaser.Scene) {
+  constructor(private scene: Phaser.Scene, position: Phaser.Math.Vector2) {
     this.sprite = this.scene.add
-      .sprite(100 / 2, 720 / 2, 'master', 'Straznik-FHV.png')
+      .sprite(position.x, position.y, 'master', 'Straznik-FHV.png')
       .setScale(4)
       .setPipeline('Light2D');
 
