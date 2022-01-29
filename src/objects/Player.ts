@@ -1,6 +1,6 @@
 import { PissDrop } from './PissDrop';
 
-const PLAYER_VELOCITY = 250;
+const PLAYER_VELOCITY = 150;
 
 export class Player {
   public sprite: Phaser.GameObjects.Sprite;
@@ -9,7 +9,7 @@ export class Player {
 
   private targetToMouseRotation: number = 0;
 
-  private pointer: any;
+  private pointer: Phaser.Input.Pointer | null = null;
 
   private rotation = 0;
 
@@ -27,16 +27,19 @@ export class Player {
 
     this.sprite.setOrigin(0.5).setDepth(1);
 
-    scene.input.on('pointermove', (pointer: any) => {
+    scene.input.on('pointermove', (pointer: Phaser.Input.Pointer) => {
       this.pointer = pointer;
     });
+
     this.scene.physics.world.enable(this.sprite);
     this.body = this.sprite.body as Phaser.Physics.Arcade.Body;
     this.body.setCollideWorldBounds(true);
 
     const cursorKeys = scene.input.keyboard.createCursorKeys();
 
-    const pissDropDeathEmitterManager = scene.add.particles('piss');
+    const pissDropDeathEmitterManager = scene.add
+      .particles('master', 'piss-drop.png')
+      .setPipeline('Light2D');
 
     this.scene.time.addEvent({
       delay: 40,
@@ -60,7 +63,7 @@ export class Player {
     });
   }
 
-  update(delta: number) {
+  update() {
     let velocity = new Phaser.Math.Vector2(0, 0);
 
     if (this.keys.up?.isDown) {
