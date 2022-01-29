@@ -1,7 +1,7 @@
 const PISS_VELOCITY = 180;
 
 export class PissDrop {
-  public sprite: Phaser.GameObjects.Rectangle;
+  public sprite: Phaser.GameObjects.Sprite;
 
   private body: Phaser.Physics.Arcade.Body;
 
@@ -11,18 +11,13 @@ export class PissDrop {
     originPos: Phaser.Math.Vector2,
     private emitterManager: Phaser.GameObjects.Particles.ParticleEmitterManager
   ) {
-    this.sprite = this.scene.add.rectangle(
-      originPos.x,
-      originPos.y,
-      8,
-      3,
-      0xffff00,
-      0.8
-    );
+    this.sprite = this.scene.add
+      .sprite(originPos.x, originPos.y, 'master', 'piss-drop.png')
+      .setScale(4)
+      .setRotation(rotation)
+      .setPipeline('Light2D');
 
-    this.sprite.setOrigin(0.5);
-
-    this.sprite.setRotation(rotation);
+    this.sprite.setData('ref', this);
 
     this.scene.physics.world.enable(this.sprite);
 
@@ -47,7 +42,7 @@ export class PissDrop {
             y: this.body.position.y,
             lifespan,
             quantity: 1,
-            scale: 0.4,
+            scale: 2,
             alpha: { start: 1, end: 0 },
             blendMode: 'ADD',
             emitZone: { type: 'random', source: path },

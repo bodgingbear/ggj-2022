@@ -88,12 +88,13 @@ export class GameScene extends Phaser.Scene {
   }
 
   update(_time: number, delta: number) {
-    this.player?.update(delta);
+    this.player?.update();
     this.enemies.children.entries.forEach((enemy) =>
       enemy.getData('ref').update(delta, this.player)
     );
 
-    this.zIndexGroup.children.entries.forEach((el) =>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.zIndexGroup.children.entries.forEach((el: any) =>
       el.setDepth(el.y + el.displayHeight)
     );
   }

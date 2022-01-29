@@ -137,6 +137,27 @@
 					}
 				},
 				{
+					"filename": "piss-drop.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 1,
+						"h": 1
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 1,
+						"h": 1
+					},
+					"frame": {
+						"x": 734,
+						"y": 104,
+						"w": 1,
+						"h": 1
+					}
+				},
+				{
 					"filename": "drzewo.png",
 					"rotated": false,
 					"trimmed": false,
@@ -499,6 +520,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:e5d1fd63d76db9680b39d4fa7d837648:26b2ccf8120286619a6a100d8ab76c7c:ce5acf6cd72dab34adb55a56ed928e19$"
+		"smartupdate": "$TexturePacker:SmartUpdate:8ceb38d0a59efd584739d89151e4d30d:ab3560cc48b4cd9c4dbe84fa33e704e1:ce5acf6cd72dab34adb55a56ed928e19$"
 	}
 }

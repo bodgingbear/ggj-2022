@@ -13,7 +13,7 @@ export class BootScene extends Phaser.Scene {
     //   frameHeight: 44,
     // });
 
-    this.load.image('piss', loadAsset('images/piss.png'))
+    this.load.image('piss', loadAsset('images/piss.png'));
     this.load.multiatlas('master', 'atlas/master.json', 'atlas');
   }
 
