@@ -14,9 +14,12 @@ export class Enemy {
   private rotation: number = 0;
 
   constructor(private scene: Phaser.Scene) {
-    this.sprite = this.scene.add
-      .sprite(100 / 2, 720 / 2, 'master', 'Straznik-FHV.png')
-      .setScale(3);
+    this.sprite = this.scene.add.sprite(
+      100 / 2,
+      720 / 2,
+      'master',
+      'Straznik-FHV.png'
+    ).setScale(4).setPipeline('Light2D')
 
     this.sprite.setOrigin(0.2);
 

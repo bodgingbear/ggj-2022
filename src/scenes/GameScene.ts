@@ -1,4 +1,5 @@
 import { Enemy } from 'objects/Enemy';
+import { Lantern } from 'objects/Lantern';
 import { PissDropsController } from 'objects/PissDropsController';
 import { Player } from 'objects/Player';
 
@@ -21,12 +22,8 @@ export class GameScene extends Phaser.Scene {
   }
 
   public create(): void {
-    this.add.text(50, 50, 'Here is the game', {
-      fontSize: '12px',
-      fill: '#fff',
-      align: 'center',
-      lineSpacing: 10,
-    });
+    const bg = this.add.image(0, 0, 'master', 'bg.png').setOrigin(0).setScale(4).setPipeline('Light2D');
+    this.cameras.main.setBounds(0, 0, bg.displayWidth, bg.displayHeight);
 
     const keys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -37,7 +34,6 @@ export class GameScene extends Phaser.Scene {
 
     this.pissDrops = this.add.group();
 
-    this.player = new Player(this, keys, this.pissDrops);
     // this.enemy = new Enemy(this);
 
     this.enemies = this.add.group();
@@ -49,10 +45,20 @@ export class GameScene extends Phaser.Scene {
       this.pissDrops,
       this.enemies
     );
+    this.player = new Player(this, 600, 600, keys, this.pissDrops);
+
+    this.cameras.main.startFollow(this.player.sprite, false, 0.1, 0.1)
+
+    this.lights.enable();
+    this.lights.setAmbientColor(0x111111);
+
+    new Lantern(this, 600, 600)
+    new Lantern(this, 900, 900)
+    new Lantern(this, 200, 700)
   }
 
   update(_time: number, delta: number) {
     this.player?.update(delta);
-    this.enemy?.update(delta, this.player!);
+    this.enemies.children.entries.forEach(enemy => enemy.getData('ref').update(delta, this.player))
   }
 }

@@ -5,11 +5,116 @@
 			"normalMap": "master-0_n.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 198,
-				"h": 39
+				"w": 737,
+				"h": 317
 			},
 			"scale": 1,
 			"frames": [
+				{
+					"filename": "bg.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 539,
+						"h": 317
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 539,
+						"h": 317
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 539,
+						"h": 317
+					}
+				},
+				{
+					"filename": "lidl.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 198,
+						"h": 83
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 198,
+						"h": 83
+					},
+					"frame": {
+						"x": 539,
+						"y": 0,
+						"w": 198,
+						"h": 83
+					}
+				},
+				{
+					"filename": "drzewa.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 136,
+						"h": 120
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 136,
+						"h": 120
+					},
+					"frame": {
+						"x": 539,
+						"y": 83,
+						"w": 136,
+						"h": 120
+					}
+				},
+				{
+					"filename": "latarnia2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 44,
+						"h": 54
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 44,
+						"h": 54
+					},
+					"frame": {
+						"x": 675,
+						"y": 83,
+						"w": 44,
+						"h": 54
+					}
+				},
+				{
+					"filename": "lawka.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 18,
+						"h": 21
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 18,
+						"h": 21
+					},
+					"frame": {
+						"x": 719,
+						"y": 83,
+						"w": 18,
+						"h": 21
+					}
+				},
 				{
 					"filename": "Andrzej-Down.png",
 					"rotated": false,
@@ -25,10 +130,31 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 1,
-						"y": 1,
+						"x": 719,
+						"y": 104,
 						"w": 15,
 						"h": 37
+					}
+				},
+				{
+					"filename": "drzewo.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 51
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 51
+					},
+					"frame": {
+						"x": 675,
+						"y": 137,
+						"w": 40,
+						"h": 51
 					}
 				},
 				{
@@ -46,8 +172,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 18,
-						"y": 1,
+						"x": 715,
+						"y": 141,
 						"w": 15,
 						"h": 37
 					}
@@ -67,10 +193,52 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 35,
-						"y": 1,
+						"x": 715,
+						"y": 178,
 						"w": 15,
 						"h": 37
+					}
+				},
+				{
+					"filename": "latarnia1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 28,
+						"h": 54
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 28,
+						"h": 54
+					},
+					"frame": {
+						"x": 675,
+						"y": 188,
+						"w": 28,
+						"h": 54
+					}
+				},
+				{
+					"filename": "Ziomek-0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 14,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 11,
+						"h": 36
+					},
+					"frame": {
+						"x": 703,
+						"y": 188,
+						"w": 11,
+						"h": 36
 					}
 				},
 				{
@@ -88,10 +256,31 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 52,
-						"y": 1,
+						"x": 714,
+						"y": 215,
 						"w": 15,
 						"h": 37
+					}
+				},
+				{
+					"filename": "Ziomek-1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 14,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 11,
+						"h": 36
+					},
+					"frame": {
+						"x": 703,
+						"y": 224,
+						"w": 11,
+						"h": 36
 					}
 				},
 				{
@@ -109,8 +298,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 69,
-						"y": 1,
+						"x": 714,
+						"y": 252,
 						"w": 15,
 						"h": 37
 					}
@@ -130,8 +319,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 86,
-						"y": 1,
+						"x": 539,
+						"y": 260,
 						"w": 15,
 						"h": 37
 					}
@@ -151,8 +340,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 103,
-						"y": 1,
+						"x": 539,
+						"y": 203,
 						"w": 15,
 						"h": 37
 					}
@@ -172,8 +361,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 120,
-						"y": 1,
+						"x": 554,
+						"y": 260,
 						"w": 15,
 						"h": 37
 					}
@@ -193,8 +382,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 137,
-						"y": 1,
+						"x": 554,
+						"y": 203,
 						"w": 14,
 						"h": 37
 					}
@@ -214,8 +403,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 153,
-						"y": 1,
+						"x": 568,
+						"y": 203,
 						"w": 14,
 						"h": 37
 					}
@@ -235,8 +424,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 169,
-						"y": 1,
+						"x": 569,
+						"y": 260,
 						"w": 13,
 						"h": 37
 					}
@@ -256,10 +445,52 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 184,
-						"y": 1,
+						"x": 582,
+						"y": 260,
 						"w": 13,
 						"h": 37
+					}
+				},
+				{
+					"filename": "Ziomek-0-Cart.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 14,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 13,
+						"h": 36
+					},
+					"frame": {
+						"x": 582,
+						"y": 203,
+						"w": 13,
+						"h": 36
+					}
+				},
+				{
+					"filename": "Ziomek-1-Cart.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 14,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 13,
+						"h": 36
+					},
+					"frame": {
+						"x": 595,
+						"y": 260,
+						"w": 13,
+						"h": 36
 					}
 				}
 			]
@@ -268,6 +499,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:70dc95fb8ad8780cc1c949d76e0a9054:ed0632474db22e27cd042c892d5e699d:ce5acf6cd72dab34adb55a56ed928e19$"
+		"smartupdate": "$TexturePacker:SmartUpdate:e5d1fd63d76db9680b39d4fa7d837648:26b2ccf8120286619a6a100d8ab76c7c:ce5acf6cd72dab34adb55a56ed928e19$"
 	}
 }

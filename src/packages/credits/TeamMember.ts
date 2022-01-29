@@ -21,6 +21,7 @@ export class TeamMember {
     data: TeamMemberData,
     groupContainer: Phaser.GameObjects.Container
   ) {
+    
     this.container = this.scene.add.container(x, y);
 
     this.image = this.scene.add.image(0, 0, data.imageKey);

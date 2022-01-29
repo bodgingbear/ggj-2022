@@ -16,12 +16,14 @@ export class Player {
 
   constructor(
     private scene: Phaser.Scene,
+    x: number,
+    y: number,
     private keys: Phaser.Types.Input.Keyboard.CursorKeys,
     private pissDrops: Phaser.GameObjects.Group
   ) {
     this.sprite = this.scene.add
-      .sprite(1280 / 2, 720 / 2, 'master', 'Andrzej-0.png')
-      .setScale(3);
+      .sprite(x, y, 'master', 'Andrzej-Drunk-Down.png')
+      .setScale(4).setPipeline('Light2D')
 
     this.sprite.setOrigin(0.5).setDepth(1);
 
