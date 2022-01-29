@@ -15,9 +15,9 @@ const game = new Phaser.Game({
   width: 1920,
   height: 1080,
   scene: [
-    BootScene,
-    LoadingScene,
-    MainMenuScene,
+    // BootScene,
+    // LoadingScene,
+    // MainMenuScene,
     GameScene,
     HowToPlayScene,
     CreditsScene,
