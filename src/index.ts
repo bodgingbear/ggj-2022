@@ -32,6 +32,7 @@ const game = new Phaser.Game({
   physics: {
     default: 'arcade',
   },
+  maxLights: 15,
 });
 
 window.addEventListener('load', (): Phaser.Game => game);

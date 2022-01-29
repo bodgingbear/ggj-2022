@@ -1,6 +1,7 @@
 import { Enemy } from 'objects/Enemy';
 import { Lantern } from 'objects/Lantern';
 import { Lidl } from 'objects/Lidl';
+import { Moon } from 'objects/Moon';
 import { PissDropsController } from 'objects/PissDropsController';
 import { Player } from 'objects/Player';
 import { Trees } from 'objects/Trees';
@@ -67,20 +68,22 @@ export class GameScene extends Phaser.Scene {
 
     this.cameras.main.startFollow(this.player.sprite, false, 0.1, 0.1);
     this.lights.enable();
+    // this.lights.cull(this.cameras.main);
     this.lights.setAmbientColor(0);
+    new Moon(this, 200, 200);
+    this.lidl = new Lidl(this, this.player);
 
     const lanterns = [
       new Lantern(this, 260 - 33, 800, true),
       new Lantern(this, 890 - 33, 700, true),
       new Lantern(this, 260 - 33, 1200, true),
       new Lantern(this, 890 - 33, 1100, true),
-      new Lantern(this, 1500, 700, false),
+      new Lantern(this, 1500, 500, false),
       new Lantern(this, 1500, 1200, false),
     ];
     lanterns.forEach((lantern) => this.zIndexGroup.add(lantern.sprite));
 
     this.addCameraSwing();
-    this.lidl = new Lidl(this, this.player);
     this.trees = new Trees(this, this.player);
   }
 
