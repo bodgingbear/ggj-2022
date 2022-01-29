@@ -1,7 +1,7 @@
 const PISS_VELOCITY = 180;
 
 export class PissDrop {
-  private sprite: Phaser.GameObjects.Rectangle;
+  public sprite: Phaser.GameObjects.Rectangle;
 
   private body: Phaser.Physics.Arcade.Body;
 

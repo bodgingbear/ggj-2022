@@ -16,7 +16,8 @@ export class Player {
 
   constructor(
     private scene: Phaser.Scene,
-    private keys: Phaser.Types.Input.Keyboard.CursorKeys
+    private keys: Phaser.Types.Input.Keyboard.CursorKeys,
+    private pissDrops: Phaser.GameObjects.Group
   ) {
     this.sprite = this.scene.add
       .sprite(1280 / 2, 720 / 2, 'master', 'Andrzej-0.png')
@@ -39,16 +40,18 @@ export class Player {
       loop: true,
       callback: () => {
         if (cursorKeys.space?.isDown)
-          new PissDrop(
-            this.scene,
-            this.rotation,
-            this.body.position.add(
-              new Phaser.Math.Vector2(
-                this.sprite.displayWidth / 2,
-                this.sprite.displayHeight * 0.7
-              )
-            ),
-            pissDropDeathEmitterManager
+          this.pissDrops.add(
+            new PissDrop(
+              this.scene,
+              this.rotation,
+              this.body.position.add(
+                new Phaser.Math.Vector2(
+                  this.sprite.displayWidth / 2,
+                  this.sprite.displayHeight * 0.7
+                )
+              ),
+              pissDropDeathEmitterManager
+            ).sprite
           );
       },
     });

@@ -1,3 +1,4 @@
+import { PissDrop } from './PissDrop';
 import { Player } from './Player';
 
 const ENEMY_VELOCITY = 50;
@@ -6,7 +7,7 @@ const ROTATION_SPEED = Math.PI * 0.3;
 // TODO: jeśli mocz dotknie wroga to on zaczyna uciekać
 
 export class Enemy {
-  private sprite: Phaser.GameObjects.Sprite;
+  public sprite: Phaser.GameObjects.Sprite;
 
   private body: Phaser.Physics.Arcade.Body;
 
@@ -21,6 +22,12 @@ export class Enemy {
 
     this.scene.physics.world.enable(this.sprite);
     this.body = this.sprite.body as Phaser.Physics.Arcade.Body;
+    this.sprite.setData('ref', this);
+    this.body.setImmovable(true);
+  }
+
+  public onHit(pissDrop: PissDrop, deathCb: () => void) {
+    console.log('zajebali mi skladaka');
   }
 
   update(delta: number, player: Player) {

@@ -1,10 +1,18 @@
 import { Enemy } from 'objects/Enemy';
+import { PissDropsController } from 'objects/PissDropsController';
 import { Player } from 'objects/Player';
 
 export class GameScene extends Phaser.Scene {
   private player?: Player;
 
+  // TODO: DO Wyjebania
   private enemy?: Enemy;
+
+  enemies!: Phaser.GameObjects.Group;
+
+  pissDrops!: Phaser.GameObjects.Group;
+
+  private pissDropsController!: PissDropsController;
 
   public constructor() {
     super({
@@ -27,8 +35,20 @@ export class GameScene extends Phaser.Scene {
       right: Phaser.Input.Keyboard.KeyCodes.D,
     });
 
-    this.player = new Player(this, keys);
-    this.enemy = new Enemy(this);
+    this.pissDrops = this.add.group();
+
+    this.player = new Player(this, keys, this.pissDrops);
+    // this.enemy = new Enemy(this);
+
+    this.enemies = this.add.group();
+
+    this.enemies.add(new Enemy(this).sprite);
+
+    this.pissDropsController = new PissDropsController(
+      this,
+      this.pissDrops,
+      this.enemies
+    );
   }
 
   update(_time: number, delta: number) {
