@@ -1,10 +1,7 @@
-import { PissDrop } from './PissDrop';
 import { Player } from './Player';
 
 const ENEMY_VELOCITY = 50;
 const ROTATION_SPEED = Math.PI * 0.3;
-
-// TODO: jeśli mocz dotknie wroga to on zaczyna uciekać
 
 export class Enemy {
   public sprite: Phaser.GameObjects.Sprite;
@@ -13,13 +10,13 @@ export class Enemy {
 
   private rotation: number = 0;
 
+  private spierdalingTarget: Phaser.Math.Vector2 | null = null;
+
   constructor(private scene: Phaser.Scene) {
-    this.sprite = this.scene.add.sprite(
-      100 / 2,
-      720 / 2,
-      'master',
-      'Straznik-FHV.png'
-    ).setScale(4).setPipeline('Light2D')
+    this.sprite = this.scene.add
+      .sprite(100 / 2, 720 / 2, 'master', 'Straznik-FHV.png')
+      .setScale(4)
+      .setPipeline('Light2D');
 
     this.sprite.setOrigin(0.2);
 
@@ -29,15 +26,44 @@ export class Enemy {
     this.body.setImmovable(true);
   }
 
-  public onHit(pissDrop: PissDrop, deathCb: () => void) {
-    console.log('zajebali mi skladaka');
+  // public onHit(pissDrop: PissDrop, deathCb: () => void) {
+  public onHit() {
+    const shouldKeepX = Math.random() > 0.5;
+
+    if (shouldKeepX) {
+      this.spierdalingTarget = new Phaser.Math.Vector2(
+        this.body.x,
+        this.getNearestEdgeY()
+      );
+    } else {
+      this.spierdalingTarget = new Phaser.Math.Vector2(
+        this.getNearestEdgeX(),
+        this.body.y
+      );
+    }
   }
 
-  update(delta: number, player: Player) {
-    const targetRotation = Phaser.Math.Angle.BetweenPoints(
-      this.body,
-      player.body
-    );
+  private getNearestEdgeX = () => {
+    if (this.body.x < 1280 / 2) {
+      return 0 - 100;
+    }
+
+    return 1280 + 100;
+  };
+
+  private getNearestEdgeY = () => {
+    if (this.body.y < 1080 / 2) {
+      return 0 - 100;
+    }
+
+    return 1080 + 100;
+  };
+
+  private goToPoint = (
+    target: Phaser.Types.Math.Vector2Like,
+    delta: number
+  ) => {
+    const targetRotation = Phaser.Math.Angle.BetweenPoints(this.body, target);
 
     this.rotation = Phaser.Math.Angle.RotateTo(
       this.rotation,
@@ -54,5 +80,24 @@ export class Enemy {
     this.sprite.setFlipX(
       !(normalRotation > Math.PI / 2 && normalRotation < Math.PI * 1.75)
     );
+  };
+
+  update(delta: number, player: Player) {
+    if (this.spierdalingTarget !== null) {
+      const distanceFromSpierdalingTarget = Phaser.Math.Distance.BetweenPoints(
+        this.spierdalingTarget,
+        this.body
+      );
+
+      if (distanceFromSpierdalingTarget < 50) {
+        this.sprite.destroy();
+        return;
+      }
+
+      this.goToPoint(this.spierdalingTarget, delta);
+      return;
+    }
+
+    this.goToPoint(player.body, delta);
   }
 }

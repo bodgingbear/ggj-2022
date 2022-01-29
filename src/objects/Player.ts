@@ -33,7 +33,7 @@ export class Player {
     });
     this.scene.physics.world.enable(this.sprite);
     this.body = this.sprite.body as Phaser.Physics.Arcade.Body;
-    this.body.setCollideWorldBounds(true)
+    this.body.setCollideWorldBounds(true);
 
     const cursorKeys = scene.input.keyboard.createCursorKeys();
 
@@ -95,8 +95,8 @@ export class Player {
         )
       );
 
-      this.rotation = this.targetToMouseRotation
-      
+      this.rotation = this.targetToMouseRotation;
+
       // Phaser.Math.Angle.RotateTo(
       //   this.rotation,
       //   this.targetToMouseRotation,
