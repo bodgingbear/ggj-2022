@@ -14,6 +14,7 @@ export class BootScene extends Phaser.Scene {
     // });
 
     this.load.image('piss', loadAsset('images/piss.png'))
+    this.load.multiatlas('master', 'atlas/master.json', 'atlas');
   }
 
   public create(): void {

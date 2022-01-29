@@ -4,7 +4,7 @@ const ROTATION_SPEED = Math.PI * 0.2;
 const PLAYER_VELOCITY = 150;
 
 export class Player {
-  private sprite: Phaser.GameObjects.Rectangle;
+  private sprite: Phaser.GameObjects.Sprite;
 
   private body: Phaser.Physics.Arcade.Body;
 
@@ -12,18 +12,18 @@ export class Player {
 
   private pointer: any;
 
+  private rotation = 0;
+
   constructor(
     private scene: Phaser.Scene,
     private keys: Phaser.Types.Input.Keyboard.CursorKeys
   ) {
-    this.sprite = this.scene.add.rectangle(
+    this.sprite = this.scene.add.sprite(
       1280 / 2,
       720 / 2,
-      50,
-      50,
-      0xff00ff,
-      0.8
-    );
+        'master',
+        'Andrzej-0.png'
+    ).setScale(3)
 
     this.sprite.setOrigin(0.5);
 
@@ -44,7 +44,7 @@ export class Player {
         if (cursorKeys.space?.isDown)
           new PissDrop(
             this.scene,
-            this.sprite.rotation,
+            this.rotation,
             this.body.position.add(
               new Phaser.Math.Vector2(
                 this.sprite.width / 2,
@@ -88,13 +88,25 @@ export class Player {
         this.pointer
       );
 
-      this.sprite.setRotation(
-        Phaser.Math.Angle.RotateTo(
-          this.sprite.rotation,
+      this.rotation = Phaser.Math.Angle.RotateTo(
+          this.rotation,
           this.targetToMouseRotation,
           ROTATION_SPEED * 0.001 * delta
         )
-      );
+
+        console.log(this.rotation)
+
+        const normalRotation = Phaser.Math.Angle.Normalize(this.targetToMouseRotation)
+
+        if(normalRotation > Math.PI * 1.75  normalRotation > 0 && normalRotation < Math.PI / 4) {
+            this.sprite.setFrame('Andrzej-3.png')
+        } else if(normalRotation >= Math.PI / 4 && normalRotation < Math.PI * 3/4) {
+            this.sprite.setFrame('Andrzej-1.png')
+        } else if(normalRotation >= Math.PI * 3/4 && normalRotation < Math.PI) {
+            this.sprite.setFrame('Andrzej-0.png')
+        } else if(normalRotation >= Math.PI * 3/4 && normalRotation <= 2 * Math.PI) {
+            this.sprite.setFrame('Andrzej-2.png')
+        }
     }
   }
 }

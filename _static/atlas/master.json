@@ -1,0 +1,272 @@
+{
+	"textures": [
+		{
+			"image": "master.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 198,
+				"h": 39
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "Andrzej-0.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 37
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 15,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Andrzej-1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 37
+					},
+					"frame": {
+						"x": 18,
+						"y": 1,
+						"w": 15,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Andrzej-2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 37
+					},
+					"frame": {
+						"x": 35,
+						"y": 1,
+						"w": 15,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Andrzej-3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 37
+					},
+					"frame": {
+						"x": 52,
+						"y": 1,
+						"w": 15,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Andrzej-Drunk-1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 37
+					},
+					"frame": {
+						"x": 69,
+						"y": 1,
+						"w": 15,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Andrzej-Drunk-2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 37
+					},
+					"frame": {
+						"x": 86,
+						"y": 1,
+						"w": 15,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Andrzej-Drunk-3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 37
+					},
+					"frame": {
+						"x": 103,
+						"y": 1,
+						"w": 15,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Andrzej-Drunk-4.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 37
+					},
+					"frame": {
+						"x": 120,
+						"y": 1,
+						"w": 15,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Straznik-F.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 37
+					},
+					"frame": {
+						"x": 137,
+						"y": 1,
+						"w": 14,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Straznik-FHV.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 37
+					},
+					"frame": {
+						"x": 153,
+						"y": 1,
+						"w": 14,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Straznik-M.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 14,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 13,
+						"h": 37
+					},
+					"frame": {
+						"x": 169,
+						"y": 1,
+						"w": 13,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Straznik-MHV.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 14,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 13,
+						"h": 37
+					},
+					"frame": {
+						"x": 184,
+						"y": 1,
+						"w": 13,
+						"h": 37
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:2cbab391464c40a753757ed2198af307:1603064255790de4e1a76770339835fa:5bc7ad8fb5c1c7a3dd93d07a0db38fe6$"
+	}
+}
