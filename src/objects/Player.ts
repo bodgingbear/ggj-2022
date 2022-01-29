@@ -23,7 +23,8 @@ export class Player {
   ) {
     this.sprite = this.scene.add
       .sprite(x, y, 'master', 'Andrzej-Drunk-Down.png')
-      .setScale(4).setPipeline('Light2D')
+      .setScale(4)
+      .setPipeline('Light2D');
 
     this.sprite.setOrigin(0.5).setDepth(1);
 
