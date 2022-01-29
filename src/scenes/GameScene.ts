@@ -5,6 +5,8 @@ import { PissDropsController } from 'objects/PissDropsController';
 import { Player } from 'objects/Player';
 import { Trees } from 'objects/Trees';
 import { EnemiesSpawnController } from 'objects/EnemiesSpawnController';
+import { debugMap } from 'packages/utils/shouldSkipIntro';
+import { Enemy } from 'objects/Enemy';
 
 export class GameScene extends Phaser.Scene {
   private player?: Player;
@@ -59,10 +61,22 @@ export class GameScene extends Phaser.Scene {
       this.zIndexGroup.add(enemy);
     });
 
-    this.enemiesSpawnController = new EnemiesSpawnController(
-      this,
-      this.enemies
-    );
+    this.enemiesSpawnController = new EnemiesSpawnController(this);
+
+    this.enemiesSpawnController.on('request-emit', (position) => {
+      const enemy = new Enemy(this, position);
+      this.enemies.add(enemy.sprite);
+      this.zIndexGroup.add(enemy.sprite);
+      enemy.on('destroy', () => {
+        if (this.enemies.children.entries.length === 0) {
+          this.enemiesSpawnController.onRoundEnd();
+        }
+      });
+    });
+
+    this.enemiesSpawnController.on('end-of-levels', () => {
+      alert('END OF LEVELS');
+    });
 
     this.pissDropsController = new PissDropsController(
       this,
@@ -76,25 +90,22 @@ export class GameScene extends Phaser.Scene {
 
     this.cameras.main.startFollow(this.player.sprite, false, 0.1, 0.1);
     this.lights.enable();
-    // this.lights.cull(this.cameras.main);
 
-    /* eslint-disable spaced-comment */
-
-    // /*
-    this.lights.setAmbientColor(0);
-    /*/
-    this.lights.setAmbientColor(0xffffff);
-    //*/
-    /* eslint-enable spaced-comment */
+    if (debugMap()) {
+      this.lights.setAmbientColor(0xffffff);
+      this.cameras.main.setZoom(0.5);
+    } else {
+      this.lights.setAmbientColor(0);
+    }
 
     new Moon(this, 200, 200);
     this.lidl = new Lidl(this, this.player);
 
     const lanterns = [
       new Lantern(this, 260 - 33, 800, true),
-      new Lantern(this, 890 - 33, 700, true),
+      new Lantern(this, 890 - 33, 600, true),
       new Lantern(this, 260 - 33, 1200, true),
-      new Lantern(this, 890 - 33, 1100, true),
+      new Lantern(this, 890 - 33, 1000, true),
       new Lantern(this, 1500, 500, false),
       new Lantern(this, 1500, 1200, false),
     ];

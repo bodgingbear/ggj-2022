@@ -1,10 +1,22 @@
+import { EventEmitter } from 'packages/utils';
 import { Player } from './Player';
 
 const ENEMY_VELOCITY = 50;
 const ENEMY_SPIERDALING_VELOCITY = 150;
 const ROTATION_SPEED = Math.PI * 0.3;
 
-export class Enemy {
+function getRandomEnemyTexture() {
+  const textures = [
+    'Straznik-FHV.png',
+    'Straznik-MHV.png',
+    'Straznik-M.png',
+    'Straznik-F.png',
+  ];
+
+  return textures[Math.floor(Math.random() * textures.length)];
+}
+
+export class Enemy extends EventEmitter<'destroy'> {
   public sprite: Phaser.GameObjects.Sprite;
 
   private body: Phaser.Physics.Arcade.Body;
@@ -14,8 +26,9 @@ export class Enemy {
   private spierdalingTarget: Phaser.Math.Vector2 | null = null;
 
   constructor(private scene: Phaser.Scene, position: Phaser.Math.Vector2) {
+    super();
     this.sprite = this.scene.add
-      .sprite(position.x, position.y, 'master', 'Straznik-FHV.png')
+      .sprite(position.x, position.y, 'master', getRandomEnemyTexture())
       .setScale(4)
       .setPipeline('Light2D');
 
@@ -97,6 +110,7 @@ export class Enemy {
 
       if (distanceFromSpierdalingTarget < 50) {
         this.sprite.destroy();
+        this.emit('destroy');
         return;
       }
 

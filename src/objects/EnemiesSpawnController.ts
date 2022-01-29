@@ -1,11 +1,17 @@
-import { Enemy } from './Enemy';
+import { EventEmitter } from 'packages/utils';
 import { levels } from './levels';
 
-export class EnemiesSpawnController {
-  constructor(
-    private scene: Phaser.Scene,
-    private enemies: Phaser.GameObjects.Group
-  ) {
+export class EnemiesSpawnController extends EventEmitter<
+  'request-emit' | 'end-of-levels',
+  {
+    'request-emit': (position: Phaser.Math.Vector2) => void;
+    'end-of-levels': () => void;
+  }
+> {
+  private level = 0;
+
+  constructor(private scene: Phaser.Scene) {
+    super();
     this.onRoundStart();
   }
 
@@ -13,13 +19,20 @@ export class EnemiesSpawnController {
     this.spawnEnemies();
   }
 
+  onRoundEnd() {
+    if (++this.level > levels.length - 1) {
+      this.emit('end-of-levels');
+    } else {
+      this.spawnEnemies();
+    }
+  }
+
   private spawnEnemies() {
-    levels[0].forEach(({ time, position }) => {
+    levels[this.level].forEach(({ time, position }) => {
       this.scene.time.addEvent({
         delay: time,
         callback: () => {
-          const enemy = new Enemy(this.scene, position);
-          this.enemies.add(enemy.sprite);
+          this.emit('request-emit', position);
         },
       });
     });
