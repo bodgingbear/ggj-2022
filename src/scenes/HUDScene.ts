@@ -26,9 +26,6 @@ export class HUDScene extends Phaser.Scene {
     this.add.existing(this.bar.bladderShrinking);
 
     this.player = player;
-    const bar = new BladderBar(this);
-    this.add.existing(bar.bladderShrinking);
-
     new ClickableElement(
       this,
       'alcohol.png',
