@@ -145,6 +145,6 @@ export class Player {
   }
 
   public addPiss = (pissCount: number) => {
-    this.pee = Math.max(this.pee + pissCount, PEE_MAX_VALUE);
+    this.pee = Math.min(this.pee + pissCount, PEE_MAX_VALUE);
   };
 }
