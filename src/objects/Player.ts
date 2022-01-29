@@ -25,7 +25,7 @@ export class Player {
       .setScale(4)
       .setPipeline('Light2D');
 
-    this.sprite.setOrigin(0.5).setDepth(1);
+    this.sprite.setOrigin(0.5);
 
     scene.input.on('pointermove', (pointer: Phaser.Input.Pointer) => {
       this.pointer = pointer;
@@ -57,7 +57,11 @@ export class Player {
                 )
               ),
               pissDropDeathEmitterManager
-            ).sprite
+            ).sprite.setDepth(
+              this.sprite.frame.name === 'Andrzej-Drunk-Up.png'
+                ? this.sprite.depth - 0.1
+                : this.sprite.depth + 0.1
+            )
           );
       },
     });
@@ -109,25 +113,21 @@ export class Player {
 
       if (normalRotation > Math.PI * 1.75 || normalRotation < Math.PI / 4) {
         this.sprite.setFrame('Andrzej-Drunk-Right.png');
-        this.sprite.setDepth(0);
       } else if (
         normalRotation >= Math.PI / 4 &&
         normalRotation < (Math.PI * 3) / 4
       ) {
         this.sprite.setFrame('Andrzej-Drunk-Down.png');
-        this.sprite.setDepth(0);
       } else if (
         normalRotation >= (Math.PI * 3) / 4 &&
         normalRotation < Math.PI * 1.25
       ) {
         this.sprite.setFrame('Andrzej-Drunk-Left.png');
-        this.sprite.setDepth(0);
       } else if (
         normalRotation >= Math.PI * 1.25 &&
         normalRotation <= 2 * Math.PI
       ) {
         this.sprite.setFrame('Andrzej-Drunk-Up.png');
-        this.sprite.setDepth(1);
       }
     }
   }
