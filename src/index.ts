@@ -15,12 +15,12 @@ const game = new Phaser.Game({
   width: 1920,
   height: 1080,
   scene: [
-    // BootScene,
+    BootScene,
     // LoadingScene,
     // MainMenuScene,
     GameScene,
-    HowToPlayScene,
-    CreditsScene,
+    // HowToPlayScene,
+    // CreditsScene,
   ],
   scale: {
     parent: 'app',
@@ -29,6 +29,9 @@ const game = new Phaser.Game({
     height: 720,
   },
   zoom: 5,
+  physics: {
+    default: 'arcade',
+  },
 });
 
 window.addEventListener('load', (): Phaser.Game => game);
