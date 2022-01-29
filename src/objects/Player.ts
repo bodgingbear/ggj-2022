@@ -6,7 +6,7 @@ const PLAYER_VELOCITY = 150;
 export class Player {
   private sprite: Phaser.GameObjects.Sprite;
 
-  private body: Phaser.Physics.Arcade.Body;
+  public body: Phaser.Physics.Arcade.Body;
 
   private targetToMouseRotation: number = 0;
 
@@ -18,14 +18,11 @@ export class Player {
     private scene: Phaser.Scene,
     private keys: Phaser.Types.Input.Keyboard.CursorKeys
   ) {
-    this.sprite = this.scene.add.sprite(
-      1280 / 2,
-      720 / 2,
-        'master',
-        'Andrzej-0.png'
-    ).setScale(3)
+    this.sprite = this.scene.add
+      .sprite(1280 / 2, 720 / 2, 'master', 'Andrzej-0.png')
+      .setScale(3);
 
-    this.sprite.setOrigin(0.5).setDepth(1)
+    this.sprite.setOrigin(0.5).setDepth(1);
 
     scene.input.on('pointermove', (pointer: any) => {
       this.pointer = pointer;
@@ -89,28 +86,37 @@ export class Player {
       );
 
       this.rotation = Phaser.Math.Angle.RotateTo(
-          this.rotation,
-          this.targetToMouseRotation,
-          ROTATION_SPEED * 0.001 * delta
-        )
+        this.rotation,
+        this.targetToMouseRotation,
+        ROTATION_SPEED * 0.001 * delta
+      );
 
-        console.log(this.rotation)
+      console.log(this.rotation);
 
-        const normalRotation = Phaser.Math.Angle.Normalize(this.rotation)
+      const normalRotation = Phaser.Math.Angle.Normalize(this.rotation);
 
-        if(normalRotation > Math.PI * 1.75 ||  normalRotation < Math.PI / 4) {
-            this.sprite.setFrame('Andrzej-Drunk-Right.png')
-            this.sprite.setDepth(0)
-        } else if(normalRotation >= Math.PI / 4 && normalRotation < Math.PI * 3/4) {
-            this.sprite.setFrame('Andrzej-Drunk-Down.png')
-            this.sprite.setDepth(0)
-        } else if(normalRotation >= Math.PI * 3/4 && normalRotation < Math.PI * 1.25) {
-            this.sprite.setFrame('Andrzej-Drunk-Left.png')
-            this.sprite.setDepth(0)
-        } else if(normalRotation >= Math.PI * 1.25 && normalRotation <= 2 * Math.PI) {
-            this.sprite.setFrame('Andrzej-Drunk-Up.png')
-            this.sprite.setDepth(1)
-        }
+      if (normalRotation > Math.PI * 1.75 || normalRotation < Math.PI / 4) {
+        this.sprite.setFrame('Andrzej-Drunk-Right.png');
+        this.sprite.setDepth(0);
+      } else if (
+        normalRotation >= Math.PI / 4 &&
+        normalRotation < (Math.PI * 3) / 4
+      ) {
+        this.sprite.setFrame('Andrzej-Drunk-Down.png');
+        this.sprite.setDepth(0);
+      } else if (
+        normalRotation >= (Math.PI * 3) / 4 &&
+        normalRotation < Math.PI * 1.25
+      ) {
+        this.sprite.setFrame('Andrzej-Drunk-Left.png');
+        this.sprite.setDepth(0);
+      } else if (
+        normalRotation >= Math.PI * 1.25 &&
+        normalRotation <= 2 * Math.PI
+      ) {
+        this.sprite.setFrame('Andrzej-Drunk-Up.png');
+        this.sprite.setDepth(1);
+      }
     }
   }
 }
