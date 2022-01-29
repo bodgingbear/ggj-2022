@@ -1,6 +1,7 @@
 import { Player } from './Player';
 
 const ENEMY_VELOCITY = 50;
+const ENEMY_SPIERDALING_VELOCITY = 150;
 const ROTATION_SPEED = Math.PI * 0.3;
 
 export class Enemy {
@@ -64,16 +65,22 @@ export class Enemy {
     delta: number
   ) => {
     const targetRotation = Phaser.Math.Angle.BetweenPoints(this.body, target);
+    const isSpierdaling = this.spierdalingTarget !== null;
 
-    this.rotation = Phaser.Math.Angle.RotateTo(
-      this.rotation,
-      targetRotation,
-      ROTATION_SPEED * 0.001 * delta
-    );
+    if (isSpierdaling) {
+      this.rotation = targetRotation;
+    } else {
+      this.rotation = Phaser.Math.Angle.RotateTo(
+        this.rotation,
+        targetRotation,
+        ROTATION_SPEED * 0.001 * delta
+      );
+    }
 
-    const { x, y } = new Phaser.Math.Vector2(ENEMY_VELOCITY, 0).rotate(
-      this.rotation
-    );
+    const { x, y } = new Phaser.Math.Vector2(
+      isSpierdaling ? ENEMY_SPIERDALING_VELOCITY : ENEMY_VELOCITY,
+      0
+    ).rotate(this.rotation);
     this.body.setVelocity(x, y);
 
     const normalRotation = Phaser.Math.Angle.Normalize(this.rotation);
