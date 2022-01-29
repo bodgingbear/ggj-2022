@@ -1,31 +1,40 @@
-const BLADDER_BAR_X = 865;
-const BLADDER_BAR_Y = 105;
+const BLADDER_BAR_X = 1280;
+const BLADDER_BAR_Y = 0;
+
+const BlADDER_BAR_WIDTH = 160;
+const BLADDER_BAR_HEIGHT = 26;
 
 export class BladderBar {
+  bar: Phaser.GameObjects.Rectangle;
+
   bladderShrinking: Phaser.GameObjects.Rectangle;
 
   constructor(private scene: Phaser.Scene) {
-    const bar = this.scene.add.rectangle(
-      BLADDER_BAR_X,
-      BLADDER_BAR_Y,
-      160,
-      26,
+    this.bar = this.scene.add.rectangle(
+      BLADDER_BAR_X - BlADDER_BAR_WIDTH,
+      BLADDER_BAR_Y + BLADDER_BAR_HEIGHT - 10,
+      BlADDER_BAR_WIDTH,
+      BLADDER_BAR_HEIGHT,
       0xffff00
     );
 
     this.bladderShrinking = this.scene.add.rectangle(
-      bar.x - bar.displayWidth / 2,
-      bar.y,
-      bar.displayWidth - 8,
-      bar.displayHeight - 8,
+      this.bar.x,
+      this.bar.y + 13,
+      this.bar.displayWidth - 8,
+      this.bar.displayHeight - 8,
       0xffbb00
     );
 
-    this.bladderShrinking.setOrigin(-0.03, 0.5);
+    this.bar.setOrigin(0);
+    this.onPissAmountChange(100);
   }
 
   onPissAmountChange = (piss: number) => {
     this.bladderShrinking.scaleX = piss / 100;
+    this.bladderShrinking.setX(
+      this.bar.x + this.bladderShrinking.displayWidth / 2 + 4
+    );
   };
 
   update() {}

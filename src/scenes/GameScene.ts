@@ -1,3 +1,4 @@
+import { BladderBar } from 'objects/BladderBar';
 import { Enemy } from 'objects/Enemy';
 import { Lantern } from 'objects/Lantern';
 import { Lidl } from 'objects/Lidl';
@@ -68,7 +69,7 @@ export class GameScene extends Phaser.Scene {
     this.cameras.main.startFollow(this.player.sprite, false, 0.1, 0.1);
 
     this.lights.enable();
-    this.lights.setAmbientColor(0);
+    this.lights.setAmbientColor(0xffffff);
 
     const lanterns = [
       new Lantern(this, 260 - 33, 800, true),
@@ -82,6 +83,8 @@ export class GameScene extends Phaser.Scene {
 
     this.lidl = new Lidl(this, this.player);
     this.trees = new Trees(this, this.player);
+
+    this.scene.run('HUDScene');
   }
 
   update(_time: number, delta: number) {

@@ -6,6 +6,7 @@ import { BootScene } from './scenes/BootScene';
 import { LoadingScene } from './scenes/LoadingScene';
 import { MainMenuScene } from './scenes/MainMenuScene';
 import { GameScene } from './scenes/GameScene';
+import { HUDScene } from './scenes/HUDScene';
 import { HowToPlayScene } from './scenes/HowToPlayScene';
 import { CreditsScene } from './scenes/CreditsScene';
 
@@ -21,6 +22,7 @@ const game = new Phaser.Game({
     GameScene,
     // HowToPlayScene,
     // CreditsScene,
+    HUDScene,
   ],
   scale: {
     parent: 'app',
