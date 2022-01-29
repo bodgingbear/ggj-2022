@@ -1,55 +1,65 @@
-const PISS_VELOCITY = 150
+const PISS_VELOCITY = 150;
 
 export class PissDrop {
-    private sprite: Phaser.GameObjects.Rectangle
-    private body: Phaser.Physics.Arcade.Body;
-    
-    constructor(
-        private scene: Phaser.Scene,
-        rotation: number,
-        originPos: Phaser.Math.Vector2,
-        private emitterManager: Phaser.GameObjects.Particles.ParticleEmitterManager) {
-        this.sprite = this.scene.add.rectangle(
-           originPos.x, originPos.y, 5, 5, 0xffff00, 0.8)
+  private sprite: Phaser.GameObjects.Rectangle;
 
-       this.sprite.setOrigin(0.5)
+  private body: Phaser.Physics.Arcade.Body;
 
-       this.sprite.setRotation(rotation)
+  constructor(
+    private scene: Phaser.Scene,
+    rotation: number,
+    originPos: Phaser.Math.Vector2,
+    private emitterManager: Phaser.GameObjects.Particles.ParticleEmitterManager
+  ) {
+    this.sprite = this.scene.add.rectangle(
+      originPos.x,
+      originPos.y,
+      5,
+      5,
+      0xffff00,
+      0.8
+    );
 
-       this.scene.physics.world.enable(this.sprite);
+    this.sprite.setOrigin(0.5);
 
-       this.body = this.sprite.body as Phaser.Physics.Arcade.Body;
+    this.sprite.setRotation(rotation);
 
-       const {x, y} = new Phaser.Math.Vector2(PISS_VELOCITY, 0).rotate(rotation)
-       this.body.setVelocity(x, y)
+    this.scene.physics.world.enable(this.sprite);
 
+    this.body = this.sprite.body as Phaser.Physics.Arcade.Body;
 
-       this.scene.time.addEvent({
-           delay: 1500,
-           callback: () => {
-               this.body.destroy()
-               this.sprite.destroy()
+    const { x, y } = new Phaser.Math.Vector2(PISS_VELOCITY, 0).rotate(rotation);
+    this.body.setVelocity(x, y);
 
-               const path = new Phaser.Geom.Circle(0, 0, 10)
+    this.scene.time.addEvent({
+      delay: 1500,
+      callback: () => {
+        this.body.destroy();
+        this.sprite.destroy();
 
-               const emitter = this.emitterManager.createEmitter({
-                x: this.body.position.x, y: this.body.position.y,
-                lifespan: 400,
-                quantity: 1,
-                scale: 0.4,
-                alpha: { start: 1, end: 0 },
-                blendMode: 'ADD',
-                emitZone: { type: 'random', source: path }
-            }).start()
+        const path = new Phaser.Geom.Circle(0, 0, 10);
 
-            this.scene.time.addEvent({
-                delay: 400,
-                callback: () => {
-                    emitter.killAll()
-                    emitter.stop()
-                }
-            })
-           }
-       })
-    }
+        const emitter = this.emitterManager
+          .createEmitter({
+            x: this.body.position.x,
+            y: this.body.position.y,
+            lifespan: 400,
+            quantity: 1,
+            scale: 0.4,
+            alpha: { start: 1, end: 0 },
+            blendMode: 'ADD',
+            emitZone: { type: 'random', source: path },
+          })
+          .start();
+
+        this.scene.time.addEvent({
+          delay: 400,
+          callback: () => {
+            emitter.killAll();
+            emitter.stop();
+          },
+        });
+      },
+    });
+  }
 }

@@ -1,4 +1,4 @@
-import { Player } from "objects/Player";
+import { Player } from 'objects/Player';
 
 export class GameScene extends Phaser.Scene {
   private player?: Player;
@@ -16,11 +16,13 @@ export class GameScene extends Phaser.Scene {
       align: 'center',
       lineSpacing: 10,
     });
-    
-    this.player = new Player(this)
+
+    const keys = this.input.keyboard.createCursorKeys();
+
+    this.player = new Player(this, keys);
   }
 
   update(_time: number, delta: number) {
-    this.player?.update(delta)
+    this.player?.update(delta);
   }
 }
