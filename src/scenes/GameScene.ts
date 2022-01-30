@@ -94,7 +94,6 @@ export class GameScene extends Phaser.Scene {
     });
 
     this.player = new Player(this, 200, 900, keys);
-
     const pissDropDeathEmitterManager = this.add
       .particles('master', 'piss-drop.png')
       .setPipeline('Light2D');

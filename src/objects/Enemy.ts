@@ -32,6 +32,8 @@ export class Enemy extends EventEmitter<'destroy'> {
 
     this.scene.physics.world.enable(this.sprite);
     this.body = this.sprite.body as Phaser.Physics.Arcade.Body;
+    this.body.setSize(this.sprite.width, (this.sprite.height * 2) / 3);
+    this.body.setOffset(0, this.sprite.height / 3);
     this.sprite.setData('ref', this);
     this.body.setImmovable(true);
   }

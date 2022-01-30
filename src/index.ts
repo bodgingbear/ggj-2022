@@ -5,6 +5,7 @@ import './index.css';
 import { DayScene } from 'scenes/DayScene';
 import { HowToPlayScene } from 'scenes/HowToPlayScene';
 import { CreditsScene } from 'scenes/CreditsScene';
+import { debugMap } from 'packages/utils/shouldSkipIntro';
 import { BootScene } from './scenes/BootScene';
 import { LoadingScene } from './scenes/LoadingScene';
 import { MainMenuScene } from './scenes/MainMenuScene';
@@ -35,6 +36,17 @@ const game = new Phaser.Game({
   zoom: 5,
   physics: {
     default: 'arcade',
+    arcade: debugMap()
+      ? {
+          debug: true,
+          debugShowBody: true,
+          debugShowStaticBody: true,
+          debugShowVelocity: true,
+          debugVelocityColor: 0xffff00,
+          debugBodyColor: 0x0000ff,
+          debugStaticBodyColor: 0xffffff,
+        }
+      : {},
   },
   maxLights: 15,
 } as Phaser.Types.Core.GameConfig);

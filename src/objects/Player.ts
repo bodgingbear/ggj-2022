@@ -70,6 +70,8 @@ export class Player extends EventEmitter<
 
     this.scene.physics.world.enable(this.sprite);
     this.body = this.sprite.body as Phaser.Physics.Arcade.Body;
+    this.body.setSize(this.sprite.width, this.sprite.height / 2);
+    this.body.setOffset(0, this.sprite.height / 2);
     this.body.setCollideWorldBounds(true);
 
     const cursorKeys = scene.input.keyboard.createCursorKeys();
@@ -88,11 +90,9 @@ export class Player extends EventEmitter<
           this.emit(
             'request-piss',
             this.rotation,
-            this.body.position.add(
-              new Phaser.Math.Vector2(
-                this.sprite.displayWidth / 2,
-                this.sprite.displayHeight * 0.7
-              )
+            new Phaser.Math.Vector2(
+              this.sprite.x,
+              this.sprite.y + this.sprite.displayHeight * 0.15
             ),
             this.body.velocity,
             this.getDirection() === 'up'
