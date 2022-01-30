@@ -227,11 +227,13 @@ export class Player {
 
     if (item.type === 'alcohol') {
       this.drinkAlcohol(item);
+      console.log('dźwięk drink vodka');
       return;
     }
 
     if (item.type === 'energy') {
       this.drinkEnergyDrink(item);
+      console.log('dźwięk drink energy drink');
     }
   };
 

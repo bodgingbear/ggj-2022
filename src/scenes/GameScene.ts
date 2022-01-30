@@ -24,6 +24,10 @@ export class GameScene extends Phaser.Scene {
 
   physics!: Phaser.Physics.Arcade.ArcadePhysics;
 
+  public noPee: () => void = () => {
+    console.log('randomize dźwięk nie ma już siku - 4 łącznie');
+  };
+
   lidl!: Lidl;
 
   trees!: Trees;
@@ -85,9 +89,7 @@ export class GameScene extends Phaser.Scene {
       this.pissDrops,
       this.enemies
     );
-    this.player = new Player(this, 200, 900, keys, this.pissDrops, () => {
-      console.log('TODO: Play dzwięki bólu zula, ze juz go pecherz boli XD');
-    });
+    this.player = new Player(this, 200, 900, keys, this.pissDrops, this.noPee);
     this.zIndexGroup.add(this.player.sprite);
 
     this.physics.add.collider(this.enemies, this.player.sprite, () => {
@@ -134,6 +136,13 @@ export class GameScene extends Phaser.Scene {
       .setOrigin(0)
       .setPosition(-10000000)
       .setAlpha(0);
+
+    // NA KONIEC DNIA: dźwięk horroru i płynne przejście do nocy w tym dźwięku
+    // NA POCZATEK NOCY:
+    // 1. dźwięk wiatru start
+    // 2. (do ustalenia dokładnie) randomowo co jakiś czas żeby był dźwięk "andrzejku/andrzeju" od męskiego miejskiego (sprawdzać w booleanie czy jest jakiś męski miejski i jak jest to dać na to timeout)
+
+    // SOUNDS DO USTALENIA: szczekanie na wchodzenie (imo chyba nie xd)
   }
 
   update(_time: number, delta: number) {

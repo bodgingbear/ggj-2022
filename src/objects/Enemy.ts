@@ -44,6 +44,12 @@ export class Enemy extends EventEmitter<'destroy'> {
           Phaser.Math.Angle.BetweenPoints(this.body.position, hitPos) + Math.PI
         )
       );
+
+    console.log('sik dźwięk');
+    // timeout 300/500ms
+    console.log(
+      'dźwięk obrzydzenia "hit..." (męski lub damski randomowo - zależnie od miejskiego)'
+    );
   }
 
   private goToPoint = (

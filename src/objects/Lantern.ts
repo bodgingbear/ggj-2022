@@ -14,5 +14,7 @@ export class Lantern {
       .setFlipX(true);
 
     this.scene.lights.addLight(x, y, 200, 0xffe692, 0.5);
+
+    // dodać miganie i przy każdym mignięciu dać dźwięk "lights"
   }
 }
