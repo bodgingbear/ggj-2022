@@ -1,4 +1,5 @@
-import { PEE_DEFAULT_VALUE, PEE_MAX_VALUE } from 'constants';
+import { PEE_DEFAULT_VALUE, PEE_MAX_VALUE } from '../constants';
+import { Inventory, InventoryItem } from './Inventory';
 
 import { PissDrop } from './PissDrop';
 
@@ -18,6 +19,8 @@ export class Player {
   private rotation = 0;
 
   private light: Phaser.GameObjects.Light;
+
+  public inventory = new Inventory();
 
   constructor(
     private scene: Phaser.Scene,
@@ -168,8 +171,10 @@ export class Player {
     }
   }
 
-  public addPiss = (pissCount: number) => {
-    this.pee = Math.min(this.pee + pissCount, PEE_MAX_VALUE);
+  public drink = (item: InventoryItem) => {
+    this.pee = Math.min(this.pee + item.pee, PEE_MAX_VALUE);
+    // eslint-disable-next-line no-param-reassign
+    item.count--;
   };
 
   private playAnimation = (key: string) => {
