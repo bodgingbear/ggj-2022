@@ -33,11 +33,11 @@ export class GameScene extends Phaser.Scene {
 
   trees!: Trees;
 
-  overlay!: Phaser.GameObjects.Rectangle;
-
   ended = false;
 
   hudEmitter = new EventEmitter<'end'>();
+
+  startedAt!: number;
 
   public constructor() {
     super({
@@ -46,6 +46,8 @@ export class GameScene extends Phaser.Scene {
   }
 
   public create(): void {
+    this.startedAt = this.time.now;
+
     const bg = this.add
       .image(0, 0, 'master', 'bg.png')
       .setOrigin(0)
@@ -147,15 +149,10 @@ export class GameScene extends Phaser.Scene {
 
     this.scene.run('HUDScene', {
       peeProvider: () => this.player?.pee ?? 0,
+      startedAt: this.startedAt,
       player: this.player,
       emitter: this.hudEmitter,
     });
-
-    this.overlay = this.add
-      .rectangle(0, 0, bg.displayWidth, bg.displayHeight, 0, 1)
-      .setOrigin(0)
-      .setPosition(-10000000)
-      .setAlpha(0);
 
     // NA KONIEC DNIA: dźwięk horroru i płynne przejście do nocy w tym dźwięku
     // NA POCZATEK NOCY:
@@ -194,21 +191,9 @@ export class GameScene extends Phaser.Scene {
   }
 
   handleAndrzejCaught() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.zIndexGroup.children.entries.forEach((el: any) => el.setDepth(1));
-    this.children.bringToTop(this.overlay.setPosition(0, 0).setDepth(2));
-
-    this.tweens.addCounter({
-      from: 0,
-      to: 0.9,
-      duration: 1000,
-      yoyo: false,
-      loop: 0,
-      onUpdate: (val) => {
-        this.overlay.setAlpha(val.getValue());
-      },
-      onComplete: () => {
-        this.hudEmitter.emit('end');
-      },
-    });
+    this.hudEmitter.emit('end');
+    this.scene.pause();
   }
 }
