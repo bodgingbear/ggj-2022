@@ -9,6 +9,7 @@ import { Trolley } from 'objects/Trolley';
 import { GameEmiter } from 'objects/GameEmiter';
 import { CHANCE_FOR_JALMUZNA, CHANCE_FOR_CZERWONY_BYK } from 'constants';
 import { Sunset } from 'objects/Sunset';
+import { Sound } from 'Sound';
 
 function checkOverlap(spriteA, spriteB) {
   const boundsA = spriteA.getBounds();
@@ -40,13 +41,48 @@ export class DayScene extends Phaser.Scene {
 
   bg: Phaser.GameObjects.Image;
 
+  private beggingSucceedSounds: Phaser.Sound.BaseSound[] = [];
+
+  get randomBeggingSucceedSound(): Phaser.Sound.BaseSound {
+    return this.beggingSucceedSounds[
+      Math.floor(Math.random() * this.beggingSucceedSounds.length)
+    ];
+  }
+
+  get beggingSucceedSoundsNames(): string[] {
+    return [Sound.coinDrop1, Sound.coinDrop2];
+  }
+
+  private beggingFailedSounds: Phaser.Sound.BaseSound[] = [];
+
+  get randomBeggingFailedSound(): Phaser.Sound.BaseSound {
+    return this.beggingFailedSounds[
+      Math.floor(Math.random() * this.beggingFailedSounds.length)
+    ];
+  }
+
+  get beggingFailedSoundsNames(): string[] {
+    return [Sound.rejectMoney];
+  }
+
   public constructor() {
     super({
       key: 'DayScene',
     });
   }
 
+  addSounds = () => {
+    this.beggingSucceedSoundsNames.forEach((songName) => {
+      this.beggingSucceedSounds.push(this.sound.add(songName));
+    });
+
+    this.beggingFailedSoundsNames.forEach((songName) => {
+      this.beggingFailedSounds.push(this.sound.add(songName));
+    });
+  };
+
   public create(): void {
+    this.addSounds();
     const bg = this.add
       .image(0, 0, 'master', 'bg.png')
       .setOrigin(0)
@@ -148,10 +184,9 @@ export class DayScene extends Phaser.Scene {
 
           this.player.lastPasserToTalk.didGive = true;
 
-          // @TODO PLAY SOUND HAPPY
+          this.randomBeggingSucceedSound.play();
         } else {
-          console.log('smuteczek');
-          // @TODO PLAY SOUND UGH DIDNT GET WHAT I WNATED BIIAATATTEGHV
+          this.randomBeggingFailedSound.play();
         }
       }
     });
