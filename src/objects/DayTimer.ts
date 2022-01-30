@@ -1,4 +1,4 @@
-const START_TIME_IN_SECONDS = 45;
+export const START_TIME_IN_SECONDS = 45;
 
 export const formatTime = (delta: number) => {
   const minutes = Math.floor(delta / 1000 / 60);
@@ -18,8 +18,8 @@ export class DayTimer {
   text: Phaser.GameObjects.Text;
 
   constructor(private readonly scene: Phaser.Scene) {
-    this.text = this.scene.add.text(1280 - 24, 64, '0');
-    this.text.setOrigin(1, 0.5);
+    this.text = this.scene.add.text(1280 - 24, 24, '0');
+    this.text.setOrigin(1, 0);
   }
 
   update = () => {

@@ -8,6 +8,7 @@ import { PasserBySpawner } from 'objects/PasserBySpawner';
 import { Trolley } from 'objects/Trolley';
 import { GameEmiter } from 'objects/GameEmiter';
 import { CHANCE_FOR_JALMUZNA, CHANCE_FOR_CZERWONY_BYK } from 'constants';
+import { Sunset } from 'objects/Sunset';
 
 function checkOverlap(spriteA, spriteB) {
   const boundsA = spriteA.getBounds();
@@ -50,9 +51,19 @@ export class DayScene extends Phaser.Scene {
       .image(0, 0, 'master', 'bg.png')
       .setOrigin(0)
       .setScale(4)
-      .setPipeline('Light2D');
+      .setPipeline('Light2D')
+      .setDepth(2);
+
     this.bg = bg;
     this.cameras.main.setBounds(0, 0, bg.displayWidth, bg.displayHeight);
+    this.add.rectangle(
+      0,
+      0,
+      bg.displayWidth * 4,
+      bg.displayHeight * 4,
+      0x66a4ea
+    );
+    new Sunset(this);
 
     const boundsTop = 400;
     this.physics.world.setBounds(
@@ -72,14 +83,14 @@ export class DayScene extends Phaser.Scene {
 
     this.zIndexGroup = this.add.group();
 
-    this.player = new Player(this, 200, 900, keys, true);
+    this.player = new Player(this, 200, 200, keys, true);
+    // this.player = new Player(this, 200, 900, keys, true);
     this.lights.addLight(1500, 1100, 160, 0xffffff, 0);
     this.zIndexGroup.add(this.player.sprite);
 
     this.cameras.main.startFollow(this.player.sprite, false, 0.1, 0.1);
     this.lights.enable();
 
-    this.lights.setAmbientColor(0xffffff);
     if (debugMap()) {
       this.cameras.main.setZoom(0.5);
     }

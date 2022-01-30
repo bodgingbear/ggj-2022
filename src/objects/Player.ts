@@ -56,8 +56,14 @@ export class Player extends EventEmitter<
 
   lastPasserToTalk?: PasserBy;
 
-  get songs(): string[] {
+  get songNames(): string[] {
     return [Sound.hoboSinging1, Sound.hoboSinging2, Sound.hoboSinging3];
+  }
+
+  private songs: Phaser.Sound.BaseSound[] = [];
+
+  get randomSong(): Phaser.Sound.BaseSound {
+    return this.songs[Math.floor(Math.random() * this.songs.length)];
   }
 
   constructor(
@@ -71,11 +77,8 @@ export class Player extends EventEmitter<
     this.playerVelocity = this.getBaseVelocity();
 
     if (!this.isDay) {
-      this.light = this.scene.lights.addLight(x, y, 160, 0xffffff, 0.2);
+      this.light = this.scene.lights.addLight(x, y, 160, 0xffffff, 1);
     }
-
-    // MARK: Singing
-    this.songs.forEach((song) => this.scene.sound.add(song));
 
     this.sprite = this.scene.add
       .sprite(x, y, 'master', 'Andrzej-Drunk-Down-0.png')
@@ -94,9 +97,10 @@ export class Player extends EventEmitter<
     this.body = this.sprite.body as Phaser.Physics.Arcade.Body;
     this.body.setSize(this.sprite.width, this.sprite.height / 2);
     this.body.setOffset(0, this.sprite.height / 2);
-    this.body.setCollideWorldBounds(true);
+    this.body.setCollideWorldBounds(false);
 
     const cursorKeys = scene.input.keyboard.createCursorKeys();
+    this.startSinging();
 
     this.scene.input.keyboard.on('keydown-SPACE', () => {
       this.emit('request-talk');
@@ -192,23 +196,31 @@ export class Player extends EventEmitter<
   // MARK: Singing logic
 
   /// sings a second every given interval, waits additional 3-6 seconds before each song
-  startSinging = (interval: number) => {
-    this.scene.time.addEvent({
-      delay: interval,
-      repeat: -1,
-      callback: () =>
-        this.scene.time.addEvent({
-          delay: Phaser.Math.Between(3000, 6000),
-          callback: () =>
-            this.sing(
-              this.songs[Math.floor(Math.random() * this.songs.length)]
-            ),
-        }),
+  startSinging = () => {
+    this.songNames.forEach((song) => {
+      this.songs.push(
+        this.scene.sound.add(song, {
+          volume: 0.3,
+        })
+      );
     });
+    this.sing(this.randomSong);
   };
 
-  sing = (song: string) => {
-    this.scene.sound.play(song);
+  finishSinging = () => {
+    this.songs.forEach(this.scene.sound.remove);
+  };
+
+  sing = (song: Phaser.Sound.BaseSound) => {
+    this.scene.time.addEvent({
+      delay: Phaser.Math.Between(5000, 20000),
+      callback: () => {
+        song.on('complete', () => {
+          this.sing(this.randomSong);
+        });
+        song.play();
+      },
+    });
   };
 
   update(delta: number) {

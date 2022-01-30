@@ -28,6 +28,7 @@ export class PasserBy extends EventEmitter<'toss-a-coin'> {
 
     this.sprite = scene.add
       .sprite(x, y, 'master', getRandomPasserByTexture())
+      .setPipeline('Light2D')
       .setScale(4);
 
     this.scene.physics.world.enable(this.sprite);

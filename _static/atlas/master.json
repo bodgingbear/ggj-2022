@@ -5,51 +5,51 @@
 			"normalMap": "master-0_n.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 737,
-				"h": 317
+				"w": 539,
+				"h": 472
 			},
 			"scale": 1,
 			"frames": [
 				{
 					"filename": "bg.png",
 					"rotated": false,
-					"trimmed": false,
+					"trimmed": true,
 					"sourceSize": {
 						"w": 539,
 						"h": 317
 					},
 					"spriteSourceSize": {
 						"x": 0,
-						"y": 0,
+						"y": 72,
 						"w": 539,
-						"h": 317
+						"h": 245
 					},
 					"frame": {
 						"x": 0,
 						"y": 0,
 						"w": 539,
-						"h": 317
+						"h": 245
 					}
 				},
 				{
-					"filename": "lidl.png",
+					"filename": "sunset-sky.png",
 					"rotated": false,
-					"trimmed": false,
+					"trimmed": true,
 					"sourceSize": {
-						"w": 198,
-						"h": 83
+						"w": 539,
+						"h": 141
 					},
 					"spriteSourceSize": {
 						"x": 0,
-						"y": 0,
-						"w": 198,
-						"h": 83
+						"y": 9,
+						"w": 539,
+						"h": 107
 					},
 					"frame": {
-						"x": 539,
-						"y": 0,
-						"w": 198,
-						"h": 83
+						"x": 0,
+						"y": 245,
+						"w": 539,
+						"h": 107
 					}
 				},
 				{
@@ -67,52 +67,31 @@
 						"h": 120
 					},
 					"frame": {
-						"x": 539,
-						"y": 83,
+						"x": 0,
+						"y": 352,
 						"w": 136,
 						"h": 120
 					}
 				},
 				{
-					"filename": "latarnia2.png",
+					"filename": "lidl.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 44,
-						"h": 54
+						"w": 198,
+						"h": 83
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 44,
-						"h": 54
+						"w": 198,
+						"h": 83
 					},
 					"frame": {
-						"x": 675,
-						"y": 83,
-						"w": 44,
-						"h": 54
-					}
-				},
-				{
-					"filename": "lawka.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 18,
-						"h": 21
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 18,
-						"h": 21
-					},
-					"frame": {
-						"x": 719,
-						"y": 83,
-						"w": 18,
-						"h": 21
+						"x": 136,
+						"y": 352,
+						"w": 198,
+						"h": 83
 					}
 				},
 				{
@@ -130,73 +109,10 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 719,
-						"y": 104,
+						"x": 136,
+						"y": 435,
 						"w": 15,
 						"h": 37
-					}
-				},
-				{
-					"filename": "piss-drop.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 1,
-						"h": 1
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 1,
-						"h": 1
-					},
-					"frame": {
-						"x": 734,
-						"y": 104,
-						"w": 1,
-						"h": 1
-					}
-				},
-				{
-					"filename": "drzewo.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 40,
-						"h": 51
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 40,
-						"h": 51
-					},
-					"frame": {
-						"x": 675,
-						"y": 137,
-						"w": 40,
-						"h": 51
-					}
-				},
-				{
-					"filename": "wozek.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 22,
-						"h": 21
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 22,
-						"h": 21
-					},
-					"frame": {
-						"x": 715,
-						"y": 141,
-						"w": 22,
-						"h": 21
 					}
 				},
 				{
@@ -214,94 +130,10 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 715,
-						"y": 162,
+						"x": 151,
+						"y": 435,
 						"w": 15,
 						"h": 37
-					}
-				},
-				{
-					"filename": "alcohol.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 4,
-						"h": 12
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 4,
-						"h": 12
-					},
-					"frame": {
-						"x": 730,
-						"y": 162,
-						"w": 4,
-						"h": 12
-					}
-				},
-				{
-					"filename": "red-bull.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 4,
-						"h": 12
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 1,
-						"w": 4,
-						"h": 10
-					},
-					"frame": {
-						"x": 730,
-						"y": 174,
-						"w": 4,
-						"h": 10
-					}
-				},
-				{
-					"filename": "latarnia1.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 28,
-						"h": 54
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 28,
-						"h": 54
-					},
-					"frame": {
-						"x": 675,
-						"y": 188,
-						"w": 28,
-						"h": 54
-					}
-				},
-				{
-					"filename": "Ziomek-0.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 14,
-						"h": 36
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 11,
-						"h": 36
-					},
-					"frame": {
-						"x": 703,
-						"y": 188,
-						"w": 11,
-						"h": 36
 					}
 				},
 				{
@@ -319,31 +151,10 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 714,
-						"y": 199,
+						"x": 166,
+						"y": 435,
 						"w": 15,
 						"h": 37
-					}
-				},
-				{
-					"filename": "Ziomek-1.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 14,
-						"h": 36
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 11,
-						"h": 36
-					},
-					"frame": {
-						"x": 703,
-						"y": 224,
-						"w": 11,
-						"h": 36
 					}
 				},
 				{
@@ -361,8 +172,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 714,
-						"y": 236,
+						"x": 181,
+						"y": 435,
 						"w": 15,
 						"h": 37
 					}
@@ -382,8 +193,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 539,
-						"y": 273,
+						"x": 196,
+						"y": 435,
 						"w": 15,
 						"h": 37
 					}
@@ -403,8 +214,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 554,
-						"y": 273,
+						"x": 211,
+						"y": 435,
 						"w": 15,
 						"h": 37
 					}
@@ -424,8 +235,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 569,
-						"y": 273,
+						"x": 226,
+						"y": 435,
 						"w": 15,
 						"h": 37
 					}
@@ -445,8 +256,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 584,
-						"y": 273,
+						"x": 241,
+						"y": 435,
 						"w": 15,
 						"h": 37
 					}
@@ -466,8 +277,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 599,
-						"y": 273,
+						"x": 256,
+						"y": 435,
 						"w": 15,
 						"h": 37
 					}
@@ -487,8 +298,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 614,
-						"y": 273,
+						"x": 271,
+						"y": 435,
 						"w": 15,
 						"h": 37
 					}
@@ -508,8 +319,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 629,
-						"y": 273,
+						"x": 286,
+						"y": 435,
 						"w": 15,
 						"h": 37
 					}
@@ -529,8 +340,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 644,
-						"y": 273,
+						"x": 301,
+						"y": 435,
 						"w": 15,
 						"h": 37
 					}
@@ -550,8 +361,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 659,
-						"y": 203,
+						"x": 316,
+						"y": 435,
 						"w": 15,
 						"h": 37
 					}
@@ -571,10 +382,220 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 659,
-						"y": 240,
+						"x": 331,
+						"y": 435,
 						"w": 15,
 						"h": 37
+					}
+				},
+				{
+					"filename": "latarnia2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 44,
+						"h": 54
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 44,
+						"h": 54
+					},
+					"frame": {
+						"x": 334,
+						"y": 352,
+						"w": 44,
+						"h": 54
+					}
+				},
+				{
+					"filename": "wozek.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 22,
+						"h": 21
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 22,
+						"h": 21
+					},
+					"frame": {
+						"x": 334,
+						"y": 406,
+						"w": 22,
+						"h": 21
+					}
+				},
+				{
+					"filename": "sun.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 38,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 38,
+						"h": 38
+					},
+					"frame": {
+						"x": 346,
+						"y": 427,
+						"w": 38,
+						"h": 38
+					}
+				},
+				{
+					"filename": "lawka.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 18,
+						"h": 21
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 18,
+						"h": 21
+					},
+					"frame": {
+						"x": 356,
+						"y": 406,
+						"w": 18,
+						"h": 21
+					}
+				},
+				{
+					"filename": "piss-drop.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 1,
+						"h": 1
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 1,
+						"h": 1
+					},
+					"frame": {
+						"x": 346,
+						"y": 465,
+						"w": 1,
+						"h": 1
+					}
+				},
+				{
+					"filename": "alcohol.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 4,
+						"h": 12
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 4,
+						"h": 12
+					},
+					"frame": {
+						"x": 374,
+						"y": 406,
+						"w": 4,
+						"h": 12
+					}
+				},
+				{
+					"filename": "latarnia1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 28,
+						"h": 54
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 28,
+						"h": 54
+					},
+					"frame": {
+						"x": 378,
+						"y": 352,
+						"w": 28,
+						"h": 54
+					}
+				},
+				{
+					"filename": "red-bull.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 4,
+						"h": 12
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 4,
+						"h": 10
+					},
+					"frame": {
+						"x": 378,
+						"y": 406,
+						"w": 4,
+						"h": 10
+					}
+				},
+				{
+					"filename": "drzewo.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 51
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 51
+					},
+					"frame": {
+						"x": 384,
+						"y": 406,
+						"w": 40,
+						"h": 51
+					}
+				},
+				{
+					"filename": "sunset-sun.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 38,
+						"h": 38
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 38,
+						"h": 38
+					},
+					"frame": {
+						"x": 406,
+						"y": 352,
+						"w": 38,
+						"h": 38
 					}
 				},
 				{
@@ -592,8 +613,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 659,
-						"y": 277,
+						"x": 424,
+						"y": 390,
 						"w": 15,
 						"h": 37
 					}
@@ -613,8 +634,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 674,
-						"y": 273,
+						"x": 424,
+						"y": 427,
 						"w": 15,
 						"h": 37
 					}
@@ -634,8 +655,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 689,
-						"y": 242,
+						"x": 439,
+						"y": 390,
 						"w": 14,
 						"h": 37
 					}
@@ -655,8 +676,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 689,
-						"y": 279,
+						"x": 444,
+						"y": 352,
 						"w": 14,
 						"h": 37
 					}
@@ -676,8 +697,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 703,
-						"y": 273,
+						"x": 439,
+						"y": 427,
 						"w": 14,
 						"h": 37
 					}
@@ -697,8 +718,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 717,
-						"y": 273,
+						"x": 453,
+						"y": 389,
 						"w": 14,
 						"h": 37
 					}
@@ -718,8 +739,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 539,
-						"y": 203,
+						"x": 458,
+						"y": 352,
 						"w": 13,
 						"h": 37
 					}
@@ -739,8 +760,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 552,
-						"y": 203,
+						"x": 453,
+						"y": 426,
 						"w": 13,
 						"h": 37
 					}
@@ -760,8 +781,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 565,
-						"y": 203,
+						"x": 466,
+						"y": 426,
 						"w": 13,
 						"h": 37
 					}
@@ -781,8 +802,8 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 578,
-						"y": 203,
+						"x": 467,
+						"y": 389,
 						"w": 13,
 						"h": 37
 					}
@@ -802,8 +823,8 @@
 						"h": 36
 					},
 					"frame": {
-						"x": 591,
-						"y": 203,
+						"x": 471,
+						"y": 352,
 						"w": 13,
 						"h": 36
 					}
@@ -823,9 +844,51 @@
 						"h": 36
 					},
 					"frame": {
-						"x": 604,
-						"y": 203,
+						"x": 479,
+						"y": 426,
 						"w": 13,
+						"h": 36
+					}
+				},
+				{
+					"filename": "Ziomek-0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 14,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 11,
+						"h": 36
+					},
+					"frame": {
+						"x": 480,
+						"y": 388,
+						"w": 11,
+						"h": 36
+					}
+				},
+				{
+					"filename": "Ziomek-1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 14,
+						"h": 36
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 11,
+						"h": 36
+					},
+					"frame": {
+						"x": 484,
+						"y": 352,
+						"w": 11,
 						"h": 36
 					}
 				}
@@ -835,6 +898,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:966e61323648d475d7ea18260bbefab1:5df2151fdfb46a2d2d8c28b100b37a9a:ce5acf6cd72dab34adb55a56ed928e19$"
+		"smartupdate": "$TexturePacker:SmartUpdate:415340e099f4a2bb0b56a77ea6f858ce:bb589e0ece452a65ce6a2b04d158c9ab:ce5acf6cd72dab34adb55a56ed928e19$"
 	}
 }
