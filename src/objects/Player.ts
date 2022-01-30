@@ -54,6 +54,8 @@ export class Player extends EventEmitter<
     private keys: Phaser.Types.Input.Keyboard.CursorKeys
   ) {
     super();
+    this.light = this.scene.lights.addLight(x, y, 160, 0xffffff, 0.2);
+
     this.sprite = this.scene.add
       .sprite(x, y, 'master', 'Andrzej-Drunk-Down-0.png')
       .setScale(4)
@@ -70,8 +72,6 @@ export class Player extends EventEmitter<
     this.scene.physics.world.enable(this.sprite);
     this.body = this.sprite.body as Phaser.Physics.Arcade.Body;
     this.body.setCollideWorldBounds(true);
-
-    this.light = this.scene.lights.addLight(x, y, 160, 0xffffff, 0.2);
 
     const cursorKeys = scene.input.keyboard.createCursorKeys();
 
