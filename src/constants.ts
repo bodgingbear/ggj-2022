@@ -3,6 +3,8 @@ import { TeamMemberData } from 'packages/credits';
 export const PEE_MAX_VALUE = 100;
 export const PEE_DEFAULT_VALUE = 50;
 
+export const PASSER_BY_VELOCITY = 50;
+
 export const TEAM: TeamMemberData[] = [
   {
     name: 'Kacper Pietrzak',

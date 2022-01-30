@@ -4,6 +4,8 @@ import { Player } from 'objects/Player';
 import { Trees } from 'objects/Trees';
 import { debugMap } from 'packages/utils/shouldSkipIntro';
 import { EventEmitter } from 'packages/utils';
+import { PasserBy } from 'objects/PasserBy';
+import { PasserBySpawner } from 'objects/PasserBySpawner';
 
 export class DayScene extends Phaser.Scene {
   private player!: Player;
@@ -22,6 +24,8 @@ export class DayScene extends Phaser.Scene {
 
   hudEmitter = new EventEmitter<'end'>();
 
+  passersGroup!: Phaser.GameObjects.Group;
+
   public constructor() {
     super({
       key: 'DayScene',
@@ -36,7 +40,12 @@ export class DayScene extends Phaser.Scene {
       .setPipeline('Light2D');
     this.cameras.main.setBounds(0, 0, bg.displayWidth, bg.displayHeight);
 
-    this.physics.world.setBounds(0, 100, bg.displayWidth, bg.displayHeight);
+    this.physics.world.setBounds(
+      0,
+      450,
+      bg.displayWidth,
+      bg.displayHeight - 450
+    );
     this.physics.world.setBoundsCollision();
 
     const keys = this.input.keyboard.addKeys({
@@ -78,6 +87,24 @@ export class DayScene extends Phaser.Scene {
     //   emitter: this.hudEmitter,
     // });
 
+    this.passersGroup = this.add.group();
+
+    this.physics.add.collider(
+      this.passersGroup,
+      [this.lidl.sprite, this.trees.sprite],
+      (passer) => {
+        passer.destroy();
+      }
+    );
+
+    this.physics.add.collider(this.passersGroup, this.player.sprite);
+
+    new PasserBySpawner(this).on('request-emit', (position, direction) => {
+      const passer = new PasserBy(this, position.x, position.y, direction);
+      this.zIndexGroup.add(passer.sprite);
+      this.passersGroup.add(passer.sprite);
+    });
+
     this.overlay = this.add
       .rectangle(0, 0, bg.displayWidth, bg.displayHeight, 0, 1)
       .setOrigin(0)
@@ -101,5 +128,24 @@ export class DayScene extends Phaser.Scene {
     this.zIndexGroup.children.entries.forEach((el: any) =>
       el.setDepth(el.y + el.displayHeight)
     );
+
+    this.events.on('update', () => {
+      this.passersGroup.children.entries.forEach(
+        (passer: Phaser.GameObjects.Sprite) => {
+          if (
+            !this.physics.world.bounds.contains(
+              passer.getTopLeft().x,
+              passer.getTopLeft().y
+            ) ||
+            !this.physics.world.bounds.contains(
+              passer.getTopRight().x,
+              passer.getTopRight().y
+            )
+          ) {
+            passer.destroy();
+          }
+        }
+      );
+    });
   }
 }
