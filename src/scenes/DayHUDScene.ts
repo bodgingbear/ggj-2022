@@ -1,3 +1,4 @@
+import { DayTimer } from 'objects/DayTimer';
 import { GameEmiter } from 'objects/GameEmiter';
 import { InventoryElementsList } from 'objects/InventoryElementsList';
 import { Player } from 'objects/Player';
@@ -18,6 +19,8 @@ export class DayHUDScene extends Phaser.Scene {
 
   gameOverTime: number | null = null;
 
+  timer!: DayTimer;
+
   public constructor() {
     super({
       key: 'DayHUDScene',
@@ -27,6 +30,8 @@ export class DayHUDScene extends Phaser.Scene {
   public create({ player }: HUDData): void {
     this.player = player;
 
+    this.timer = new DayTimer(this);
+
     this.inventoryElementsList = new InventoryElementsList(
       this,
       this.player.inventory.items,
@@ -35,6 +40,8 @@ export class DayHUDScene extends Phaser.Scene {
   }
 
   public update(): void {
+    this.timer.update();
+
     this.inventoryElementsList.elements.forEach((inventoryElement, i) => {
       inventoryElement.setCount(this.player.inventory.items[i].count);
     });
