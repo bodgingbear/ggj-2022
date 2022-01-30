@@ -8,6 +8,7 @@ import { debugMap } from 'packages/utils/shouldSkipIntro';
 import { Enemy } from 'objects/Enemy';
 import { EventEmitter } from 'packages/utils';
 import { PissDrop } from 'objects/PissDrop';
+import { PissDropsController } from 'objects/PissDropsController';
 
 export class GameScene extends Phaser.Scene {
   private player!: Player;
@@ -35,6 +36,8 @@ export class GameScene extends Phaser.Scene {
   hudEmitter = new EventEmitter<'end'>();
 
   startedAt!: number;
+
+  pissDropsController!: PissDropsController;
 
   public constructor() {
     super({
@@ -68,6 +71,12 @@ export class GameScene extends Phaser.Scene {
 
     this.enemies = this.add.group();
     this.enemiesSpawnController = new EnemiesSpawnController(this);
+
+    this.pissDropsController = new PissDropsController(
+      this,
+      this.pissDrops,
+      this.enemies
+    );
 
     this.enemiesSpawnController.on('request-emit', (position) => {
       const enemy = new Enemy(this, position);
