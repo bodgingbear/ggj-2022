@@ -187,7 +187,6 @@ export class Player extends EventEmitter<
 
   // MARK: Singing logic
 
-  /// sings a second every given interval, waits additional 3-6 seconds before each song
   startSinging = () => {
     this.songNames.forEach((song) => {
       this.songs.push(
