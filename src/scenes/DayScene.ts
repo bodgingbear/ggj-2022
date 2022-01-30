@@ -5,10 +5,8 @@ import { Trees } from 'objects/Trees';
 import { debugMap } from 'packages/utils/shouldSkipIntro';
 import { EventEmitter } from 'packages/utils';
 
-export class GameScene extends Phaser.Scene {
+export class DayScene extends Phaser.Scene {
   private player!: Player;
-
-  enemies!: Phaser.GameObjects.Group;
 
   private zIndexGroup!: Phaser.GameObjects.Group;
 
@@ -26,7 +24,7 @@ export class GameScene extends Phaser.Scene {
 
   public constructor() {
     super({
-      key: 'GameScene',
+      key: 'DayScene',
     });
   }
 
@@ -53,43 +51,32 @@ export class GameScene extends Phaser.Scene {
     this.player = new Player(this, 200, 900, keys);
     this.zIndexGroup.add(this.player.sprite);
 
-    this.physics.add.collider(this.enemies, this.player.sprite, () => {
-      if (this.ended) return;
-
-      this.ended = true;
-      this.handleAndrzejCaught();
-    });
-
     this.cameras.main.startFollow(this.player.sprite, false, 0.1, 0.1);
     this.lights.enable();
 
+    this.lights.setAmbientColor(0xffffff);
     if (debugMap()) {
-      this.lights.setAmbientColor(0xffffff);
       this.cameras.main.setZoom(0.5);
-    } else {
-      this.lights.setAmbientColor(0);
-      this.addCameraSwing();
     }
-
-    this.lidl = new Lidl(this, this.player);
+    this.lidl = new Lidl(this, this.player, false);
 
     const lanterns = [
-      new Lantern(this, 260 - 33, 800, true),
-      new Lantern(this, 890 - 33, 600, true),
-      new Lantern(this, 260 - 33, 1200, true),
-      new Lantern(this, 890 - 33, 1000, true),
-      new Lantern(this, 1500, 500, false),
-      new Lantern(this, 1500, 1200, false),
+      new Lantern(this, 260 - 33, 800, true, false),
+      new Lantern(this, 890 - 33, 600, true, false),
+      new Lantern(this, 260 - 33, 1200, true, false),
+      new Lantern(this, 890 - 33, 1000, true, false),
+      new Lantern(this, 1500, 500, false, false),
+      new Lantern(this, 1500, 1200, false, false),
     ];
     lanterns.forEach((lantern) => this.zIndexGroup.add(lantern.sprite));
 
     this.trees = new Trees(this, this.player);
 
-    this.scene.run('HUDScene', {
-      peeProvider: () => this.player?.pee ?? 0,
-      player: this.player,
-      emitter: this.hudEmitter,
-    });
+    // this.scene.run('HUDScene', {
+    //   peeProvider: () => this.player?.pee ?? 0,
+    //   player: this.player,
+    //   emitter: this.hudEmitter,
+    // });
 
     this.overlay = this.add
       .rectangle(0, 0, bg.displayWidth, bg.displayHeight, 0, 1)
@@ -107,9 +94,6 @@ export class GameScene extends Phaser.Scene {
 
   update(_time: number, delta: number) {
     this.player?.update();
-    this.enemies.children.entries.forEach((enemy) =>
-      enemy.getData('ref').update(delta, this.player)
-    );
 
     if (this.ended) return;
 
@@ -117,38 +101,5 @@ export class GameScene extends Phaser.Scene {
     this.zIndexGroup.children.entries.forEach((el: any) =>
       el.setDepth(el.y + el.displayHeight)
     );
-  }
-
-  addCameraSwing() {
-    this.tweens.addCounter({
-      duration: 1000,
-      yoyo: true,
-      ease: 'sine.inout',
-      loop: -1,
-      from: 0,
-      to: 1,
-      onUpdate: (value) => {
-        this.cameras.main.setFollowOffset(value.getValue() * 50);
-      },
-    });
-  }
-
-  handleAndrzejCaught() {
-    this.zIndexGroup.children.entries.forEach((el: any) => el.setDepth(1));
-    this.children.bringToTop(this.overlay.setPosition(0, 0).setDepth(2));
-
-    this.tweens.addCounter({
-      from: 0,
-      to: 0.9,
-      duration: 1000,
-      yoyo: false,
-      loop: 0,
-      onUpdate: (val) => {
-        this.overlay.setAlpha(val.getValue());
-      },
-      onComplete: () => {
-        this.hudEmitter.emit('end');
-      },
-    });
   }
 }

@@ -129,6 +129,8 @@ export class BootScene extends Phaser.Scene {
     //   repeat: -1,
     // });
 
-    this.scene.start('GameScene');
+    this.scene.start(
+      process.env.START_DAY_SCENE === 'true' ? 'DayScene' : 'GameScene'
+    );
   }
 }

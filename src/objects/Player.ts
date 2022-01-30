@@ -37,7 +37,7 @@ export class Player extends EventEmitter<
 
   private rotation = 0;
 
-  private light: Phaser.GameObjects.Light;
+  private light?: Phaser.GameObjects.Light;
 
   public inventory = new Inventory();
 
@@ -153,7 +153,7 @@ export class Player extends EventEmitter<
 
     this.body.setVelocity(velocity.x, velocity.y);
 
-    this.light.setPosition(this.sprite.x, this.sprite.y);
+    this.light?.setPosition(this.sprite.x, this.sprite.y);
 
     if (this.pointer) {
       this.targetToMouseRotation = Phaser.Math.Angle.BetweenPoints(

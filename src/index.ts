@@ -2,6 +2,7 @@ import 'phaser';
 
 import './index.css';
 
+import { DayScene } from 'scenes/DayScene';
 import { BootScene } from './scenes/BootScene';
 import { LoadingScene } from './scenes/LoadingScene';
 import { MainMenuScene } from './scenes/MainMenuScene';
@@ -19,6 +20,7 @@ const game = new Phaser.Game({
     BootScene,
     // LoadingScene,
     // MainMenuScene,
+    DayScene,
     GameScene,
     // HowToPlayScene,
     // CreditsScene,

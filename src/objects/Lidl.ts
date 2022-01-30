@@ -5,7 +5,7 @@ export class Lidl {
 
   private body: Phaser.Physics.Arcade.Body;
 
-  constructor(private scene: Phaser.Scene, player: Player) {
+  constructor(private scene: Phaser.Scene, player: Player, litUp = true) {
     this.sprite = this.scene.add
       .sprite(3040 / 2, 1600 / 2, 'master', 'lidl.png')
       .setScale(4)
@@ -19,28 +19,30 @@ export class Lidl {
     this.scene.physics.add.collider(this.sprite, player.sprite);
     this.body.setImmovable(true);
 
-    this.scene.lights.addLight(
-      this.sprite.x + 80,
-      this.sprite.y,
-      300,
-      0xfff6f2,
-      0.5
-    );
+    if (litUp) {
+      this.scene.lights.addLight(
+        this.sprite.x + 80,
+        this.sprite.y,
+        300,
+        0xfff6f2,
+        0.5
+      );
 
-    this.scene.lights.addLight(
-      this.sprite.x + 80,
-      this.sprite.y,
-      300,
-      0x0000ff,
-      0.5
-    );
+      this.scene.lights.addLight(
+        this.sprite.x + 80,
+        this.sprite.y,
+        300,
+        0x0000ff,
+        0.5
+      );
 
-    this.scene.lights.addLight(
-      this.sprite.x + 80,
-      this.sprite.y + 200,
-      300,
-      0x0000ff,
-      0.5
-    );
+      this.scene.lights.addLight(
+        this.sprite.x + 80,
+        this.sprite.y + 200,
+        300,
+        0x0000ff,
+        0.5
+      );
+    }
   }
 }
