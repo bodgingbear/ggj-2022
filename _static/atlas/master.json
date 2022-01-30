@@ -179,6 +179,27 @@
 					}
 				},
 				{
+					"filename": "alcohol.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 4,
+						"h": 12
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 4,
+						"h": 12
+					},
+					"frame": {
+						"x": 715,
+						"y": 137,
+						"w": 4,
+						"h": 12
+					}
+				},
+				{
 					"filename": "Andrzej-Down-1.png",
 					"rotated": false,
 					"trimmed": false,
@@ -193,31 +214,31 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 715,
+						"x": 719,
 						"y": 141,
 						"w": 15,
 						"h": 37
 					}
 				},
 				{
-					"filename": "alcohol.png",
+					"filename": "red-bull.png",
 					"rotated": false,
-					"trimmed": false,
+					"trimmed": true,
 					"sourceSize": {
-						"w": 6,
+						"w": 4,
 						"h": 12
 					},
 					"spriteSourceSize": {
 						"x": 0,
-						"y": 0,
-						"w": 6,
-						"h": 12
+						"y": 1,
+						"w": 4,
+						"h": 10
 					},
 					"frame": {
-						"x": 730,
-						"y": 141,
-						"w": 6,
-						"h": 12
+						"x": 715,
+						"y": 149,
+						"w": 4,
+						"h": 10
 					}
 				},
 				{
@@ -793,6 +814,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:dc92c24bd8003f86fdc5e2b88c4407e0:a794fbafb0ec3c7a7c6ca81d74d2cc9c:ce5acf6cd72dab34adb55a56ed928e19$"
+		"smartupdate": "$TexturePacker:SmartUpdate:2505dadbeacda10ee3ec1927feefe021:fe0830500a51ddda01e1896ad7740f1a:ce5acf6cd72dab34adb55a56ed928e19$"
 	}
 }

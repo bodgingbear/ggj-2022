@@ -1,4 +1,17 @@
-import { InventoryItem } from './Inventory';
+import { BaseInventoryItem } from './Inventory';
+
+const keyMap: Record<string, string> = {
+  '0': 'ZERO',
+  '1': 'ONE',
+  '2': 'TWO',
+  '3': 'THREE',
+  '4': 'FOUR',
+  '5': 'FIVE',
+  '6': 'SIX',
+  '7': 'SEVEN',
+  '8': 'EIGHT',
+  '9': 'NINE',
+};
 
 export class InventoryElement {
   sprite: Phaser.GameObjects.Sprite;
@@ -13,7 +26,7 @@ export class InventoryElement {
 
   constructor(
     private readonly scene: Phaser.Scene,
-    inventoryItem: InventoryItem,
+    inventoryItem: BaseInventoryItem,
     x: number,
     y: number,
     onKeyDown: () => void
@@ -48,7 +61,8 @@ export class InventoryElement {
       )
       .setOrigin(0.5, 0);
 
-    this.scene.input.keyboard.on(`keydown-${inventoryItem.key}`, () => {
+    const keyboardKey = keyMap[inventoryItem.key] ?? inventoryItem.key;
+    this.scene.input.keyboard.on(`keydown-${keyboardKey}`, () => {
       if (this.enabled) {
         onKeyDown();
       }
