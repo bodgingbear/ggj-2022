@@ -190,7 +190,11 @@ export class Player extends EventEmitter<
   /// sings a second every given interval, waits additional 3-6 seconds before each song
   startSinging = () => {
     this.songNames.forEach((song) => {
-      this.songs.push(this.scene.sound.add(song));
+      this.songs.push(
+        this.scene.sound.add(song, {
+          volume: 0.3,
+        })
+      );
     });
     this.sing(this.randomSong);
   };
