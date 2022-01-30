@@ -76,7 +76,7 @@ export class HUDScene extends Phaser.Scene {
           this.overlay.setAlpha(val.getValue());
         },
         onComplete: () => {
-          const delta = this.gameOverTime ?? 0 - this.startedAt;
+          const delta = (this.gameOverTime ?? 0) - this.startedAt;
           const formattedTime = formatTime(delta);
 
           this.add
