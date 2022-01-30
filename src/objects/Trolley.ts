@@ -20,6 +20,7 @@ export class Trolley extends EventEmitter<'collide'> {
     super();
     this.sprite = this.scene.add
       .sprite(x, y, 'master', 'wozek.png')
+      .setPipeline('Light2D')
       .setScale(4);
     this.sprite.setData('ref', this);
 

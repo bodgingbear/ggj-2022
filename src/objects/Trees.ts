@@ -10,7 +10,7 @@ export class Trees {
       .sprite(3360 / 2, 1100 / 2 + 58, 'master', 'drzewa.png')
       .setScale(4)
       .setPipeline('Light2D')
-      .setDepth(0.5);
+      .setDepth(3);
 
     this.sprite.setOrigin(0.2);
 

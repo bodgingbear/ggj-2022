@@ -67,7 +67,7 @@ export class Player extends EventEmitter<
     this.playerVelocity = this.getBaseVelocity();
 
     if (!this.isDay) {
-      this.light = this.scene.lights.addLight(x, y, 160, 0xffffff, 0.2);
+      this.light = this.scene.lights.addLight(x, y, 160, 0xffffff, 0.4);
     }
 
     // MARK: Singing
