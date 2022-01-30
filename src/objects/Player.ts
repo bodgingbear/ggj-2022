@@ -22,6 +22,8 @@ export class Player {
 
   public inventory = new Inventory();
 
+  private isShaking = false;
+
   constructor(
     private scene: Phaser.Scene,
     x: number,
@@ -172,6 +174,22 @@ export class Player {
   }
 
   public drink = (item: InventoryItem) => {
+    if (this.isShaking) {
+      return;
+    }
+
+    this.isShaking = true;
+    this.scene.cameras.main.shake(
+      750,
+      0.02,
+      true,
+      (_: Phaser.Cameras.Scene2D.Camera, progress: number) => {
+        this.isShaking = progress !== 1;
+      }
+    );
+
+    this.scene.cameras.main.flash(500, 0x11, 0x11, 0x11, true);
+
     this.pee = Math.min(this.pee + item.pee, PEE_MAX_VALUE);
     // eslint-disable-next-line no-param-reassign
     item.count--;
