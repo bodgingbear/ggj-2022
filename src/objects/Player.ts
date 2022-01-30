@@ -1,7 +1,6 @@
 import { debugMap } from 'packages/utils/shouldSkipIntro';
 
 import { EventEmitter } from 'packages/utils';
-import { PissDrop } from './PissDrop';
 
 import { PEE_DEFAULT_VALUE, PEE_MAX_VALUE } from '../constants';
 import {

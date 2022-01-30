@@ -4,7 +4,10 @@
 declare namespace NodeJS {
   interface ProcessEnv {
     readonly NODE_ENV: 'development' | 'production' | 'test';
+    readonly START_DAY_SCENE?: 'true' | 'false';
     readonly SKIP_INTRO?: 'true' | 'false';
+    readonly SKIP_MENU?: 'true' | 'false';
+    readonly DEBUG_MAP?: 'true' | 'false';
   }
 }
 

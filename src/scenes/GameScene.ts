@@ -1,7 +1,6 @@
 import { Lantern } from 'objects/Lantern';
 import { Lidl } from 'objects/Lidl';
 import { Moon } from 'objects/Moon';
-import { PissDropsController } from 'objects/PissDropsController';
 import { Player } from 'objects/Player';
 import { Trees } from 'objects/Trees';
 import { EnemiesSpawnController } from 'objects/EnemiesSpawnController';
@@ -16,8 +15,6 @@ export class GameScene extends Phaser.Scene {
   enemies!: Phaser.GameObjects.Group;
 
   pissDrops!: Phaser.GameObjects.Group;
-
-  private pissDropsController!: PissDropsController;
 
   private enemiesSpawnController!: EnemiesSpawnController;
 
@@ -87,11 +84,6 @@ export class GameScene extends Phaser.Scene {
       alert('END OF LEVELS');
     });
 
-    this.pissDropsController = new PissDropsController(
-      this,
-      this.pissDrops,
-      this.enemies
-    );
     this.player = new Player(this, 200, 900, keys);
 
     const pissDropDeathEmitterManager = this.add

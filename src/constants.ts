@@ -16,24 +16,24 @@ export const TEAM: TeamMemberData[] = [
     imageKey: 'bartek_credits',
     imagePath: 'images/credits/bartek.png',
   },
-  // {
-  //   name: 'Piotrek Szadkowski',
-  //   role: 'Programming',
-  //   imageKey: 'piotrek_credits',
-  //   imagePath: 'images/credits/piotrek.png',
-  // },
+  {
+    name: 'Piotr "Dziobak" Szadkowski',
+    role: 'Programming',
+    imageKey: 'piotrek_credits',
+    imagePath: 'images/credits/piotrek.png',
+  },
   // {
   //   name: 'Bogdan Bańkowski',
   //   role: 'Programming',
   //   imageKey: 'bogdan_credits',
   //   imagePath: 'images/credits/bogdan.png',
   // },
-  // {
-  //   name: 'Kuba Pietrzak',
-  //   role: 'Sounds & QA',
-  //   imageKey: 'kuba_credits',
-  //   imagePath: 'images/credits/kuba.png',
-  // },
+  {
+    name: 'Kuba Pietrzak',
+    role: 'Programming & Sounds',
+    imageKey: 'kuba_credits',
+    imagePath: 'images/credits/kuba.png',
+  },
   // {
   //   name: 'Maciek Wójcik',
   //   role: 'Programming',

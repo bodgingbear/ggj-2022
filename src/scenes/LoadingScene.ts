@@ -1,5 +1,9 @@
 import { loadAsset } from 'packages/utils';
-import { shouldSkipIntro } from 'packages/utils/shouldSkipIntro';
+import {
+  shouldOpenDayScene,
+  shouldSkipIntro,
+  shouldSkipMenu,
+} from 'packages/utils/shouldSkipIntro';
 import { TEAM } from '../constants';
 
 export class LoadingScene extends Phaser.Scene {
@@ -92,6 +96,10 @@ export class LoadingScene extends Phaser.Scene {
   };
 
   private changeScene = () => {
-    this.scene.start('MainMenuScene');
+    if (shouldSkipMenu()) {
+      this.scene.start(shouldOpenDayScene() ? 'DayScene' : 'GameScene');
+    } else {
+      this.scene.start('MainMenuScene');
+    }
   };
 }

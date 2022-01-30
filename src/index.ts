@@ -3,13 +3,13 @@ import 'phaser';
 import './index.css';
 
 import { DayScene } from 'scenes/DayScene';
+import { HowToPlayScene } from 'scenes/HowToPlayScene';
+import { CreditsScene } from 'scenes/CreditsScene';
 import { BootScene } from './scenes/BootScene';
 import { LoadingScene } from './scenes/LoadingScene';
 import { MainMenuScene } from './scenes/MainMenuScene';
 import { GameScene } from './scenes/GameScene';
 import { HUDScene } from './scenes/HUDScene';
-import { HowToPlayScene } from './scenes/HowToPlayScene';
-import { CreditsScene } from './scenes/CreditsScene';
 
 const game = new Phaser.Game({
   type: Phaser.AUTO,
@@ -18,12 +18,12 @@ const game = new Phaser.Game({
   height: 1080,
   scene: [
     BootScene,
-    // LoadingScene,
-    // MainMenuScene,
-    DayScene,
+    LoadingScene,
+    MainMenuScene,
     GameScene,
-    // HowToPlayScene,
-    // CreditsScene,
+    DayScene,
+    HowToPlayScene,
+    CreditsScene,
     HUDScene,
   ],
   scale: {
@@ -37,6 +37,6 @@ const game = new Phaser.Game({
     default: 'arcade',
   },
   maxLights: 15,
-});
+} as Phaser.Types.Core.GameConfig);
 
 window.addEventListener('load', (): Phaser.Game => game);

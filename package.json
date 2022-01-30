@@ -39,6 +39,8 @@
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.4.2",
     "dotenv-webpack": "^5.0.0",
+    "electron": "^10.4.7",
+    "electron-builder": "^22.14.5",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-typescript": "^7.2.1",
     "eslint-config-prettier": "^6.11.0",
