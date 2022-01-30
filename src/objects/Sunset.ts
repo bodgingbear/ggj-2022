@@ -93,7 +93,7 @@ export class Sunset {
       to: 0,
       onUpdate: (value) => {
         const { r, g, b } = Phaser.Display.Color.Interpolate.ColorWithColor(
-          new Phaser.Display.Color(0xdf, 0x6d, 0x35),
+          new Phaser.Display.Color(0x22, 0x00, 0x00),
           new Phaser.Display.Color(0xff, 0xff, 0xff),
           1,
           value.getValue()

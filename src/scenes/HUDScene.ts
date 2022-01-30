@@ -36,9 +36,11 @@ export class HUDScene extends Phaser.Scene {
     });
   }
 
-  public create({ player, peeProvider, startedAt, emitter }: HUDData): void {
+  public create({ player, peeProvider, emitter }: HUDData): void {
+    this.gameOver = false;
+
     this.peeProvider = peeProvider;
-    this.startedAt = startedAt;
+    this.startedAt = Date.now();
     this.bar = new BladderBar(this);
     this.add.existing(this.bar.bladderShrinking);
     this.timer = new Timer(this, this.startedAt);
@@ -85,6 +87,11 @@ export class HUDScene extends Phaser.Scene {
             )
             .setDepth(3)
             .setOrigin(0.5);
+
+          this.time.addEvent({
+            delay: 2000,
+            callback: () => emitter.emit('overlayEnd'),
+          });
         },
       });
     });

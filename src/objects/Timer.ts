@@ -20,7 +20,7 @@ export class Timer {
   }
 
   update = () => {
-    const delta = this.scene.time.now - this.startedAt;
+    const delta = Date.now() - this.startedAt;
 
     this.text.setText(formatTime(delta));
   };

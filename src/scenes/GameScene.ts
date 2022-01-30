@@ -10,6 +10,7 @@ import { EventEmitter } from 'packages/utils';
 import { PissDrop } from 'objects/PissDrop';
 import { PissDropsController } from 'objects/PissDropsController';
 import { GameEmiter } from 'objects/GameEmiter';
+import { Inventory } from 'objects/Inventory';
 
 export class GameScene extends Phaser.Scene {
   private player!: Player;
@@ -46,7 +47,7 @@ export class GameScene extends Phaser.Scene {
     });
   }
 
-  public create(): void {
+  public create({ inventory }: { inventory: Inventory }): void {
     this.startedAt = this.time.now;
 
     const bg = this.add
@@ -101,6 +102,7 @@ export class GameScene extends Phaser.Scene {
     });
 
     this.player = new Player(this, 200, 900, keys, false);
+    this.player.inventory = inventory ?? this.player.inventory;
 
     const pissDropDeathEmitterManager = this.add
       .particles('master', 'piss-drop.png')
@@ -164,6 +166,11 @@ export class GameScene extends Phaser.Scene {
 
     this.hudEmitter.on('drink', (item) => {
       this.player.drink(item);
+    });
+
+    this.hudEmitter.on('overlayEnd', () => {
+      this.scene.stop('HUDScene');
+      this.scene.start('DayScene', { inventory: this.player.inventory });
     });
     // PODCZAS DNIA: podśpiewywanie
 

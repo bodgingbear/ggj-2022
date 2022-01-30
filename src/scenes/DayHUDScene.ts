@@ -7,7 +7,7 @@ interface HUDData {
   player: Player;
   peeProvider: () => number;
   startedAt: number;
-  emitter: GameEmiter;
+  emiter: GameEmiter;
 }
 
 export class DayHUDScene extends Phaser.Scene {
@@ -21,22 +21,43 @@ export class DayHUDScene extends Phaser.Scene {
 
   timer!: DayTimer;
 
+  overlay!: Phaser.GameObjects.Rectangle;
+
   public constructor() {
     super({
       key: 'DayHUDScene',
     });
   }
 
-  public create({ player }: HUDData): void {
+  public create({ player, emiter }: HUDData): void {
     this.player = player;
 
-    this.timer = new DayTimer(this);
+    this.timer = new DayTimer(this, Date.now());
 
     this.inventoryElementsList = new InventoryElementsList(
       this,
       this.player.inventory.items,
       false
     );
+
+    this.overlay = this.add
+      .rectangle(1280 / 2, 720 / 2, 1280, 720, 0, 1)
+      .setDepth(2)
+      .setVisible(true)
+      .setAlpha(0);
+
+    this.timer.addListener('end', () => {
+      emiter.emit('end');
+
+      this.tweens.add({
+        targets: [this.overlay],
+        alpha: 1,
+        duration: 750,
+        onComplete: () => {
+          emiter.emit('overlayEnd');
+        },
+      });
+    });
   }
 
   public update(): void {

@@ -147,6 +147,7 @@ export class DayScene extends Phaser.Scene {
 
     this.scene.run('DayHUDScene', {
       player: this.player,
+      emiter: this.hudEmitter,
     });
 
     this.passersGroup = this.add.group();
@@ -256,6 +257,16 @@ export class DayScene extends Phaser.Scene {
       handleTrolleyCol
     );
 
+    this.hudEmitter.addListener('end', () => {
+      this.scene.pause();
+    });
+
+    this.hudEmitter.addListener('overlayEnd', () => {
+      this.scene.stop('DayHUDScene');
+      this.scene.start('GameScene', { inventory: this.player.inventory });
+    });
+
+    // NA KONIEC DNIA: dźwięk horroru i płynne przejście do nocy w tym dźwięku
     // NA POCZATEK NOCY:
     // 1. dźwięk wiatru start
     // 2. (do ustalenia dokładnie) randomowo co jakiś czas żeby był dźwięk "andrzejku/andrzeju" od męskiego miejskiego (sprawdzać w booleanie czy jest jakiś męski miejski i jak jest to dać na to timeout)
