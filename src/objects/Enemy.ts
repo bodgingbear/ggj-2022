@@ -5,13 +5,8 @@ const ENEMY_VELOCITY = 50;
 const ENEMY_SPIERDALING_VELOCITY = 150;
 const ROTATION_SPEED = Math.PI * 0.3;
 
-function getRandomEnemyTexture() {
-  const textures = [
-    'Straznik-FHV.png',
-    'Straznik-MHV.png',
-    'Straznik-M.png',
-    'Straznik-F.png',
-  ];
+function getRandomEnemyAnimation() {
+  const textures = ['Straznik-FHV', 'Straznik-MHV', 'Straznik-M', 'Straznik-F'];
 
   return textures[Math.floor(Math.random() * textures.length)];
 }
@@ -28,9 +23,10 @@ export class Enemy extends EventEmitter<'destroy'> {
   constructor(private scene: Phaser.Scene, position: Phaser.Math.Vector2) {
     super();
     this.sprite = this.scene.add
-      .sprite(position.x, position.y, 'master', getRandomEnemyTexture())
+      .sprite(position.x, position.y, 'master', 'Straznik-FHV-0.png')
       .setScale(4)
-      .setPipeline('Light2D');
+      .setPipeline('Light2D')
+      .play(getRandomEnemyAnimation());
 
     this.sprite.setOrigin(0.2);
 
@@ -41,35 +37,20 @@ export class Enemy extends EventEmitter<'destroy'> {
   }
 
   public onHit() {
-    const shouldKeepX = Math.random() > 0.5;
-
-    if (shouldKeepX) {
-      this.spierdalingTarget = new Phaser.Math.Vector2(
-        this.body.x,
-        this.getNearestEdgeY()
-      );
-    } else {
-      this.spierdalingTarget = new Phaser.Math.Vector2(
-        this.getNearestEdgeX(),
-        this.body.y
-      );
-    }
+    this.spierdalingTarget = new Phaser.Math.Vector2(
+      this.getNearestEdgeX(),
+      this.body.y
+    );
   }
 
   private getNearestEdgeX = () => {
-    if (this.body.x < 1280 / 2) {
+    const { width } = this.scene.cameras.main.getBounds();
+
+    if (this.body.x < width / 2) {
       return 0 - 100;
     }
 
-    return 1280 + 100;
-  };
-
-  private getNearestEdgeY = () => {
-    if (this.body.y < 720 / 2) {
-      return 0 - 100;
-    }
-
-    return 720 + 100;
+    return width + 100;
   };
 
   private goToPoint = (

@@ -1,5 +1,5 @@
-import { BladderBar, BlADDER_BAR_WIDTH } from 'objects/BladderBar';
-import { ClickableElement } from 'objects/ClickableElement';
+import { BladderBar } from 'objects/BladderBar';
+import { InventoryElement } from 'objects/InventoryElement';
 import { Player } from 'objects/Player';
 import { EventEmitter } from 'packages/utils';
 
@@ -16,6 +16,8 @@ export class HUDScene extends Phaser.Scene {
 
   player!: Player;
 
+  inventoryElements: InventoryElement[] = [];
+
   public constructor() {
     super({
       key: 'HUDScene',
@@ -28,24 +30,31 @@ export class HUDScene extends Phaser.Scene {
     this.add.existing(this.bar.bladderShrinking);
 
     this.player = player;
-    new ClickableElement(
-      this,
-      'alcohol.png',
-      'Q',
-      1280 - BlADDER_BAR_WIDTH - 32,
-      32,
-      () => this.player.addPiss(10)
-    );
 
-    emitter.on('end', () => {
-      this.add
-        .text(1280 / 2, 720 / 2, 'Dorwali cie... Czeka cie noc na Ibizie :(')
-        .setScale(2)
-        .setOrigin(0.5);
-    });
+    let prevWidth = 0;
+
+    for (let i = 0; i < this.player.inventory.items.length; i++) {
+      const item = this.player.inventory.items[i];
+
+      const inventoryElement = new InventoryElement(
+        this,
+        item,
+        prevWidth + 32 + 32 * i,
+        32,
+        () => this.player.drink(item)
+      );
+
+      prevWidth += inventoryElement.getWidth();
+
+      this.inventoryElements.push(inventoryElement);
+    }
   }
 
   public update(): void {
     this.bar.onPissAmountChange(this.peeProvider());
+
+    this.inventoryElements.forEach((inventoryElement, i) => {
+      inventoryElement.setCount(this.player.inventory.items[i].count);
+    });
   }
 }
