@@ -1,10 +1,16 @@
-import { PEE_DEFAULT_VALUE, PEE_MAX_VALUE } from 'constants';
 import { debugMap } from 'packages/utils/shouldSkipIntro';
-import { Inventory, InventoryItem } from './Inventory';
 
 import { PissDrop } from './PissDrop';
 
-const PLAYER_VELOCITY = debugMap() ? 500 : 150;
+import { PEE_DEFAULT_VALUE, PEE_MAX_VALUE } from '../constants';
+import {
+  Inventory,
+  AlcoholInventoryItem,
+  InventoryItem,
+  EnergyInventoryItem,
+} from './Inventory';
+
+const BASE_PLAYER_VELOCITY = debugMap() ? 500 : 150;
 
 export class Player {
   public sprite: Phaser.GameObjects.Sprite;
@@ -24,6 +30,10 @@ export class Player {
   public inventory = new Inventory();
 
   private isShaking = false;
+
+  private energeticTimeEvent: Phaser.Time.TimerEvent | null = null;
+
+  private playerVelocity = BASE_PLAYER_VELOCITY;
 
   constructor(
     private scene: Phaser.Scene,
@@ -120,23 +130,23 @@ export class Player {
     let velocity = new Phaser.Math.Vector2(0, 0);
 
     if (this.keys.up?.isDown) {
-      velocity.subtract(new Phaser.Math.Vector2(0, PLAYER_VELOCITY * 1.5));
+      velocity.subtract(new Phaser.Math.Vector2(0, this.playerVelocity * 1.5));
     }
 
     if (this.keys.down?.isDown) {
-      velocity.add(new Phaser.Math.Vector2(0, PLAYER_VELOCITY * 1.5));
+      velocity.add(new Phaser.Math.Vector2(0, this.playerVelocity * 1.5));
     }
 
     if (this.keys.left?.isDown) {
-      velocity.subtract(new Phaser.Math.Vector2(PLAYER_VELOCITY, 0));
+      velocity.subtract(new Phaser.Math.Vector2(this.playerVelocity, 0));
     }
 
     if (this.keys.right?.isDown) {
-      velocity.add(new Phaser.Math.Vector2(PLAYER_VELOCITY, 0));
+      velocity.add(new Phaser.Math.Vector2(this.playerVelocity, 0));
     }
 
     if (velocity.x !== 0 && velocity.y !== 0) {
-      velocity = velocity.normalize().scale(PLAYER_VELOCITY);
+      velocity = velocity.normalize().scale(this.playerVelocity);
     }
 
     this.body.setVelocity(velocity.x, velocity.y);
@@ -174,7 +184,7 @@ export class Player {
     }
   }
 
-  public drink = (item: InventoryItem) => {
+  private drinkAlcohol = (item: AlcoholInventoryItem) => {
     if (this.isShaking) {
       return;
     }
@@ -192,8 +202,37 @@ export class Player {
     this.scene.cameras.main.flash(500, 0x11, 0x11, 0x11, true);
 
     this.pee = Math.min(this.pee + item.pee, PEE_MAX_VALUE);
+  };
+
+  private drinkEnergyDrink = (item: EnergyInventoryItem) => {
+    this.playerVelocity *= item.multiplier;
+
+    const timeLeft = this.energeticTimeEvent
+      ? this.energeticTimeEvent.delay - this.energeticTimeEvent.elapsed
+      : 0;
+
+    this.energeticTimeEvent?.destroy();
+    this.energeticTimeEvent = this.scene.time.addEvent({
+      delay: timeLeft + item.duration,
+      loop: true,
+      callback: () => {
+        this.playerVelocity = BASE_PLAYER_VELOCITY;
+      },
+    });
+  };
+
+  public drink = (item: InventoryItem) => {
     // eslint-disable-next-line no-param-reassign
     item.count--;
+
+    if (item.type === 'alcohol') {
+      this.drinkAlcohol(item);
+      return;
+    }
+
+    if (item.type === 'energy') {
+      this.drinkEnergyDrink(item);
+    }
   };
 
   private playAnimation = (key: string) => {
