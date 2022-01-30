@@ -12,6 +12,7 @@ import {
 
 const BASE_PLAYER_VELOCITY = debugMap() ? 500 : 150;
 const DAY_BASE_PLAYER_VELOCITY = 200;
+const ROTATION_SPEED = Math.PI * 0.5;
 
 type Direction = 'up' | 'down' | 'left' | 'right';
 
@@ -59,7 +60,7 @@ export class Player extends EventEmitter<
     super();
     this.playerVelocity = this.getBaseVelocity();
 
-    if (this.isDay) {
+    if (!this.isDay) {
       this.light = this.scene.lights.addLight(x, y, 160, 0xffffff, 0.2);
     }
 
@@ -171,7 +172,7 @@ export class Player extends EventEmitter<
     return 'Andrzej-Drunk-Up';
   };
 
-  update() {
+  update(delta: number) {
     let velocity = new Phaser.Math.Vector2(0, 0);
 
     if (this.keys.up?.isDown) {
@@ -208,8 +209,7 @@ export class Player extends EventEmitter<
       );
 
       this.rotation = this.targetToMouseRotation;
-
-      // Phaser.Math.Angle.RotateTo(
+      // this.rotation = Phaser.Math.Angle.RotateTo(
       //   this.rotation,
       //   this.targetToMouseRotation,
       //   ROTATION_SPEED * 0.001 * delta
@@ -247,6 +247,7 @@ export class Player extends EventEmitter<
     // eslint-disable-next-line no-param-reassign
     item.count--;
     this.playerVelocity *= item.multiplier;
+    this.pee = Math.min(this.pee + item.pee, PEE_MAX_VALUE);
 
     const timeLeft = this.energeticTimeEvent
       ? this.energeticTimeEvent.delay - this.energeticTimeEvent.elapsed

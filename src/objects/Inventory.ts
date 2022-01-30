@@ -19,6 +19,7 @@ export interface EnergyInventoryItem extends BaseInventoryItem {
   type: 'energy';
   multiplier: number;
   duration: number;
+  pee: number;
 }
 
 export type InventoryItem = AlcoholInventoryItem | EnergyInventoryItem;
@@ -36,10 +37,11 @@ export class Inventory {
     {
       name: 'Red Bull',
       sprite: 'red-bull.png',
-      count: 0,
+      count: 2,
       key: '2',
       type: 'energy',
       multiplier: 2.5,
+      pee: 2,
       duration: 2500,
     },
   ];

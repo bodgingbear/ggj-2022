@@ -169,7 +169,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   update(_time: number, delta: number) {
-    this.player?.update();
+    this.player?.update(delta);
     this.enemies.children.entries.forEach((enemy) =>
       enemy.getData('ref').update(delta, this.player)
     );

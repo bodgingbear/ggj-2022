@@ -25,7 +25,7 @@ export class DayScene extends Phaser.Scene {
 
   hudEmitter = new GameEmiter();
 
-  trolleys: Trolley[] = [];
+  trolleys!: Phaser.GameObjects.Group;
 
   passersGroup!: Phaser.GameObjects.Group;
 
@@ -41,13 +41,15 @@ export class DayScene extends Phaser.Scene {
       .setOrigin(0)
       .setScale(4)
       .setPipeline('Light2D');
+
     this.cameras.main.setBounds(0, 0, bg.displayWidth, bg.displayHeight);
 
+    const boundsTop = 400;
     this.physics.world.setBounds(
       0,
-      450,
+      boundsTop,
       bg.displayWidth,
-      bg.displayHeight - 450
+      bg.displayHeight - boundsTop + 100
     );
     this.physics.world.setBoundsCollision();
 
@@ -60,7 +62,8 @@ export class DayScene extends Phaser.Scene {
 
     this.zIndexGroup = this.add.group();
 
-    this.player = new Player(this, 1500, 1100, keys, true);
+    this.player = new Player(this, 200, 900, keys, true);
+    this.lights.addLight(1500, 1100, 160, 0xffffff, 0);
     this.zIndexGroup.add(this.player.sprite);
 
     this.cameras.main.startFollow(this.player.sprite, false, 0.1, 0.1);
@@ -100,11 +103,34 @@ export class DayScene extends Phaser.Scene {
     );
 
     this.physics.add.collider(this.passersGroup, this.player.sprite);
+    this.trolleys = this.add.group();
 
     new PasserBySpawner(this).on('request-emit', (position, direction) => {
       const passer = new PasserBy(this, position.x, position.y, direction);
       this.zIndexGroup.add(passer.sprite);
       this.passersGroup.add(passer.sprite);
+      this.passersGroup.add(passer.sprite);
+
+      if (
+        Math.random() > 0.8 &&
+        (direction === 'left' || direction === 'right')
+      ) {
+        const xDelta =
+          // eslint-disable-next-line no-nested-ternary
+          direction === 'left' ? -100 : direction === 'right' ? 100 : 0;
+        const yDelta = 30;
+
+        const trolley = new Trolley(
+          this,
+          position.x + xDelta,
+          position.y + yDelta,
+          this.player,
+          this.lidl
+        );
+        trolley.on('collide', () => this.zIndexGroup.remove(trolley.sprite));
+        this.trolleys.add(trolley.sprite);
+        this.zIndexGroup.add(trolley.sprite);
+      }
     });
 
     this.overlay = this.add
@@ -113,9 +139,9 @@ export class DayScene extends Phaser.Scene {
       .setPosition(-10000000)
       .setAlpha(0);
 
-    this.trolleys.push(new Trolley(this, this.player, this.lidl));
-
-    this.trolleys.forEach((t) => this.zIndexGroup.add(t.sprite));
+    this.physics.add.collider(this.trolleys, this.player.sprite);
+    this.physics.add.collider(this.trolleys, this.trees.sprite);
+    this.physics.add.collider(this.trolleys, this.passersGroup);
 
     // NA KONIEC DNIA: dźwięk horroru i płynne przejście do nocy w tym dźwięku
     // NA POCZATEK NOCY:
@@ -126,7 +152,7 @@ export class DayScene extends Phaser.Scene {
   }
 
   update(_time: number, delta: number) {
-    this.player?.update();
+    this.player?.update(delta);
 
     if (this.ended) return;
 
@@ -153,7 +179,7 @@ export class DayScene extends Phaser.Scene {
         }
       );
     });
-    this.trolleys.forEach((t) => t.update());
+    this.trolleys.children.each((t) => t.getData('ref').update());
     this.lidl.update();
   }
 }

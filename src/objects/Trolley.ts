@@ -1,28 +1,32 @@
+import { EventEmitter } from 'packages/utils';
 import { Lidl } from './Lidl';
 import { Player } from './Player';
 
 const DESTINATION_X = 2022;
 const DESTINATION_Y = 1024;
 
-export class Trolley {
+export class Trolley extends EventEmitter<'collide'> {
   sprite: Phaser.GameObjects.Sprite;
 
   body: Phaser.Physics.Arcade.Body;
 
   constructor(
     private readonly scene: Phaser.Scene,
+    x: number,
+    y: number,
     private player: Player,
     lidl: Lidl
   ) {
+    super();
     this.sprite = this.scene.add
-      .sprite(1300, 1100, 'master', 'wozek.png')
-      .setScale(4)
-      .setDepth(999999);
+      .sprite(x, y, 'master', 'wozek.png')
+      .setScale(4);
+    this.sprite.setData('ref', this);
 
     this.scene.physics.world.enable(this.sprite);
     this.body = this.sprite.body as Phaser.Physics.Arcade.Body;
-    this.scene.physics.add.collider(this.sprite, player.sprite);
     this.body.setCollideWorldBounds(true);
+    this.body.setBounce(1.5, 1.5);
 
     this.scene.physics.add.overlap(
       this.sprite,
@@ -32,8 +36,11 @@ export class Trolley {
   }
 
   onLidlCollide = () => {
+    this.emit('collide');
     this.body.destroy();
     this.player.inventory.addItem('Wódka');
+
+    this.sprite.setDepth(99999999);
 
     this.scene.tweens.add({
       targets: this.sprite,
