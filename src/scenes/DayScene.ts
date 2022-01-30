@@ -10,6 +10,7 @@ import { GameEmiter } from 'objects/GameEmiter';
 import { CHANCE_FOR_JALMUZNA, CHANCE_FOR_CZERWONY_BYK } from 'constants';
 import { Sunset } from 'objects/Sunset';
 import { Sound } from 'Sound';
+import { Inventory } from 'objects/Inventory';
 
 function checkOverlap(spriteA, spriteB) {
   const boundsA = spriteA.getBounds();
@@ -81,7 +82,7 @@ export class DayScene extends Phaser.Scene {
     });
   };
 
-  public create(): void {
+  public create({ inventory }: { inventory: Inventory }): void {
     this.addSounds();
     const bg = this.add
       .image(0, 0, 'master', 'bg.png')
@@ -120,6 +121,7 @@ export class DayScene extends Phaser.Scene {
     this.zIndexGroup = this.add.group();
 
     this.player = new Player(this, 200, 200, keys, true);
+    this.player.inventory = inventory ?? this.player.inventory;
     // this.player = new Player(this, 200, 900, keys, true);
     this.lights.addLight(1500, 1100, 160, 0xffffff, 0);
     this.zIndexGroup.add(this.player.sprite);

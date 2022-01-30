@@ -10,10 +10,10 @@ export class MainMenuScene extends Phaser.Scene {
   }
 
   public create(): void {
-    const vid = this.add.video(1280 / 2, 720 / 2, 'demo');
-    vid.play(true);
-    vid.setScale(0.9);
-    vid.setAlpha(0.75);
+    // const vid = this.add.video(1280 / 2, 720 / 2, 'demo');
+    // vid.play(true);
+    // vid.setScale(0.9);
+    // vid.setAlpha(0.75);
 
     const text = this.add.text(1280 / 2, 64, 'Poratuj Dobrodzieju!', {
       fontSize: '48px',
@@ -27,7 +27,7 @@ export class MainMenuScene extends Phaser.Scene {
     const pressSpaceButton = this.add.text(
       1280 / 2,
       720 - 32 - 32,
-      'Press SPACE to start',
+      'Naciśnij SPACJĘ żeby zagrać',
       {
         fontSize: '24px',
         fill: '#fff',
@@ -42,13 +42,13 @@ export class MainMenuScene extends Phaser.Scene {
       this.scene.start(shouldOpenDayScene() ? 'DayScene' : 'GameScene');
     });
 
-    const howToPlayButton = new TextButton(this, 32, 720 - 32, 'How to play', {
+    const howToPlayButton = new TextButton(this, 32, 720 - 32, 'Jak Grać?', {
       originX: 0,
       originY: 1,
     });
     howToPlayButton.on('click', () => this.scene.start('HowToPlayScene'));
 
-    const creditsButton = new TextButton(this, 1280 - 32, 720 - 32, 'Credits', {
+    const creditsButton = new TextButton(this, 1280 - 32, 720 - 32, 'Autorzy', {
       originX: 1,
       originY: 1,
     });

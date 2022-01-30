@@ -25,7 +25,7 @@ export class HowToPlayScene extends Phaser.Scene {
 
     howToPlayButton.on('click', () => this.scene.start('MainMenuScene'));
 
-    const text = this.add.text(1280 / 2, 720 / 2, "You'll figure it out", {
+    const text = this.add.text(1280 / 2, 720 / 2, 'Jakoś dasz sę radę', {
       color: 'white',
       fontSize: 32,
       align: 'center',
