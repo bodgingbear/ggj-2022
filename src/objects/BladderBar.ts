@@ -1,6 +1,6 @@
-import { PEE_MAX_VALUE } from 'constants';
+import { PEE_MAX_VALUE } from '../constants';
 
-const BLADDER_BAR_X = 1280;
+const BLADDER_BAR_X = 1280 - 24;
 const BLADDER_BAR_Y = 0;
 
 export const BlADDER_BAR_WIDTH = 160;
@@ -14,7 +14,7 @@ export class BladderBar {
   constructor(private scene: Phaser.Scene) {
     this.bar = this.scene.add.rectangle(
       BLADDER_BAR_X - BlADDER_BAR_WIDTH,
-      BLADDER_BAR_Y + BLADDER_BAR_HEIGHT - 10,
+      BLADDER_BAR_Y + BLADDER_BAR_HEIGHT - 8,
       BlADDER_BAR_WIDTH,
       BLADDER_BAR_HEIGHT,
       0xffff00
