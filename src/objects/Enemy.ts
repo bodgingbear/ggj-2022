@@ -37,13 +37,45 @@ export class Enemy extends EventEmitter<'destroy'> {
   }
 
   public onHit(hitPos: Phaser.Math.Vector2) {
-    this.spierdalingTarget = this.body.position
-      .clone()
-      .add(
-        new Phaser.Math.Vector2(200).setAngle(
-          Phaser.Math.Angle.BetweenPoints(this.body.position, hitPos) + Math.PI
-        )
+    const spierdalingAngle = Phaser.Math.Angle.Normalize(
+      Phaser.Math.Angle.BetweenPoints(this.body.position, hitPos) + Math.PI
+    );
+
+    const camCoords = this.scene.cameras.main.worldView;
+
+    if (
+      spierdalingAngle >= Math.PI * 1.25 &&
+      spierdalingAngle < Math.PI * 1.75
+    ) {
+      this.spierdalingTarget = new Phaser.Math.Vector2(
+        this.body.x,
+        camCoords.top
       );
+    } else if (
+      spierdalingAngle >= Math.PI * 1.75 ||
+      spierdalingAngle < Math.PI * 0.25
+    ) {
+      this.spierdalingTarget = new Phaser.Math.Vector2(
+        camCoords.right,
+        this.body.y
+      );
+    } else if (
+      spierdalingAngle >= Math.PI * 0.25 &&
+      spierdalingAngle < Math.PI * 0.75
+    ) {
+      this.spierdalingTarget = new Phaser.Math.Vector2(
+        this.body.x,
+        camCoords.bottom
+      );
+    } else if (
+      spierdalingAngle >= Math.PI * 0.75 &&
+      spierdalingAngle < Math.PI * 1.25
+    ) {
+      this.spierdalingTarget = new Phaser.Math.Vector2(
+        camCoords.left,
+        this.body.y
+      );
+    }
   }
 
   private goToPoint = (
