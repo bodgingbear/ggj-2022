@@ -29,12 +29,12 @@ export class Lidl {
     );
 
     this.trolleyCollider = this.scene.add
-      .rectangle(0, 0, 500, 150, 0x00ff00, 0)
+      .rectangle(0, 0, 500, 250, 0x00ff00, 0)
       .setDepth(200000);
 
     this.sprite.setOrigin(0.2);
 
-    this.trolleyCollider.setOrigin(0, 1);
+    this.trolleyCollider.setOrigin(0, 0.5);
     this.trolleyCollider.setPosition(
       LIDL_X + 300,
       this.sprite.getBottomCenter().y + 50

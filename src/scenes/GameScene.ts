@@ -56,7 +56,13 @@ export class GameScene extends Phaser.Scene {
       .setPipeline('Light2D');
     this.cameras.main.setBounds(0, 0, bg.displayWidth, bg.displayHeight);
 
-    this.physics.world.setBounds(0, 100, bg.displayWidth, bg.displayHeight);
+    const boundsTop = 400;
+    this.physics.world.setBounds(
+      0,
+      boundsTop,
+      bg.displayWidth,
+      bg.displayHeight - boundsTop
+    );
     this.physics.world.setBoundsCollision();
 
     const keys = this.input.keyboard.addKeys({

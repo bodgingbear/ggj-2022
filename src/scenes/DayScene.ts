@@ -49,7 +49,7 @@ export class DayScene extends Phaser.Scene {
       0,
       boundsTop,
       bg.displayWidth,
-      bg.displayHeight - boundsTop + 100
+      bg.displayHeight - boundsTop
     );
     this.physics.world.setBoundsCollision();
 
@@ -112,8 +112,9 @@ export class DayScene extends Phaser.Scene {
       this.passersGroup.add(passer.sprite);
 
       if (
-        Math.random() > 0.8 &&
-        (direction === 'left' || direction === 'right')
+        Math.random() > 0.5 &&
+        (direction === 'left' || direction === 'right') &&
+        this.trolleys.children.entries.length < 4
       ) {
         const xDelta =
           // eslint-disable-next-line no-nested-ternary
@@ -127,6 +128,7 @@ export class DayScene extends Phaser.Scene {
           this.player,
           this.lidl
         );
+        this.physics.add.collider(trolley.sprite, passer.sprite);
         trolley.on('collide', () => this.zIndexGroup.remove(trolley.sprite));
         this.trolleys.add(trolley.sprite);
         this.zIndexGroup.add(trolley.sprite);
@@ -139,9 +141,22 @@ export class DayScene extends Phaser.Scene {
       .setPosition(-10000000)
       .setAlpha(0);
 
-    this.physics.add.collider(this.trolleys, this.player.sprite);
-    this.physics.add.collider(this.trolleys, this.trees.sprite);
-    this.physics.add.collider(this.trolleys, this.passersGroup);
+    this.physics.add.collider(this.trolleys, this.player.sprite, (trolley) => {
+      // eslint-disable-next-line no-param-reassign
+      trolley.body.setCollideWorldBounds(true);
+    });
+    const handleTrolleyCol = (sprite: Phaser.GameObjects.GameObject) =>
+      sprite.getData('ref').tryDestroy();
+    this.physics.add.collider(
+      this.trolleys,
+      this.trees.sprite,
+      handleTrolleyCol
+    );
+    this.physics.add.collider(
+      this.trolleys,
+      this.lidl.sprite,
+      handleTrolleyCol
+    );
 
     // NA KONIEC DNIA: dźwięk horroru i płynne przejście do nocy w tym dźwięku
     // NA POCZATEK NOCY:
@@ -161,24 +176,23 @@ export class DayScene extends Phaser.Scene {
       el.setDepth(el.y + el.displayHeight)
     );
 
-    this.events.on('update', () => {
-      this.passersGroup.children.entries.forEach(
-        (passer: Phaser.GameObjects.Sprite) => {
-          if (
-            !this.physics.world.bounds.contains(
-              passer.getTopLeft().x,
-              passer.getTopLeft().y
-            ) ||
-            !this.physics.world.bounds.contains(
-              passer.getTopRight().x,
-              passer.getTopRight().y
-            )
-          ) {
-            passer.destroy();
-          }
+    this.passersGroup.children.entries.forEach(
+      (passer: Phaser.GameObjects.Sprite) => {
+        if (
+          !this.physics.world.bounds.contains(
+            passer.getTopLeft().x,
+            passer.getTopLeft().y
+          ) ||
+          !this.physics.world.bounds.contains(
+            passer.getTopRight().x,
+            passer.getTopRight().y
+          )
+        ) {
+          passer.destroy();
         }
-      );
-    });
+      }
+    );
+
     this.trolleys.children.each((t) => t.getData('ref').update());
     this.lidl.update();
   }

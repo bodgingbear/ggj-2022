@@ -25,7 +25,6 @@ export class Trolley extends EventEmitter<'collide'> {
 
     this.scene.physics.world.enable(this.sprite);
     this.body = this.sprite.body as Phaser.Physics.Arcade.Body;
-    this.body.setCollideWorldBounds(true);
     this.body.setBounce(1.5, 1.5);
 
     this.scene.physics.add.overlap(
@@ -33,6 +32,7 @@ export class Trolley extends EventEmitter<'collide'> {
       lidl.trolleyCollider,
       this.onLidlCollide
     );
+    this.body.setCollideWorldBounds(false);
   }
 
   onLidlCollide = () => {
@@ -64,7 +64,25 @@ export class Trolley extends EventEmitter<'collide'> {
     });
   };
 
+  tryDestroy() {
+    if (!this.body.collideWorldBounds) this.sprite.destroy();
+  }
+
   update() {
+    if (
+      !this.scene.physics.world.bounds.contains(
+        this.sprite.getTopLeft().x,
+        this.sprite.getTopLeft().y
+      ) ||
+      !this.scene.physics.world.bounds.contains(
+        this.sprite.getTopRight().x,
+        this.sprite.getTopRight().y
+      )
+    ) {
+      this.tryDestroy();
+      return;
+    }
+
     this.body.setAcceleration(
       -this.body.velocity.x * 1.2,
       -this.body.velocity.y * 2.5
