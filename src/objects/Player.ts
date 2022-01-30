@@ -190,6 +190,8 @@ export class Player extends EventEmitter<
       return;
     }
 
+    // eslint-disable-next-line no-param-reassign
+    item.count--;
     this.isShaking = true;
     this.scene.cameras.main.shake(
       750,
@@ -206,6 +208,8 @@ export class Player extends EventEmitter<
   };
 
   private drinkEnergyDrink = (item: EnergyInventoryItem) => {
+    // eslint-disable-next-line no-param-reassign
+    item.count--;
     this.playerVelocity *= item.multiplier;
 
     const timeLeft = this.energeticTimeEvent
@@ -224,8 +228,6 @@ export class Player extends EventEmitter<
 
   public drink = (item: InventoryItem) => {
     // eslint-disable-next-line no-param-reassign
-    item.count--;
-
     if (item.type === 'alcohol') {
       this.drinkAlcohol(item);
       console.log('dźwięk drink vodka');
