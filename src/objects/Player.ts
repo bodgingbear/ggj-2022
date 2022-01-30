@@ -1,5 +1,6 @@
 import { debugMap } from 'packages/utils/shouldSkipIntro';
 
+import { EventEmitter } from 'packages/utils';
 import { PissDrop } from './PissDrop';
 
 import { PEE_DEFAULT_VALUE, PEE_MAX_VALUE } from '../constants';
@@ -12,7 +13,18 @@ import {
 
 const BASE_PLAYER_VELOCITY = debugMap() ? 500 : 150;
 
-export class Player {
+export class Player extends EventEmitter<
+  'request-piss' | 'no-pee-left',
+  {
+    'request-piss': (
+      rotation: number,
+      position: Phaser.Math.Vector2,
+      velocity: Phaser.Math.Vector2,
+      isUp: boolean
+    ) => void;
+    'no-pee-left': () => void;
+  }
+> {
   public sprite: Phaser.GameObjects.Sprite;
 
   public pee: number = PEE_DEFAULT_VALUE;
@@ -39,10 +51,9 @@ export class Player {
     private scene: Phaser.Scene,
     x: number,
     y: number,
-    private keys: Phaser.Types.Input.Keyboard.CursorKeys,
-    private pissDrops: Phaser.GameObjects.Group,
-    private noPee: (() => void) | null = null
+    private keys: Phaser.Types.Input.Keyboard.CursorKeys
   ) {
+    super();
     this.sprite = this.scene.add
       .sprite(x, y, 'master', 'Andrzej-Drunk-Down-0.png')
       .setScale(4)
@@ -64,37 +75,28 @@ export class Player {
 
     const cursorKeys = scene.input.keyboard.createCursorKeys();
 
-    const pissDropDeathEmitterManager = scene.add
-      .particles('master', 'piss-drop.png')
-      .setPipeline('Light2D');
-
     this.scene.time.addEvent({
       delay: 40,
       loop: true,
       callback: () => {
         if (this.pee < 0) {
-          this.noPee?.();
+          this.emit('no-pee-left');
           return;
         }
         if (cursorKeys.space?.isDown || this.pointer?.isDown) {
           this.pee--;
-          this.pissDrops.add(
-            new PissDrop(
-              this.scene,
-              this.rotation,
-              this.body.position.add(
-                new Phaser.Math.Vector2(
-                  this.sprite.displayWidth / 2,
-                  this.sprite.displayHeight * 0.7
-                )
-              ),
-              this.body.velocity,
-              pissDropDeathEmitterManager
-            ).sprite.setDepth(
-              this.getDirection() === 'up'
-                ? this.sprite.depth - 0.1
-                : this.sprite.depth + 0.1
-            )
+
+          this.emit(
+            'request-piss',
+            this.rotation,
+            this.body.position.add(
+              new Phaser.Math.Vector2(
+                this.sprite.displayWidth / 2,
+                this.sprite.displayHeight * 0.7
+              )
+            ),
+            this.body.velocity,
+            this.getDirection() === 'up'
           );
         }
       },

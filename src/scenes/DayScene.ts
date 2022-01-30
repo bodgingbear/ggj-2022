@@ -1,33 +1,18 @@
 import { Lantern } from 'objects/Lantern';
 import { Lidl } from 'objects/Lidl';
-import { Moon } from 'objects/Moon';
-import { PissDropsController } from 'objects/PissDropsController';
 import { Player } from 'objects/Player';
 import { Trees } from 'objects/Trees';
-import { EnemiesSpawnController } from 'objects/EnemiesSpawnController';
 import { debugMap } from 'packages/utils/shouldSkipIntro';
-import { Enemy } from 'objects/Enemy';
 import { EventEmitter } from 'packages/utils';
-import { PissDrop } from 'objects/PissDrop';
 
 export class GameScene extends Phaser.Scene {
   private player!: Player;
 
   enemies!: Phaser.GameObjects.Group;
 
-  pissDrops!: Phaser.GameObjects.Group;
-
-  private pissDropsController!: PissDropsController;
-
-  private enemiesSpawnController!: EnemiesSpawnController;
-
   private zIndexGroup!: Phaser.GameObjects.Group;
 
   physics!: Phaser.Physics.Arcade.ArcadePhysics;
-
-  public noPee: () => void = () => {
-    console.log('randomize dźwięk nie ma już siku - 4 łącznie');
-  };
 
   lidl!: Lidl;
 
@@ -65,51 +50,7 @@ export class GameScene extends Phaser.Scene {
 
     this.zIndexGroup = this.add.group();
 
-    this.pissDrops = this.add.group();
-
-    this.enemies = this.add.group();
-    this.enemiesSpawnController = new EnemiesSpawnController(this);
-
-    this.enemiesSpawnController.on('request-emit', (position) => {
-      const enemy = new Enemy(this, position);
-      this.enemies.add(enemy.sprite);
-      this.zIndexGroup.add(enemy.sprite);
-      enemy.on('destroy', () => {
-        if (this.enemies.children.entries.length === 0) {
-          this.enemiesSpawnController.onRoundEnd();
-        }
-      });
-    });
-
-    this.enemiesSpawnController.on('end-of-levels', () => {
-      alert('END OF LEVELS');
-    });
-
-    this.pissDropsController = new PissDropsController(
-      this,
-      this.pissDrops,
-      this.enemies
-    );
     this.player = new Player(this, 200, 900, keys);
-
-    const pissDropDeathEmitterManager = this.add
-      .particles('master', 'piss-drop.png')
-      .setPipeline('Light2D');
-
-    this.player.on('request-piss', (rotation, position, velocity, isUp) => {
-      this.pissDrops.add(
-        new PissDrop(
-          this,
-          rotation,
-          position,
-          velocity,
-          pissDropDeathEmitterManager
-        ).sprite.setDepth(
-          isUp ? this.player.sprite.depth - 0.1 : this.player.sprite.depth + 0.1
-        )
-      );
-    });
-    this.player.on('no-pee-left', () => this.noPee());
     this.zIndexGroup.add(this.player.sprite);
 
     this.physics.add.collider(this.enemies, this.player.sprite, () => {
@@ -130,7 +71,6 @@ export class GameScene extends Phaser.Scene {
       this.addCameraSwing();
     }
 
-    new Moon(this, 200, 200);
     this.lidl = new Lidl(this, this.player);
 
     const lanterns = [
