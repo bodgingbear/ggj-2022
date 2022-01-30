@@ -1,8 +1,9 @@
 import { PEE_DEFAULT_VALUE, PEE_MAX_VALUE } from 'constants';
+import { debugMap } from 'packages/utils/shouldSkipIntro';
 
 import { PissDrop } from './PissDrop';
 
-const PLAYER_VELOCITY = 150;
+const PLAYER_VELOCITY = debugMap() ? 500 : 150;
 
 export class Player {
   public sprite: Phaser.GameObjects.Sprite;

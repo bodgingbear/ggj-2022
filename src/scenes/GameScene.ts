@@ -7,9 +7,10 @@ import { Trees } from 'objects/Trees';
 import { EnemiesSpawnController } from 'objects/EnemiesSpawnController';
 import { debugMap } from 'packages/utils/shouldSkipIntro';
 import { Enemy } from 'objects/Enemy';
+import { EventEmitter } from 'packages/utils';
 
 export class GameScene extends Phaser.Scene {
-  private player?: Player;
+  private player!: Player;
 
   enemies!: Phaser.GameObjects.Group;
 
@@ -26,6 +27,12 @@ export class GameScene extends Phaser.Scene {
   lidl!: Lidl;
 
   trees!: Trees;
+
+  overlay!: Phaser.GameObjects.Rectangle;
+
+  ended = false;
+
+  hudEmitter = new EventEmitter<'end'>();
 
   public constructor() {
     super({
@@ -56,11 +63,6 @@ export class GameScene extends Phaser.Scene {
     this.pissDrops = this.add.group();
 
     this.enemies = this.add.group();
-
-    this.enemies.children.entries.forEach((enemy) => {
-      this.zIndexGroup.add(enemy);
-    });
-
     this.enemiesSpawnController = new EnemiesSpawnController(this);
 
     this.enemiesSpawnController.on('request-emit', (position) => {
@@ -83,10 +85,17 @@ export class GameScene extends Phaser.Scene {
       this.pissDrops,
       this.enemies
     );
-    this.player = new Player(this, 1200, 900, keys, this.pissDrops, () => {
+    this.player = new Player(this, 200, 900, keys, this.pissDrops, () => {
       console.log('TODO: Play dzwięki bólu zula, ze juz go pecherz boli XD');
     });
     this.zIndexGroup.add(this.player.sprite);
+
+    this.physics.add.collider(this.enemies, this.player.sprite, () => {
+      if (this.ended) return;
+
+      this.ended = true;
+      this.handleAndrzejCaught();
+    });
 
     this.cameras.main.startFollow(this.player.sprite, false, 0.1, 0.1);
     this.lights.enable();
@@ -117,7 +126,14 @@ export class GameScene extends Phaser.Scene {
     this.scene.run('HUDScene', {
       peeProvider: () => this.player?.pee ?? 0,
       player: this.player,
+      emitter: this.hudEmitter,
     });
+
+    this.overlay = this.add
+      .rectangle(0, 0, bg.displayWidth, bg.displayHeight, 0, 1)
+      .setOrigin(0)
+      .setPosition(-10000000)
+      .setAlpha(0);
   }
 
   update(_time: number, delta: number) {
@@ -125,6 +141,8 @@ export class GameScene extends Phaser.Scene {
     this.enemies.children.entries.forEach((enemy) =>
       enemy.getData('ref').update(delta, this.player)
     );
+
+    if (this.ended) return;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.zIndexGroup.children.entries.forEach((el: any) =>
@@ -134,7 +152,7 @@ export class GameScene extends Phaser.Scene {
 
   addCameraSwing() {
     this.tweens.addCounter({
-      duration: 2000,
+      duration: 1000,
       yoyo: true,
       ease: 'sine.inout',
       loop: -1,
@@ -143,6 +161,25 @@ export class GameScene extends Phaser.Scene {
 
       onUpdate: (value) => {
         this.cameras.main.setFollowOffset(value.getValue() * 100);
+      },
+    });
+  }
+
+  handleAndrzejCaught() {
+    this.zIndexGroup.children.entries.forEach((el: any) => el.setDepth(1));
+    this.children.bringToTop(this.overlay.setPosition(0, 0).setDepth(2));
+
+    this.tweens.addCounter({
+      from: 0,
+      to: 0.9,
+      duration: 1000,
+      yoyo: false,
+      loop: 0,
+      onUpdate: (val) => {
+        this.overlay.setAlpha(val.getValue());
+      },
+      onComplete: () => {
+        this.hudEmitter.emit('end');
       },
     });
   }
