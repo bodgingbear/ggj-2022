@@ -48,6 +48,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   public create({ inventory }: { inventory: Inventory }): void {
+    this.ended = false;
     this.startedAt = this.time.now;
 
     const bg = this.add

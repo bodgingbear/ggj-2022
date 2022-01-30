@@ -135,7 +135,7 @@ export class Player extends EventEmitter<
     this.body = this.sprite.body as Phaser.Physics.Arcade.Body;
     this.body.setSize(this.sprite.width, this.sprite.height / 2);
     this.body.setOffset(0, this.sprite.height / 2);
-    this.body.setCollideWorldBounds(false);
+    this.body.setCollideWorldBounds(true);
 
     const cursorKeys = scene.input.keyboard.createCursorKeys();
     this.startSinging();

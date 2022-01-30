@@ -38,6 +38,7 @@ export class HUDScene extends Phaser.Scene {
 
   public create({ player, peeProvider, emitter }: HUDData): void {
     this.gameOver = false;
+    this.gameOverTime = null;
 
     this.peeProvider = peeProvider;
     this.startedAt = Date.now();
@@ -62,7 +63,7 @@ export class HUDScene extends Phaser.Scene {
 
     emitter.on('end', () => {
       this.gameOver = true;
-      this.gameOverTime = this.time.now;
+      this.gameOverTime = Date.now();
 
       this.overlay.setVisible(true);
       this.tweens.addCounter({
