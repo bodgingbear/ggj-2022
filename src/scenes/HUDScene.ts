@@ -1,14 +1,14 @@
 import { BladderBar } from 'objects/BladderBar';
-import { InventoryElement } from 'objects/InventoryElement';
+import { GameEmiter } from 'objects/GameEmiter';
+import { InventoryElementsList } from 'objects/InventoryElementsList';
 import { Player } from 'objects/Player';
 import { formatTime, Timer } from 'objects/Timer';
-import { EventEmitter } from 'packages/utils';
 
 interface HUDData {
   player: Player;
   peeProvider: () => number;
   startedAt: number;
-  emitter: EventEmitter<'end'>;
+  emitter: GameEmiter;
 }
 
 export class HUDScene extends Phaser.Scene {
@@ -20,7 +20,7 @@ export class HUDScene extends Phaser.Scene {
 
   player!: Player;
 
-  inventoryElements: InventoryElement[] = [];
+  inventoryElementsList!: InventoryElementsList;
 
   timer!: Timer;
 
@@ -45,29 +45,18 @@ export class HUDScene extends Phaser.Scene {
 
     this.player = player;
 
-    let prevWidth = 0;
+    this.inventoryElementsList = new InventoryElementsList(
+      this,
+      this.player.inventory.items,
+      true,
+      (item) => emitter.emit('drink', item)
+    );
 
-    for (let i = 0; i < this.player.inventory.items.length; i++) {
-      const item = this.player.inventory.items[i];
-
-      const inventoryElement = new InventoryElement(
-        this,
-        item,
-        prevWidth + 32 + 32 * i,
-        32,
-        () => this.player.drink(item)
-      );
-
-      prevWidth += inventoryElement.getWidth();
-
-      this.inventoryElements.push(inventoryElement);
-
-      this.overlay = this.add
-        .rectangle(1280 / 2, 720 / 2, 1280, 720, 0, 1)
-        .setDepth(2)
-        .setVisible(false)
-        .setAlpha(0);
-    }
+    this.overlay = this.add
+      .rectangle(1280 / 2, 720 / 2, 1280, 720, 0, 1)
+      .setDepth(2)
+      .setVisible(false)
+      .setAlpha(0);
 
     emitter.on('end', () => {
       this.gameOver = true;
@@ -109,7 +98,7 @@ export class HUDScene extends Phaser.Scene {
     this.bar.onPissAmountChange(this.peeProvider());
     this.timer.update();
 
-    this.inventoryElements.forEach((inventoryElement, i) => {
+    this.inventoryElementsList.elements.forEach((inventoryElement, i) => {
       inventoryElement.setCount(this.player.inventory.items[i].count);
     });
   }

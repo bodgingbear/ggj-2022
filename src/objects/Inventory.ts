@@ -1,7 +1,9 @@
 type InventoryItemType = 'alcohol' | 'energy';
 
+type InventoryNames = 'Wódka' | 'Red Bull';
+
 export interface BaseInventoryItem {
-  name: string;
+  name: InventoryNames;
   sprite: string;
   count: number;
   key: string;
@@ -41,4 +43,15 @@ export class Inventory {
       duration: 2500,
     },
   ];
+
+  public addItem = (
+    searchedName: typeof this.items[number]['name'],
+    addedCount = 1
+  ) => {
+    this.items = this.items.map(({ name, count, ...rest }) => ({
+      name,
+      count: name === searchedName ? count + addedCount : count,
+      ...rest,
+    }));
+  };
 }

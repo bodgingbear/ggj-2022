@@ -20,15 +20,16 @@ export class InventoryElement {
 
   visible = true;
 
-  text: Phaser.GameObjects.Text;
+  text: Phaser.GameObjects.Text | null = null;
 
-  countText: Phaser.GameObjects.Text;
+  countText!: Phaser.GameObjects.Text;
 
   constructor(
     private readonly scene: Phaser.Scene,
     inventoryItem: BaseInventoryItem,
     x: number,
     y: number,
+    drawKeys: boolean,
     onKeyDown: () => void
   ) {
     this.sprite = this.scene.add
@@ -50,16 +51,18 @@ export class InventoryElement {
 
     const topWidth = this.getWidth();
 
-    this.text = this.scene.add
-      .text(
-        x + topWidth / 2,
-        y + this.sprite.displayHeight + 8,
-        inventoryItem.key,
-        {
-          fontSize: '24px',
-        }
-      )
-      .setOrigin(0.5, 0);
+    if (drawKeys) {
+      this.text = this.scene.add
+        .text(
+          x + topWidth / 2,
+          y + this.sprite.displayHeight + 8,
+          inventoryItem.key,
+          {
+            fontSize: '24px',
+          }
+        )
+        .setOrigin(0.5, 0);
+    }
 
     const keyboardKey = keyMap[inventoryItem.key] ?? inventoryItem.key;
     this.scene.input.keyboard.on(`keydown-${keyboardKey}`, () => {
@@ -81,7 +84,7 @@ export class InventoryElement {
     const alpha = this.enabled ? 1 : 0.5;
 
     this.sprite.setAlpha(alpha);
-    this.text.setAlpha(alpha);
+    this.text?.setAlpha(alpha);
     this.countText.setAlpha(alpha);
   };
 
@@ -89,7 +92,7 @@ export class InventoryElement {
     this.visible = visible;
 
     this.sprite.setVisible(this.visible);
-    this.text.setVisible(this.visible);
+    this.text?.setVisible(this.visible);
     this.countText.setVisible(this.visible);
   };
 

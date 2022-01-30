@@ -7,7 +7,7 @@ export class Trees {
 
   constructor(private scene: Phaser.Scene, player: Player) {
     this.sprite = this.scene.add
-      .sprite(3360 / 2, 1100 / 2, 'master', 'drzewa.png')
+      .sprite(3360 / 2, 1100 / 2 + 58, 'master', 'drzewa.png')
       .setScale(4)
       .setPipeline('Light2D')
       .setDepth(0.5);

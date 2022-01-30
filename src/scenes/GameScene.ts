@@ -9,6 +9,7 @@ import { Enemy } from 'objects/Enemy';
 import { EventEmitter } from 'packages/utils';
 import { PissDrop } from 'objects/PissDrop';
 import { PissDropsController } from 'objects/PissDropsController';
+import { GameEmiter } from 'objects/GameEmiter';
 
 export class GameScene extends Phaser.Scene {
   private player!: Player;
@@ -33,7 +34,7 @@ export class GameScene extends Phaser.Scene {
 
   ended = false;
 
-  hudEmitter = new EventEmitter<'end'>();
+  hudEmitter = new GameEmiter();
 
   startedAt!: number;
 
@@ -93,7 +94,8 @@ export class GameScene extends Phaser.Scene {
       alert('END OF LEVELS');
     });
 
-    this.player = new Player(this, 200, 900, keys);
+    this.player = new Player(this, 200, 900, keys, false);
+
     const pissDropDeathEmitterManager = this.add
       .particles('master', 'piss-drop.png')
       .setPipeline('Light2D');
@@ -152,6 +154,10 @@ export class GameScene extends Phaser.Scene {
       startedAt: this.startedAt,
       player: this.player,
       emitter: this.hudEmitter,
+    });
+
+    this.hudEmitter.on('drink', (item) => {
+      this.player.drink(item);
     });
 
     // NA KONIEC DNIA: dźwięk horroru i płynne przejście do nocy w tym dźwięku

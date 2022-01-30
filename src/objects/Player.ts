@@ -11,6 +11,9 @@ import {
 } from './Inventory';
 
 const BASE_PLAYER_VELOCITY = debugMap() ? 500 : 150;
+const DAY_BASE_PLAYER_VELOCITY = 200;
+
+type Direction = 'up' | 'down' | 'left' | 'right';
 
 export class Player extends EventEmitter<
   'request-piss' | 'no-pee-left',
@@ -44,23 +47,28 @@ export class Player extends EventEmitter<
 
   private energeticTimeEvent: Phaser.Time.TimerEvent | null = null;
 
-  private playerVelocity = BASE_PLAYER_VELOCITY;
+  private playerVelocity: number;
 
   constructor(
     private scene: Phaser.Scene,
     x: number,
     y: number,
-    private keys: Phaser.Types.Input.Keyboard.CursorKeys
+    private keys: Phaser.Types.Input.Keyboard.CursorKeys,
+    private isDay: boolean
   ) {
     super();
-    this.light = this.scene.lights.addLight(x, y, 160, 0xffffff, 0.2);
+    this.playerVelocity = this.getBaseVelocity();
+
+    if (this.isDay) {
+      this.light = this.scene.lights.addLight(x, y, 160, 0xffffff, 0.2);
+    }
 
     this.sprite = this.scene.add
       .sprite(x, y, 'master', 'Andrzej-Drunk-Down-0.png')
       .setScale(4)
       .setPipeline('Light2D');
 
-    this.sprite.play('Andrzej-Drunk-Down');
+    this.sprite.play(this.getDirectionAnimation('down'));
 
     this.sprite.setOrigin(0.5);
 
@@ -102,7 +110,11 @@ export class Player extends EventEmitter<
     });
   }
 
-  private getDirection = (): 'up' | 'down' | 'left' | 'right' => {
+  private getBaseVelocity = () => {
+    return this.isDay ? DAY_BASE_PLAYER_VELOCITY : BASE_PLAYER_VELOCITY;
+  };
+
+  private getDirection = (): Direction => {
     const normalRotation = Phaser.Math.Angle.Normalize(this.rotation);
 
     if (normalRotation > Math.PI * 1.75 || normalRotation < Math.PI / 4) {
@@ -125,6 +137,38 @@ export class Player extends EventEmitter<
     }
 
     return 'up';
+  };
+
+  private getDirectionAnimation = (direction: Direction) => {
+    if (this.isDay) {
+      if (direction === 'right') {
+        return 'Andrzej-Right';
+      }
+      if (direction === 'down') {
+        return 'Andrzej-Down';
+      }
+      if (direction === 'left') {
+        return 'Andrzej-Left';
+      }
+      if (direction === 'up') {
+        return 'Andrzej-Up';
+      }
+    }
+
+    if (direction === 'right') {
+      return 'Andrzej-Drunk-Right';
+    }
+    if (direction === 'down') {
+      return 'Andrzej-Drunk-Down';
+    }
+    if (direction === 'left') {
+      return 'Andrzej-Drunk-Left';
+    }
+    if (direction === 'up') {
+      return 'Andrzej-Drunk-Up';
+    }
+
+    return 'Andrzej-Drunk-Up';
   };
 
   update() {
@@ -173,15 +217,7 @@ export class Player extends EventEmitter<
 
       const direction = this.getDirection();
 
-      if (direction === 'right') {
-        this.playAnimation('Andrzej-Drunk-Right');
-      } else if (direction === 'down') {
-        this.playAnimation('Andrzej-Drunk-Down');
-      } else if (direction === 'left') {
-        this.playAnimation('Andrzej-Drunk-Left');
-      } else if (direction === 'up') {
-        this.playAnimation('Andrzej-Drunk-Up');
-      }
+      this.playAnimation(this.getDirectionAnimation(direction));
     }
   }
 
@@ -221,7 +257,7 @@ export class Player extends EventEmitter<
       delay: timeLeft + item.duration,
       loop: true,
       callback: () => {
-        this.playerVelocity = BASE_PLAYER_VELOCITY;
+        this.playerVelocity = this.getBaseVelocity();
       },
     });
   };
@@ -241,10 +277,6 @@ export class Player extends EventEmitter<
   };
 
   private playAnimation = (key: string) => {
-    if (key === this.sprite.anims.currentAnim.key) {
-      return;
-    }
-
     this.sprite.play(
       key,
       true,
