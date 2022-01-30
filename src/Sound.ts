@@ -12,4 +12,13 @@ export const Sound = {
   manHit2: 'hit_man2',
   womanHit1: 'hit_woman1',
   womanHit2: 'hit_woman2',
+  drinkingVodka1: 'drinking_vodka_1',
+  drinkingVodka2: 'drinking_vodka_2',
+  drinkingVodka3: 'drinking_vodka_3',
+  drinkingVodka4: 'drinking_vodka_4',
+  drinkingVodka5: 'drinking_vodka_5',
+  drinkingEnergy1: 'drinking_energy_1',
+  drinkingEnergy2: 'drinking_energy_2',
+  drinkingEnergy3: 'drinking_energy_3',
+  drinkingEnergy4: 'drinking_energy_4',
 };

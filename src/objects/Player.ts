@@ -60,10 +60,45 @@ export class Player extends EventEmitter<
     return [Sound.hoboSinging1, Sound.hoboSinging2, Sound.hoboSinging3];
   }
 
+  get drinkVodkaSoundNames(): string[] {
+    return [
+      Sound.drinkingVodka1,
+      Sound.drinkingVodka2,
+      Sound.drinkingVodka3,
+      Sound.drinkingVodka4,
+      Sound.drinkingVodka5,
+    ];
+  }
+
+  get drinkEnergySoundNames(): string[] {
+    return [
+      Sound.drinkingEnergy1,
+      Sound.drinkingEnergy2,
+      Sound.drinkingEnergy3,
+      Sound.drinkingEnergy4,
+    ];
+  }
+
   private songs: Phaser.Sound.BaseSound[] = [];
+
+  private drinkVodkaSounds: Phaser.Sound.BaseSound[] = [];
+
+  private drinkEnergySounds: Phaser.Sound.BaseSound[] = [];
 
   get randomSong(): Phaser.Sound.BaseSound {
     return this.songs[Math.floor(Math.random() * this.songs.length)];
+  }
+
+  get randomVodkaSound(): Phaser.Sound.BaseSound {
+    return this.drinkVodkaSounds[
+      Math.floor(Math.random() * this.drinkVodkaSounds.length)
+    ];
+  }
+
+  get randomEnergySound(): Phaser.Sound.BaseSound {
+    return this.drinkEnergySounds[
+      Math.floor(Math.random() * this.drinkEnergySounds.length)
+    ];
   }
 
   constructor(
@@ -74,6 +109,9 @@ export class Player extends EventEmitter<
     private isDay: boolean
   ) {
     super();
+
+    this.addDrinkingSounds();
+
     this.playerVelocity = this.getBaseVelocity();
 
     if (!this.isDay) {
@@ -199,7 +237,7 @@ export class Player extends EventEmitter<
     this.songNames.forEach((song) => {
       this.songs.push(
         this.scene.sound.add(song, {
-          volume: 0.3,
+          volume: 0.1,
         })
       );
     });
@@ -276,6 +314,8 @@ export class Player extends EventEmitter<
       return;
     }
 
+    this.randomVodkaSound.play();
+
     // eslint-disable-next-line no-param-reassign
     item.count--;
     this.isShaking = true;
@@ -296,6 +336,7 @@ export class Player extends EventEmitter<
   private drinkEnergyDrink = (item: EnergyInventoryItem) => {
     // eslint-disable-next-line no-param-reassign
     item.count--;
+    this.randomEnergySound.play();
     this.playerVelocity *= item.multiplier;
     this.pee = Math.min(this.pee + item.pee, PEE_MAX_VALUE);
 
@@ -317,7 +358,6 @@ export class Player extends EventEmitter<
     // eslint-disable-next-line no-param-reassign
     if (item.type === 'alcohol') {
       this.drinkAlcohol(item);
-      console.log('dźwięk drink vodka');
       return;
     }
 
@@ -333,5 +373,14 @@ export class Player extends EventEmitter<
       true,
       (this.sprite.anims.currentFrame.nextFrame.index + 1) % 2
     );
+  };
+
+  private addDrinkingSounds = () => {
+    this.drinkVodkaSoundNames.forEach((soundName) => {
+      this.drinkVodkaSounds.push(this.scene.sound.add(soundName));
+    });
+    this.drinkEnergySoundNames.forEach((soundName) => {
+      this.drinkEnergySounds.push(this.scene.sound.add(soundName));
+    });
   };
 }
