@@ -105,6 +105,7 @@ export class GameScene extends Phaser.Scene {
       this.cameras.main.setZoom(0.5);
     } else {
       this.lights.setAmbientColor(0);
+      this.addCameraSwing();
     }
 
     new Moon(this, 200, 200);
@@ -120,7 +121,6 @@ export class GameScene extends Phaser.Scene {
     ];
     lanterns.forEach((lantern) => this.zIndexGroup.add(lantern.sprite));
 
-    this.addCameraSwing();
     this.trees = new Trees(this, this.player);
 
     this.scene.run('HUDScene', {
@@ -158,9 +158,8 @@ export class GameScene extends Phaser.Scene {
       loop: -1,
       from: 0,
       to: 1,
-
       onUpdate: (value) => {
-        this.cameras.main.setFollowOffset(value.getValue() * 100);
+        this.cameras.main.setFollowOffset(value.getValue() * 50);
       },
     });
   }
