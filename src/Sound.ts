@@ -6,4 +6,10 @@ export const Sound = {
   coinDrop1: 'coin_drop_1',
   coinDrop2: 'coin_drop_2',
   coinDrop3: 'coin_drop_3',
+  peeHitSound1: 'sik_miejskie',
+  peeHitSound2: 'sik_ziemia',
+  manHit1: 'hit_man1',
+  manHit2: 'hit_man2',
+  womanHit1: 'hit_woman1',
+  womanHit2: 'hit_woman2',
 };

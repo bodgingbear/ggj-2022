@@ -256,12 +256,9 @@ export class DayScene extends Phaser.Scene {
       handleTrolleyCol
     );
 
-    // NA KONIEC DNIA: dźwięk horroru i płynne przejście do nocy w tym dźwięku
     // NA POCZATEK NOCY:
     // 1. dźwięk wiatru start
     // 2. (do ustalenia dokładnie) randomowo co jakiś czas żeby był dźwięk "andrzejku/andrzeju" od męskiego miejskiego (sprawdzać w booleanie czy jest jakiś męski miejski i jak jest to dać na to timeout)
-
-    // SOUNDS DO USTALENIA: szczekanie na wchodzenie (imo chyba nie xd)
   }
 
   update(_time: number, delta: number) {

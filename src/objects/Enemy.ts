@@ -1,4 +1,5 @@
 import { EventEmitter } from 'packages/utils';
+import { Sound } from 'Sound';
 import { Player } from './Player';
 
 const ENEMY_VELOCITY = 50;
@@ -19,6 +20,10 @@ export class Enemy extends EventEmitter<'destroy'> {
   private rotation: number = 0;
 
   private spierdalingTarget: Phaser.Math.Vector2 | null = null;
+
+  private isDisgusted: boolean = false;
+
+  private shouldPee: boolean = true;
 
   constructor(private scene: Phaser.Scene, position: Phaser.Math.Vector2) {
     super();
@@ -79,11 +84,46 @@ export class Enemy extends EventEmitter<'destroy'> {
       );
     }
 
-    console.log('sik dźwięk');
-    // timeout 300/500ms
-    console.log(
-      'dźwięk obrzydzenia "hit..." (męski lub damski randomowo - zależnie od miejskiego)'
-    );
+    const siki = [Sound.peeHitSound1, Sound.peeHitSound2];
+    const okrzykiLasek = [Sound.womanHit1, Sound.womanHit2];
+    const okrzykiFacetow = [Sound.manHit1, Sound.manHit2];
+
+    if (this.shouldPee) {
+      this.scene.sound
+        .add(siki[Math.floor(Math.random() * siki.length)])
+        .play();
+
+      this.shouldPee = false;
+
+      this.scene.time.addEvent({
+        delay: 400,
+        callback: () => {
+          this.shouldPee = true;
+        },
+      });
+    }
+
+    const isMan = this.sprite.anims.currentAnim.key.includes('M');
+
+    const disgustedMiejskie = isMan ? okrzykiFacetow : okrzykiLasek;
+
+    // TODO: wyważyć volume
+    if (!this.isDisgusted) {
+      this.isDisgusted = true;
+      this.scene.time.addEvent({
+        delay: 100,
+        callback: () => {
+          this.isDisgusted = true;
+          this.scene.sound
+            .add(
+              disgustedMiejskie[
+                Math.floor(Math.random() * okrzykiFacetow.length)
+              ]
+            )
+            .play();
+        },
+      });
+    }
   }
 
   private goToPoint = (
