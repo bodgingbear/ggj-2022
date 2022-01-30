@@ -3,7 +3,8 @@ import { Lidl } from 'objects/Lidl';
 import { Player } from 'objects/Player';
 import { Trees } from 'objects/Trees';
 import { debugMap } from 'packages/utils/shouldSkipIntro';
-import { EventEmitter } from 'packages/utils';
+import { Trolley } from 'objects/Trolley';
+import { GameEmiter } from 'objects/GameEmiter';
 
 export class DayScene extends Phaser.Scene {
   private player!: Player;
@@ -20,7 +21,9 @@ export class DayScene extends Phaser.Scene {
 
   ended = false;
 
-  hudEmitter = new EventEmitter<'end'>();
+  hudEmitter = new GameEmiter();
+
+  trolleys: Trolley[] = [];
 
   public constructor() {
     super({
@@ -48,7 +51,7 @@ export class DayScene extends Phaser.Scene {
 
     this.zIndexGroup = this.add.group();
 
-    this.player = new Player(this, 200, 900, keys);
+    this.player = new Player(this, 1500, 1100, keys, true);
     this.zIndexGroup.add(this.player.sprite);
 
     this.cameras.main.startFollow(this.player.sprite, false, 0.1, 0.1);
@@ -59,6 +62,7 @@ export class DayScene extends Phaser.Scene {
       this.cameras.main.setZoom(0.5);
     }
     this.lidl = new Lidl(this, this.player, false);
+    this.zIndexGroup.add(this.lidl.sprite);
 
     const lanterns = [
       new Lantern(this, 260 - 33, 800, true, false),
@@ -72,17 +76,19 @@ export class DayScene extends Phaser.Scene {
 
     this.trees = new Trees(this, this.player);
 
-    // this.scene.run('HUDScene', {
-    //   peeProvider: () => this.player?.pee ?? 0,
-    //   player: this.player,
-    //   emitter: this.hudEmitter,
-    // });
+    this.scene.run('DayHUDScene', {
+      player: this.player,
+    });
 
     this.overlay = this.add
       .rectangle(0, 0, bg.displayWidth, bg.displayHeight, 0, 1)
       .setOrigin(0)
       .setPosition(-10000000)
       .setAlpha(0);
+
+    this.trolleys.push(new Trolley(this, this.player, this.lidl));
+
+    this.trolleys.forEach((t) => this.zIndexGroup.add(t.sprite));
 
     // NA KONIEC DNIA: dźwięk horroru i płynne przejście do nocy w tym dźwięku
     // NA POCZATEK NOCY:
@@ -101,5 +107,8 @@ export class DayScene extends Phaser.Scene {
     this.zIndexGroup.children.entries.forEach((el: any) =>
       el.setDepth(el.y + el.displayHeight)
     );
+
+    this.trolleys.forEach((t) => t.update());
+    this.lidl.update();
   }
 }

@@ -69,6 +69,56 @@ export class BootScene extends Phaser.Scene {
     });
 
     this.anims.create({
+      key: 'Andrzej-Down',
+      frames: [
+        { key: 'master', frame: 'Andrzej-Down-0.png' },
+        { key: 'master', frame: 'Andrzej-Down-1.png' },
+      ],
+      frameRate: 6,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'Andrzej-Left',
+      frames: [
+        { key: 'master', frame: 'Andrzej-Left-0.png' },
+        { key: 'master', frame: 'Andrzej-Left-1.png' },
+      ],
+      frameRate: 6,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'Andrzej-Right',
+      frames: [
+        { key: 'master', frame: 'Andrzej-Right-0.png' },
+        { key: 'master', frame: 'Andrzej-Right-1.png' },
+      ],
+      frameRate: 6,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'Andrzej-Up',
+      frames: [
+        { key: 'master', frame: 'Andrzej-Up-0.png' },
+        { key: 'master', frame: 'Andrzej-Up-1.png' },
+      ],
+      frameRate: 6,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'Andrzej-Up',
+      frames: [
+        { key: 'master', frame: 'Andrzej-Up-0.png' },
+        { key: 'master', frame: 'Andrzej-Up-1.png' },
+      ],
+      frameRate: 6,
+      repeat: -1,
+    });
+
+    this.anims.create({
       key: 'Straznik-FHV',
       frames: [
         { key: 'master', frame: 'Straznik-FHV-0.png' },

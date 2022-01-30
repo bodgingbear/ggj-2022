@@ -6,6 +6,7 @@ import { DayScene } from 'scenes/DayScene';
 import { HowToPlayScene } from 'scenes/HowToPlayScene';
 import { CreditsScene } from 'scenes/CreditsScene';
 import { debugMap } from 'packages/utils/shouldSkipIntro';
+import { DayHUDScene } from 'scenes/DayHUDScene';
 import { BootScene } from './scenes/BootScene';
 import { LoadingScene } from './scenes/LoadingScene';
 import { MainMenuScene } from './scenes/MainMenuScene';
@@ -23,6 +24,7 @@ const game = new Phaser.Game({
     MainMenuScene,
     GameScene,
     DayScene,
+    DayHUDScene,
     HowToPlayScene,
     CreditsScene,
     HUDScene,
