@@ -8,7 +8,7 @@ export class PissDropsController {
       this.enemies,
       this.pissDrops,
       (enemyObj, pissObj) => {
-        enemyObj.getData('ref').onHit(pissObj.getData('ref'), {});
+        enemyObj.getData('ref').onHit(pissObj, {});
       }
     );
   }

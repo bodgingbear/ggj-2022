@@ -36,22 +36,15 @@ export class Enemy extends EventEmitter<'destroy'> {
     this.body.setImmovable(true);
   }
 
-  public onHit() {
-    this.spierdalingTarget = new Phaser.Math.Vector2(
-      this.getNearestEdgeX(),
-      this.body.y
-    );
+  public onHit(hitPos: Phaser.Math.Vector2) {
+    this.spierdalingTarget = this.body.position
+      .clone()
+      .add(
+        new Phaser.Math.Vector2(200).setAngle(
+          Phaser.Math.Angle.BetweenPoints(this.body.position, hitPos) + Math.PI
+        )
+      );
   }
-
-  private getNearestEdgeX = () => {
-    const { width } = this.scene.cameras.main.getBounds();
-
-    if (this.body.x < width / 2) {
-      return 0 - 100;
-    }
-
-    return width + 100;
-  };
 
   private goToPoint = (
     target: Phaser.Types.Math.Vector2Like,

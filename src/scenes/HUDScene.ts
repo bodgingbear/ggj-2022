@@ -51,7 +51,7 @@ export class HUDScene extends Phaser.Scene {
 
     emitter.on('end', () => {
       this.add
-        .text(1280 / 2, 720 / 2, 'Dorwali cie... Czeka cie noc na Ibizie :(')
+        .text(1280 / 2, 720 / 2, 'Dorwali cie... Czeka cie noc na Kolskiej 😩')
         .setScale(2)
         .setOrigin(0.5);
     });
