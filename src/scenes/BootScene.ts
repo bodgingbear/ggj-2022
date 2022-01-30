@@ -18,6 +18,96 @@ export class BootScene extends Phaser.Scene {
   }
 
   public create(): void {
+    this.anims.create({
+      key: 'Andrzej-Drunk-Down',
+      frames: [
+        { key: 'master', frame: 'Andrzej-Drunk-Down-0.png' },
+        { key: 'master', frame: 'Andrzej-Drunk-Down-1.png' },
+      ],
+      frameRate: 6,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'Andrzej-Drunk-Left',
+      frames: [
+        { key: 'master', frame: 'Andrzej-Drunk-Left-0.png' },
+        { key: 'master', frame: 'Andrzej-Drunk-Left-1.png' },
+      ],
+      frameRate: 6,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'Andrzej-Drunk-Right',
+      frames: [
+        { key: 'master', frame: 'Andrzej-Drunk-Right-0.png' },
+        { key: 'master', frame: 'Andrzej-Drunk-Right-1.png' },
+      ],
+      frameRate: 6,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'Andrzej-Drunk-Up',
+      frames: [
+        { key: 'master', frame: 'Andrzej-Drunk-Up-0.png' },
+        { key: 'master', frame: 'Andrzej-Drunk-Up-1.png' },
+      ],
+      frameRate: 6,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'Andrzej-Drunk-Up',
+      frames: [
+        { key: 'master', frame: 'Andrzej-Drunk-Up-0.png' },
+        { key: 'master', frame: 'Andrzej-Drunk-Up-1.png' },
+      ],
+      frameRate: 6,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'Straznik-FHV',
+      frames: [
+        { key: 'master', frame: 'Straznik-FHV-0.png' },
+        { key: 'master', frame: 'Straznik-FHV-1.png' },
+      ],
+      frameRate: 6,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'Straznik-F',
+      frames: [
+        { key: 'master', frame: 'Straznik-F-0.png' },
+        { key: 'master', frame: 'Straznik-F-1.png' },
+      ],
+      frameRate: 6,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'Straznik-M',
+      frames: [
+        { key: 'master', frame: 'Straznik-M-0.png' },
+        { key: 'master', frame: 'Straznik-M-1.png' },
+      ],
+      frameRate: 6,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'Straznik-MHV',
+      frames: [
+        { key: 'master', frame: 'Straznik-MHV-0.png' },
+        { key: 'master', frame: 'Straznik-MHV-1.png' },
+      ],
+      frameRate: 6,
+      repeat: -1,
+    });
+
     // this.anims.create({
     //   key: 'intro-start',
     //   frames: this.anims.generateFrameNumbers('intro', {

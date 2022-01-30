@@ -116,7 +116,7 @@
 					}
 				},
 				{
-					"filename": "Andrzej-Down.png",
+					"filename": "Andrzej-Down-0.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -179,7 +179,7 @@
 					}
 				},
 				{
-					"filename": "Andrzej-Drunk-Down.png",
+					"filename": "Andrzej-Down-1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -221,7 +221,7 @@
 					}
 				},
 				{
-					"filename": "Andrzej-Drunk-Left.png",
+					"filename": "Andrzej-Drunk-Down-0.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -284,7 +284,7 @@
 					}
 				},
 				{
-					"filename": "Andrzej-Drunk-Right.png",
+					"filename": "Andrzej-Drunk-Down-1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -326,7 +326,7 @@
 					}
 				},
 				{
-					"filename": "Andrzej-Drunk-Up.png",
+					"filename": "Andrzej-Drunk-Left-0.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -347,7 +347,7 @@
 					}
 				},
 				{
-					"filename": "Andrzej-Left.png",
+					"filename": "Andrzej-Drunk-Left-1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -368,7 +368,7 @@
 					}
 				},
 				{
-					"filename": "Andrzej-Right.png",
+					"filename": "Andrzej-Drunk-Right-0.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -389,7 +389,7 @@
 					}
 				},
 				{
-					"filename": "Andrzej-Up.png",
+					"filename": "Andrzej-Drunk-Right-1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -410,70 +410,259 @@
 					}
 				},
 				{
-					"filename": "Straznik-F.png",
+					"filename": "Andrzej-Drunk-Up-0.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 14,
+						"w": 15,
 						"h": 37
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 14,
+						"w": 15,
 						"h": 37
 					},
 					"frame": {
 						"x": 554,
 						"y": 203,
-						"w": 14,
+						"w": 15,
 						"h": 37
 					}
 				},
 				{
-					"filename": "Straznik-FHV.png",
+					"filename": "Andrzej-Drunk-Up-1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 14,
+						"w": 15,
 						"h": 37
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 14,
-						"h": 37
-					},
-					"frame": {
-						"x": 568,
-						"y": 203,
-						"w": 14,
-						"h": 37
-					}
-				},
-				{
-					"filename": "Straznik-M.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 14,
-						"h": 37
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 13,
+						"w": 15,
 						"h": 37
 					},
 					"frame": {
 						"x": 569,
 						"y": 260,
-						"w": 13,
+						"w": 15,
 						"h": 37
 					}
 				},
 				{
-					"filename": "Straznik-MHV.png",
+					"filename": "Andrzej-Left-0.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 37
+					},
+					"frame": {
+						"x": 569,
+						"y": 203,
+						"w": 15,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Andrzej-Left-1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 37
+					},
+					"frame": {
+						"x": 584,
+						"y": 260,
+						"w": 15,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Andrzej-Right-0.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 37
+					},
+					"frame": {
+						"x": 584,
+						"y": 203,
+						"w": 15,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Andrzej-Right-1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 37
+					},
+					"frame": {
+						"x": 599,
+						"y": 260,
+						"w": 15,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Andrzej-Up-0.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 37
+					},
+					"frame": {
+						"x": 599,
+						"y": 203,
+						"w": 15,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Andrzej-Up-1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 37
+					},
+					"frame": {
+						"x": 614,
+						"y": 260,
+						"w": 15,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Straznik-F-0.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 37
+					},
+					"frame": {
+						"x": 614,
+						"y": 203,
+						"w": 14,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Straznik-F-1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 37
+					},
+					"frame": {
+						"x": 628,
+						"y": 203,
+						"w": 14,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Straznik-FHV-0.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 37
+					},
+					"frame": {
+						"x": 642,
+						"y": 203,
+						"w": 14,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Straznik-FHV-1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 37
+					},
+					"frame": {
+						"x": 656,
+						"y": 203,
+						"w": 14,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Straznik-M-0.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -487,8 +676,71 @@
 						"h": 37
 					},
 					"frame": {
-						"x": 582,
+						"x": 629,
 						"y": 260,
+						"w": 13,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Straznik-M-1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 14,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 13,
+						"h": 37
+					},
+					"frame": {
+						"x": 642,
+						"y": 240,
+						"w": 13,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Straznik-MHV-0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 14,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 13,
+						"h": 37
+					},
+					"frame": {
+						"x": 642,
+						"y": 277,
+						"w": 13,
+						"h": 37
+					}
+				},
+				{
+					"filename": "Straznik-MHV-1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 14,
+						"h": 37
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 13,
+						"h": 37
+					},
+					"frame": {
+						"x": 655,
+						"y": 240,
 						"w": 13,
 						"h": 37
 					}
@@ -508,8 +760,8 @@
 						"h": 36
 					},
 					"frame": {
-						"x": 582,
-						"y": 203,
+						"x": 655,
+						"y": 277,
 						"w": 13,
 						"h": 36
 					}
@@ -529,7 +781,7 @@
 						"h": 36
 					},
 					"frame": {
-						"x": 595,
+						"x": 668,
 						"y": 260,
 						"w": 13,
 						"h": 36
@@ -541,6 +793,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:4a6955feab7ef2e5244bd9848ec068a6:6718acee3db8e8e8a2c0c10abe23c21a:ce5acf6cd72dab34adb55a56ed928e19$"
+		"smartupdate": "$TexturePacker:SmartUpdate:dc92c24bd8003f86fdc5e2b88c4407e0:a794fbafb0ec3c7a7c6ca81d74d2cc9c:ce5acf6cd72dab34adb55a56ed928e19$"
 	}
 }

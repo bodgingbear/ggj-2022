@@ -28,9 +28,11 @@ export class Player {
     private noPee: (() => void) | null = null
   ) {
     this.sprite = this.scene.add
-      .sprite(x, y, 'master', 'Andrzej-Drunk-Down.png')
+      .sprite(x, y, 'master', 'Andrzej-Drunk-Down-0.png')
       .setScale(4)
       .setPipeline('Light2D');
+
+    this.sprite.play('Andrzej-Drunk-Down');
 
     this.sprite.setOrigin(0.5);
 
@@ -73,7 +75,7 @@ export class Player {
               this.body.velocity,
               pissDropDeathEmitterManager
             ).sprite.setDepth(
-              this.sprite.frame.name === 'Andrzej-Drunk-Up.png'
+              this.getDirection() === 'up'
                 ? this.sprite.depth - 0.1
                 : this.sprite.depth + 0.1
             )
@@ -82,6 +84,31 @@ export class Player {
       },
     });
   }
+
+  private getDirection = (): 'up' | 'down' | 'left' | 'right' => {
+    const normalRotation = Phaser.Math.Angle.Normalize(this.rotation);
+
+    if (normalRotation > Math.PI * 1.75 || normalRotation < Math.PI / 4) {
+      return 'right';
+    }
+
+    if (normalRotation >= Math.PI / 4 && normalRotation < (Math.PI * 3) / 4) {
+      return 'down';
+    }
+
+    if (
+      normalRotation >= (Math.PI * 3) / 4 &&
+      normalRotation < Math.PI * 1.25
+    ) {
+      return 'left';
+    }
+
+    if (normalRotation >= Math.PI * 1.25 && normalRotation <= 2 * Math.PI) {
+      return 'up';
+    }
+
+    return 'up';
+  };
 
   update() {
     let velocity = new Phaser.Math.Vector2(0, 0);
@@ -127,30 +154,33 @@ export class Player {
       //   ROTATION_SPEED * 0.001 * delta
       // );
 
-      const normalRotation = Phaser.Math.Angle.Normalize(this.rotation);
+      const direction = this.getDirection();
 
-      if (normalRotation > Math.PI * 1.75 || normalRotation < Math.PI / 4) {
-        this.sprite.setFrame('Andrzej-Drunk-Right.png');
-      } else if (
-        normalRotation >= Math.PI / 4 &&
-        normalRotation < (Math.PI * 3) / 4
-      ) {
-        this.sprite.setFrame('Andrzej-Drunk-Down.png');
-      } else if (
-        normalRotation >= (Math.PI * 3) / 4 &&
-        normalRotation < Math.PI * 1.25
-      ) {
-        this.sprite.setFrame('Andrzej-Drunk-Left.png');
-      } else if (
-        normalRotation >= Math.PI * 1.25 &&
-        normalRotation <= 2 * Math.PI
-      ) {
-        this.sprite.setFrame('Andrzej-Drunk-Up.png');
+      if (direction === 'right') {
+        this.playAnimation('Andrzej-Drunk-Right');
+      } else if (direction === 'down') {
+        this.playAnimation('Andrzej-Drunk-Down');
+      } else if (direction === 'left') {
+        this.playAnimation('Andrzej-Drunk-Left');
+      } else if (direction === 'up') {
+        this.playAnimation('Andrzej-Drunk-Up');
       }
     }
   }
 
   public addPiss = (pissCount: number) => {
     this.pee = Math.min(this.pee + pissCount, PEE_MAX_VALUE);
+  };
+
+  private playAnimation = (key: string) => {
+    if (key === this.sprite.anims.currentAnim.key) {
+      return;
+    }
+
+    this.sprite.play(
+      key,
+      true,
+      (this.sprite.anims.currentFrame.nextFrame.index + 1) % 2
+    );
   };
 }
