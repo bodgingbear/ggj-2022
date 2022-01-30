@@ -48,6 +48,13 @@ export class HUDScene extends Phaser.Scene {
 
       this.inventoryElements.push(inventoryElement);
     }
+
+    emitter.on('end', () => {
+      this.add
+        .text(1280 / 2, 720 / 2, 'Dorwali cie... Czeka cie noc na Ibizie :(')
+        .setScale(2)
+        .setOrigin(0.5);
+    });
   }
 
   public update(): void {
