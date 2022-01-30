@@ -61,13 +61,7 @@ export class Player extends EventEmitter<
   }
 
   get drinkVodkaSoundNames(): string[] {
-    return [
-      Sound.drinkingVodka1,
-      Sound.drinkingVodka2,
-      Sound.drinkingVodka3,
-      Sound.drinkingVodka4,
-      Sound.drinkingVodka5,
-    ];
+    return [Sound.drinkingVodka1, Sound.drinkingVodka2, Sound.drinkingVodka3];
   }
 
   get drinkEnergySoundNames(): string[] {
@@ -76,6 +70,7 @@ export class Player extends EventEmitter<
       Sound.drinkingEnergy2,
       Sound.drinkingEnergy3,
       Sound.drinkingEnergy4,
+      Sound.drinkingEnergy5,
     ];
   }
 
