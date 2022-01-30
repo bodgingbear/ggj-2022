@@ -2,6 +2,8 @@ import { debugMap } from 'packages/utils/shouldSkipIntro';
 
 import { EventEmitter } from 'packages/utils';
 
+import { Sound } from 'Sound';
+
 import { PEE_DEFAULT_VALUE, PEE_MAX_VALUE } from '../constants';
 import {
   Inventory,
@@ -50,6 +52,10 @@ export class Player extends EventEmitter<
 
   private playerVelocity: number;
 
+  get songs(): string[] {
+    return [Sound.hoboSinging1, Sound.hoboSinging2, Sound.hoboSinging3];
+  }
+
   constructor(
     private scene: Phaser.Scene,
     x: number,
@@ -63,6 +69,9 @@ export class Player extends EventEmitter<
     if (!this.isDay) {
       this.light = this.scene.lights.addLight(x, y, 160, 0xffffff, 0.2);
     }
+
+    // MARK: Singing
+    this.songs.forEach((song) => this.scene.sound.add(song));
 
     this.sprite = this.scene.add
       .sprite(x, y, 'master', 'Andrzej-Drunk-Down-0.png')
@@ -170,6 +179,28 @@ export class Player extends EventEmitter<
     }
 
     return 'Andrzej-Drunk-Up';
+  };
+
+  // MARK: Singing logic
+
+  /// sings a second every given interval, waits additional 3-6 seconds before each song
+  startSinging = (interval: number) => {
+    this.scene.time.addEvent({
+      delay: interval,
+      repeat: -1,
+      callback: () =>
+        this.scene.time.addEvent({
+          delay: Phaser.Math.Between(3000, 6000),
+          callback: () =>
+            this.sing(
+              this.songs[Math.floor(Math.random() * this.songs.length)]
+            ),
+        }),
+    });
+  };
+
+  sing = (song: string) => {
+    this.scene.sound.play(song);
   };
 
   update(delta: number) {

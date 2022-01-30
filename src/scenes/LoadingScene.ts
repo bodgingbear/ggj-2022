@@ -4,6 +4,7 @@ import {
   shouldSkipIntro,
   shouldSkipMenu,
 } from 'packages/utils/shouldSkipIntro';
+import { Sound } from 'Sound';
 import { TEAM } from '../constants';
 
 export class LoadingScene extends Phaser.Scene {
@@ -28,6 +29,10 @@ export class LoadingScene extends Phaser.Scene {
       false,
       true
     );
+
+    Object.values(Sound).forEach((value) => {
+      this.load.audio(value, `audio/${value}.mp3`);
+    });
   }
 
   public preload(): void {
