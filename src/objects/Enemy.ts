@@ -76,6 +76,12 @@ export class Enemy extends EventEmitter<'destroy'> {
         this.body.y
       );
     }
+
+    console.log('sik dźwięk');
+    // timeout 300/500ms
+    console.log(
+      'dźwięk obrzydzenia "hit..." (męski lub damski randomowo - zależnie od miejskiego)'
+    );
   }
 
   private goToPoint = (
