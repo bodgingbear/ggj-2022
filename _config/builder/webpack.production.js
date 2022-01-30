@@ -4,7 +4,7 @@ const getAppData = require('./getAppData');
 
 const appData = getAppData();
 
-module.exports = merge(devSetup(true, undefined, appData), {
+module.exports = merge(devSetup(false, undefined, appData), {
   mode: 'production',
   devtool: false,
   output: {
