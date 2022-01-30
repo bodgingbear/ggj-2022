@@ -91,7 +91,9 @@ export class HUDScene extends Phaser.Scene {
 
           this.time.addEvent({
             delay: 2000,
-            callback: () => emitter.emit('overlayEnd'),
+            callback: () => {
+              emitter.emit('overlayEnd');
+            },
           });
         },
       });

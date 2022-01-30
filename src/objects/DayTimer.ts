@@ -1,6 +1,6 @@
 import { EventEmitter } from 'packages/utils';
 
-export const START_TIME_IN_SECONDS = 45;
+export const START_TIME_IN_SECONDS = 1;
 
 export const formatTime = (delta: number) => {
   const minutes = Math.floor(delta / 1000 / 60);

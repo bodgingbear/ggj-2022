@@ -55,6 +55,7 @@ export class DayHUDScene extends Phaser.Scene {
         duration: 750,
         onComplete: () => {
           emiter.emit('overlayEnd');
+          this.input.keyboard.removeAllListeners();
         },
       });
     });

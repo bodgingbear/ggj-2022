@@ -15,7 +15,7 @@ export class MainMenuScene extends Phaser.Scene {
     vid.setScale(0.9);
     vid.setAlpha(0.75);
 
-    const text = this.add.text(1280 / 2, 64, 'Phaser 3 Template', {
+    const text = this.add.text(1280 / 2, 64, 'Poratuj Dobrodzieju!', {
       fontSize: '48px',
       fill: '#fff',
       align: 'center',

@@ -263,6 +263,7 @@ export class DayScene extends Phaser.Scene {
 
     this.hudEmitter.addListener('overlayEnd', () => {
       this.scene.stop('DayHUDScene');
+      this.scene.stop('DayScene');
       this.scene.start('GameScene', { inventory: this.player.inventory });
     });
 

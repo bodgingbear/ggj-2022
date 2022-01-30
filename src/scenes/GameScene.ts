@@ -170,7 +170,10 @@ export class GameScene extends Phaser.Scene {
     });
 
     this.hudEmitter.on('overlayEnd', () => {
+      this.hudEmitter.removeAllListeners();
+
       this.scene.stop('HUDScene');
+      this.scene.stop('GameScene');
       this.scene.start('DayScene', { inventory: this.player.inventory });
     });
     // PODCZAS DNIA: podśpiewywanie
