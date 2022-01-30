@@ -13,11 +13,16 @@ export class PasserBy extends EventEmitter<'toss-a-coin'> {
 
   private body: Phaser.Physics.Arcade.Body;
 
+  talkingZone: Phaser.GameObjects.Rectangle;
+
+  didGive = false;
+
   constructor(
     private scene: Phaser.Scene,
     x: number,
     y: number,
-    direction: PasserScheduled['direction']
+    direction: PasserScheduled['direction'],
+    public isGenerous: boolean
   ) {
     super();
 
@@ -31,6 +36,13 @@ export class PasserBy extends EventEmitter<'toss-a-coin'> {
     this.body.setOffset(0, (this.sprite.height * 2) / 3);
     this.sprite.setData('ref', this);
     this.body.setImmovable(true);
+
+    this.talkingZone = this.scene.add.rectangle(x, y, 200, 200, 0, 0);
+    this.talkingZone.setData('ref', this);
+    this.scene.physics.world.enable(this.talkingZone);
+    this.scene.events.on('update', () => {
+      this.talkingZone.setPosition(this.sprite.x, this.sprite.y);
+    });
 
     if (direction === 'up') {
       this.body.setVelocityY(-PASSER_BY_VELOCITY);

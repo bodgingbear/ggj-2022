@@ -7,6 +7,14 @@ import { PasserBy } from 'objects/PasserBy';
 import { PasserBySpawner } from 'objects/PasserBySpawner';
 import { Trolley } from 'objects/Trolley';
 import { GameEmiter } from 'objects/GameEmiter';
+import { CHANCE_FOR_JALMUZNA, CHANCE_FOR_CZERWONY_BYK } from 'constants';
+
+function checkOverlap(spriteA, spriteB) {
+  const boundsA = spriteA.getBounds();
+  const boundsB = spriteB.getBounds();
+
+  return Phaser.Geom.Rectangle.Intersection(boundsA, boundsB).height > 0;
+}
 
 export class DayScene extends Phaser.Scene {
   private player!: Player;
@@ -29,6 +37,8 @@ export class DayScene extends Phaser.Scene {
 
   passersGroup!: Phaser.GameObjects.Group;
 
+  bg: Phaser.GameObjects.Image;
+
   public constructor() {
     super({
       key: 'DayScene',
@@ -41,7 +51,7 @@ export class DayScene extends Phaser.Scene {
       .setOrigin(0)
       .setScale(4)
       .setPipeline('Light2D');
-
+    this.bg = bg;
     this.cameras.main.setBounds(0, 0, bg.displayWidth, bg.displayHeight);
 
     const boundsTop = 400;
@@ -104,12 +114,54 @@ export class DayScene extends Phaser.Scene {
 
     this.physics.add.collider(this.passersGroup, this.player.sprite);
     this.trolleys = this.add.group();
+    const talkingZones = this.add.group();
+
+    this.player.on('request-talk', () => {
+      if (
+        this.player.lastPasserToTalk &&
+        checkOverlap(
+          this.player.sprite,
+          this.player.lastPasserToTalk?.talkingZone
+        )
+      ) {
+        if (
+          this.player.lastPasserToTalk!.isGenerous &&
+          !this.player.lastPasserToTalk.didGive
+        ) {
+          this.animateOnReceiveJalmuzna();
+
+          this.player.inventory.addItem(
+            Math.random() < CHANCE_FOR_CZERWONY_BYK ? 'Red Bull' : 'Wódka',
+            1
+          );
+
+          this.player.lastPasserToTalk.didGive = true;
+
+          // @TODO PLAY SOUND HAPPY
+        } else {
+          console.log('smuteczek');
+          // @TODO PLAY SOUND UGH DIDNT GET WHAT I WNATED BIIAATATTEGHV
+        }
+      }
+    });
 
     new PasserBySpawner(this).on('request-emit', (position, direction) => {
-      const passer = new PasserBy(this, position.x, position.y, direction);
+      const passer = new PasserBy(
+        this,
+        position.x,
+        position.y,
+        direction,
+        Math.random() < CHANCE_FOR_JALMUZNA
+      );
       this.zIndexGroup.add(passer.sprite);
       this.passersGroup.add(passer.sprite);
       this.passersGroup.add(passer.sprite);
+
+      this.physics.add.overlap(passer.talkingZone, this.player.sprite, () => {
+        this.player.lastPasserToTalk = passer;
+      });
+
+      talkingZones.add(passer.talkingZone);
 
       if (
         Math.random() > 0.5 &&
@@ -196,4 +248,21 @@ export class DayScene extends Phaser.Scene {
     this.trolleys.children.each((t) => t.getData('ref').update());
     this.lidl.update();
   }
+
+  animateOnReceiveJalmuzna = () => {
+    const direction = Math.random() > 0.5 ? -1 : 1;
+
+    this.tweens.addCounter({
+      from: 0,
+      to: 1,
+      duration: 500,
+      yoyo: true,
+      onUpdate: (tween) => {
+        this.cameras.main.setRotation(
+          Phaser.Math.DegToRad(0 + 5 * tween.getValue() * direction)
+        );
+        this.cameras.main.setZoom(1 + 0.1 * tween.getValue());
+      },
+    });
+  };
 }

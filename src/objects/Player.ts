@@ -11,6 +11,7 @@ import {
   InventoryItem,
   EnergyInventoryItem,
 } from './Inventory';
+import { PasserBy } from './PasserBy';
 
 const BASE_PLAYER_VELOCITY = debugMap() ? 500 : 150;
 const DAY_BASE_PLAYER_VELOCITY = 200;
@@ -19,7 +20,7 @@ const ROTATION_SPEED = Math.PI * 0.5;
 type Direction = 'up' | 'down' | 'left' | 'right';
 
 export class Player extends EventEmitter<
-  'request-piss' | 'no-pee-left',
+  'request-piss' | 'no-pee-left' | 'request-talk',
   {
     'request-piss': (
       rotation: number,
@@ -28,6 +29,7 @@ export class Player extends EventEmitter<
       isUp: boolean
     ) => void;
     'no-pee-left': () => void;
+    'request-talk': () => void;
   }
 > {
   public sprite: Phaser.GameObjects.Sprite;
@@ -51,6 +53,8 @@ export class Player extends EventEmitter<
   private energeticTimeEvent: Phaser.Time.TimerEvent | null = null;
 
   private playerVelocity: number;
+
+  lastPasserToTalk?: PasserBy;
 
   get songs(): string[] {
     return [Sound.hoboSinging1, Sound.hoboSinging2, Sound.hoboSinging3];
@@ -93,6 +97,10 @@ export class Player extends EventEmitter<
     this.body.setCollideWorldBounds(true);
 
     const cursorKeys = scene.input.keyboard.createCursorKeys();
+
+    this.scene.input.keyboard.on('keydown-SPACE', () => {
+      this.emit('request-talk');
+    });
 
     this.scene.time.addEvent({
       delay: 40,

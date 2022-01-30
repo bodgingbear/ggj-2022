@@ -5,6 +5,9 @@ export const PEE_DEFAULT_VALUE = 50;
 
 export const PASSER_BY_VELOCITY = 50;
 
+export const CHANCE_FOR_JALMUZNA = 0.2;
+export const CHANCE_FOR_CZERWONY_BYK = 0.2;
+
 export const TEAM: TeamMemberData[] = [
   {
     name: 'Kacper Pietrzak',
